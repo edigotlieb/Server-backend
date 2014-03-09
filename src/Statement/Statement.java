@@ -8,6 +8,9 @@ package Statement;
  *
  * @author T7639192
  */
-public class Statement {
-	
+abstract public class Statement {
+	public static Statement StatementFactory(String statement){
+		return null;
+	}
+	abstract public String toString();
 }

@@ -15,13 +15,13 @@ import java.util.logging.Logger;
 
 public class PreparedStatementStrings {
 
-    private static HashMap<String,String> fileNames;
+    private static HashMap<String,String> fileNames = new HashMap<>();
     
     static {
         fileNames.put("getAllUserInfo", "getUser.sql");
     }
     
-    private HashMap<String,String> PreparedSql;
+    private HashMap<String,String> PreparedSql = new HashMap<>();
     
     private static PreparedStatementStrings instance = null;
     
@@ -40,7 +40,7 @@ public class PreparedStatementStrings {
     private void readFiles() {
         for(String key : fileNames.keySet()) {
             try {
-                PreparedSql.put(key, new String(Files.readAllBytes(Paths.get("/preparedSQL/"+fileNames.get(key)))));
+                PreparedSql.put(key, new String(Files.readAllBytes(Paths.get("preparedSQL/"+fileNames.get(key)))));
             } catch (IOException ex) {
                 Logger.getLogger(PreparedStatementStrings.class.getName()).log(Level.SEVERE, null, ex);
             }

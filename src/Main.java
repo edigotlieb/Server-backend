@@ -17,8 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PreparedStatementStrings pss = PreparedStatementStrings.getInstance();
-        System.out.println(pss.getSQL("getAllUserInfo"));
+
     }
     
 }

@@ -10,15 +10,16 @@ package Statement;
  */
 public class RelStatement extends Statement {
 
-	private String colname, value, op;
+	private final String term1, term2, op;
 
-	public RelStatement(String colname, String value, String op) {
-		this.colname = colname;
-		this.value = value;
+	public RelStatement(String term1, String term2, String op) {
+		this.term1 = term1;
+		this.term2 = term2;
 		this.op = op;
 	}
 
+        @Override
 	public String toString() {
-		return colname + " " + op + " " + value;
+		return term1 + " " + op + " " + term2;
 	}
 }

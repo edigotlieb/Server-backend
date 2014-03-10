@@ -4,7 +4,11 @@
  */
 package SQLQueryGenerator;
 
+import Statement.AndStatement;
+import Statement.RelStatement;
 import Statement.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,23 +18,50 @@ import java.util.Map;
  */
 public class SqlQueryGenerator {
 
+	private static <T> String stringCommaSeperated(Iterable<T> list){
+		Iterator<T> iterator = list.iterator();
+		String res = "";
+		while(iterator.hasNext()){
+			res += iterator.next().toString();
+			res += ", ";
+		}
+		if(res.length() > 0){
+			res = res.substring(0, res.length()-2);
+		}
+		return res;
+	}
+	
+	private static <T> String stringCommaSeperated(Map<T,T> map){
+		Iterator<T> iterator = map.keySet().iterator();
+		String res = "";
+		while(iterator.hasNext()){
+			T key = iterator.next();
+			res += key.toString() + " = " + map.get(key);
+			res += ", ";
+		}
+		if(res.length() > 0){
+			res = res.substring(0, res.length()-2);
+		}
+		return res;
+	}
+	
 	public static String select(List<String> colnames, String from, Statement where) {
-		return null;
+		return "SELECT " + stringCommaSeperated(colnames) + " FROM " + from + " WHERE " + where.toString();
 	}
 
 	public static String delete(String from, Statement where) {
-		return null;
+		return "DELETE FROM " + from + " WHERE " + where.toString();
 	}
 
 	public static String update(String table, Map<String, String> set, Statement where) {
-		return null;
+		return "UPDATE " + table + " SET " + stringCommaSeperated(set) + " WHERE " + where.toString();
 	}
 
 	public static String insert(String into, List<String> values) {
-		return null;
+		return "INSERT INTO " + into + " VALUES (" + stringCommaSeperated(values) + ")";
 	}
 
 	public static String insert(String into, Map<String, String> cols_vals) {
-		return null;
+		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet())  + ") VALUES (" + stringCommaSeperated(cols_vals.values()) + ")";
 	}
 }

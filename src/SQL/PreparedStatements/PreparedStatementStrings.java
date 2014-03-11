@@ -15,13 +15,14 @@ import java.util.logging.Logger;
 
 public class PreparedStatementStrings {
 
-    private static HashMap<String,String> fileNames = new HashMap<>();
+    private static final HashMap<String,String> fileNames = new HashMap<>();
     
     static {
         fileNames.put("getAllUserInfo", "getUser.sql");
+        fileNames.put("getAllAppInfo", "getApp.sql");
     }
     
-    private HashMap<String,String> PreparedSql = new HashMap<>();
+    private final HashMap<String,String> PreparedSql = new HashMap<>();
     
     private static PreparedStatementStrings instance = null;
     

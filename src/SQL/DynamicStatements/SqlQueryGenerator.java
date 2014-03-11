@@ -2,12 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package SQL;
+package SQL.DynamicStatements;
 
-import Statement.AndStatement;
-import Statement.RelStatement;
 import Statement.Statement;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;

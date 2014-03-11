@@ -9,12 +9,12 @@ package Request;
 public class Credentials {
     String username,hashed_password;
     String hashed_app_key;
-    int app_id;
+    String app_name;
     
-    public Credentials(String username,String hashed_password,int app_id,String hashed_app_key) {
+    public Credentials(String username,String hashed_password,String app_name,String hashed_app_key) {
         this.username = username;
         this.hashed_password = hashed_password;
-        this.app_id = app_id;
+        this.app_name = app_name;
         this.hashed_app_key = hashed_app_key;
     }
 
@@ -30,8 +30,8 @@ public class Credentials {
         return this.hashed_app_key;
     }
     
-    public int getAppID() {
-        return this.app_id;
+    public String getAppName() {
+        return this.app_name;
     }
     
 }

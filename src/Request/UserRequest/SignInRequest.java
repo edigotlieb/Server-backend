@@ -7,6 +7,7 @@
 package Request.UserRequest;
 
 import Request.Credentials;
+import SQL.SqlExecutor;
 
 public class SignInRequest extends UserRequest{
             
@@ -20,8 +21,12 @@ public class SignInRequest extends UserRequest{
     }
 
     @Override
-    public Credentials getCreds() {
-        return super.creds;
+    protected boolean CheckPermissions(SqlExecutor sqlExc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
+    
+    
 
 }

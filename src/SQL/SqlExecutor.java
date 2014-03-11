@@ -17,12 +17,11 @@ public class SqlExecutor {
 
     
     
-    /*    public static ResultSet executePreparedStatementQry(Connection con,String sql) throws SQLException {
-    PreparedStatement ps = con.prepareStatement(sql);
-    ResultSet rs = ps.executeQuery();
-    ps.close();
-    return rs;
-    }*/
+    public static ResultSet executePreparedStatementQry(Connection con,PreparedStatement ps) throws SQLException {
+        ResultSet rs = ps.executeQuery();
+        ps.close();
+        return rs;
+    }
     
     public static ResultSet executeDynamicStatementQry(Connection con,String sql) throws SQLException {
         Statement stmt = con.createStatement();

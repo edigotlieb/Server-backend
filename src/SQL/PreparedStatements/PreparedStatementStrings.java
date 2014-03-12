@@ -18,8 +18,12 @@ public class PreparedStatementStrings {
     private static final HashMap<String,String> fileNames = new HashMap<>();
     
     static {
-        fileNames.put("getAllUserInfo", "getUser.sql");
-        fileNames.put("getAllAppInfo", "getApp.sql");
+        fileNames.put("getAllUserInfoByUsername", "getAllUserInfoByUsername.sql");
+        fileNames.put("getAllAppInfoByName", "getAllAppInfoByName.sql");
+        fileNames.put("getAllAppInfoByKey", "getAllAppInfoByKey.sql");
+        fileNames.put("getUserPermissionGroups", "getUserPermissionGroups.sql");
+        fileNames.put("getUserPermissionsToTables", "getUserPermissionsToTables.sql");
+        fileNames.put("getUserTablePermission", "getUserTablePermission.sql");
     }
     
     private final HashMap<String,String> PreparedSql = new HashMap<>();

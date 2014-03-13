@@ -75,5 +75,5 @@ public abstract class Request {
 		return CheckPermissions(sqlExc);
 	}
 
-	protected abstract boolean CheckPermissions(SqlExecutor sqlExc);
+	protected abstract boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException;
 }

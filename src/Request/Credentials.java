@@ -10,17 +10,34 @@ import java.util.List;
  */
 public class Credentials {
 
+	public final static String superAdmin = "Super_Admin";
+	public final static String developer = "Developer";
 	private String username, hashedPassword;
 	private String hashedAppKey;
 	private String appName;
 	//More Information
 	private String name, dispName, email;
 	private int year, roomNum;
-	
 	private List<String> permissions;
 
 	public String[] getPermissions() {
 		return this.permissions.toArray(new String[this.permissions.size()]);
+	}
+
+	public boolean isAnonymous() {
+		return false;
+	}
+
+	public boolean isSuperAdmin() {
+		return isInPermissionGroup(superAdmin);
+	}
+
+	public boolean isAppSuperAdmin() {
+		return isSuperAdmin() || isInPermissionGroup(this.appName + "_" + superAdmin);
+	}
+
+	public boolean isInPermissionGroup(String permissionGroupName) {
+		return this.permissions.contains(permissionGroupName);
 	}
 
 	public void setPermissions(Collection<String> permissions) {

@@ -4,6 +4,7 @@
  */
 package SQL.DynamicStatements;
 
+import Request.AppRequest.AddTableRequest;
 import Statement.Statement;
 import java.util.Iterator;
 import java.util.List;
@@ -60,5 +61,13 @@ public class SqlQueryGenerator {
 
 	public static String insert(String into, Map<String, String> cols_vals) {
 		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet())  + ") VALUES (" + stringCommaSeperated(cols_vals.values()) + ")";
+	}
+	
+	public static String create(String tableName, List<AddTableRequest.Column> cols) {
+		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols)  + ")";
+	}
+	
+	public static String drop(String tableName) {
+		return "DROP TABLE " + tableName;
 	}
 }

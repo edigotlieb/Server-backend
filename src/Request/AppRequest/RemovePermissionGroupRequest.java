@@ -44,7 +44,7 @@ public class RemovePermissionGroupRequest extends AppRequest {
 
 	@Override
 	public APP_ACTION_TYPE getActionType() {
-		return AppRequest.APP_ACTION_TYPE.ADD_TABLE;
+		return AppRequest.APP_ACTION_TYPE.REMOVE_PERMISSIONGROUP;
 	}
 
 	public class Column {

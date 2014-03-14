@@ -40,6 +40,6 @@ public class DeleteAppRequest extends AppRequest {
 
 	@Override
 	public APP_ACTION_TYPE getActionType() {
-		return AppRequest.APP_ACTION_TYPE.DROP_TABLE;
+		return AppRequest.APP_ACTION_TYPE.DELETE_APP;
 	}
 }

@@ -4,6 +4,7 @@
 package Request.AppRequest;
 
 import Request.Credentials;
+import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import java.sql.PreparedStatement;
@@ -16,11 +17,11 @@ public class DropTableRequest extends AppRequest {
 
 	public DropTableRequest(Credentials creds, String tableName) {
 		super(creds);
-		this.tableName = tableName;
+		this.tableName = this.creds.getAppName() +"_" + tableName;
 	}
 
 	@Override
-	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException {
+	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException,ValidationException {
 		final String table_name = this.tableName;
 		ResultSet rset = sqlExc.executePreparedStatement("getTableInfoByName", new StatementPreparer() {
 			@Override
@@ -29,15 +30,10 @@ public class DropTableRequest extends AppRequest {
 			}
 		});
 		if (!rset.next()) {
-			return false;
+                        throw new ValidationException(8);			
 		}
-		String app_name = rset.getString("APP_NAME");
-		if (!this.creds.getAppName().equals(app_name)) {
-			return false;
-		}
-
 		if (!this.creds.isAppSuperAdmin()) {
-			return false;
+			throw new ValidationException(6);
 		}
 		return true;
 	}

@@ -1,5 +1,6 @@
 package Request;
 
+import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import Utilities.Hashing;
@@ -31,8 +32,8 @@ public abstract class Request {
 	// abstract public Credentials getCreds();
 	abstract public TYPE getType();
 
-	public final boolean Validate(SqlExecutor sqlExc, String challenge) throws SQLException {
-		final String appname = this.creds.getUsername();
+	public final boolean Validate(SqlExecutor sqlExc, String challenge) throws SQLException, ValidationException {
+		final String appname = this.creds.getAppName();
 		ResultSet rset = sqlExc.executePreparedStatement("getAllAppInfoByName", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
@@ -40,11 +41,11 @@ public abstract class Request {
 			}
 		});
 		if (!rset.next()) {
-			return false;
+                        throw new ValidationException(1);			
 		}
 		String app_key = rset.getString("APP_KEY");
 		if (!this.creds.getHashedAppKey().equals(Hashing.MD5Hash(app_key + challenge))) {
-			return false;
+			throw new ValidationException(2);
 		}
 		
 		final String username = this.creds.getUsername();
@@ -55,11 +56,11 @@ public abstract class Request {
 			}
 		});
 		if (!rset.next()) {
-			return false;
+			throw new ValidationException(3);
 		}
 		String hashed_pass = rset.getString("PASSWORD");
 		if (!this.creds.getHashedPassword().equals(Hashing.MD5Hash(hashed_pass + challenge))) {
-			return false;
+			throw new ValidationException(4);
 		}
 		this.creds.setMoreInfo(rset.getString("NAME"),
 				rset.getString("DISPLAY_NAME"),
@@ -75,5 +76,5 @@ public abstract class Request {
 		return CheckPermissions(sqlExc);
 	}
 
-	protected abstract boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException;
+	protected abstract boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException;
 }

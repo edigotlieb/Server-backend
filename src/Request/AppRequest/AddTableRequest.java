@@ -4,6 +4,7 @@
 package Request.AppRequest;
 
 import Request.Credentials;
+import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import java.sql.PreparedStatement;
@@ -14,12 +15,11 @@ import java.util.List;
 
 public class AddTableRequest extends AppRequest {
 
-	private List<Column> columns;
-	private List<Permission> perms;
-	private String tableName;
+	private final List<Column> columns;
+	private final List<Permission> perms;
+	private final String tableName;
 
 	public enum PERMISSION_TYPE {
-
 		ADD_TABLE, DROP_TABLE, DELETE_APP, ADD_PERMISSIONGROUP, REMOVE_PERMISSIONGROUP
 	}
 
@@ -27,11 +27,11 @@ public class AddTableRequest extends AppRequest {
 		super(creds);
 		this.columns = new ArrayList<>(cols);
 		this.perms = new ArrayList<>(perms);
-		this.tableName = tableName;
+		this.tableName = this.creds.getAppName()+"_"+tableName;
 	}
 
 	@Override
-	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException {
+	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException,ValidationException {
 		final String table_name = this.tableName;
 		ResultSet rset = sqlExc.executePreparedStatement("getTableInfoByName", new StatementPreparer() {
 			@Override
@@ -40,11 +40,11 @@ public class AddTableRequest extends AppRequest {
 			}
 		});
 		if (rset.next()) {
-			return false;
+                        //table exists
+                        throw new ValidationException(7);			
 		}
-
 		if (!this.creds.isAppSuperAdmin()) {
-			return false;
+                        throw new ValidationException(6);			
 		}
 		return true;
 	}

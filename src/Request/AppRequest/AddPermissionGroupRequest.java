@@ -4,6 +4,7 @@
 package Request.AppRequest;
 
 import Request.Credentials;
+import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 
 public class AddPermissionGroupRequest extends AppRequest {
 
-	private String permissionGroupName;
+	private final String permissionGroupName;
 
 	public AddPermissionGroupRequest(Credentials creds, String permissionGroupName) {
 		super(creds);
@@ -20,7 +21,7 @@ public class AddPermissionGroupRequest extends AppRequest {
 	}
 
 	@Override
-	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException {
+	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		final String permissionGroupNameLocal = this.permissionGroupName;
 		ResultSet rset = sqlExc.executePreparedStatement("getPermissionGroupInfoByName", new StatementPreparer() {
 			@Override
@@ -28,12 +29,11 @@ public class AddPermissionGroupRequest extends AppRequest {
 				ps.setString(1, permissionGroupNameLocal);
 			}
 		});
-		if (rset.next()) {
-			return false;
-		}
-
+		if (rset.next() || permissionGroupName.equals(Credentials.anonymous)) {
+			throw new ValidationException(5);                                
+		}                
 		if (!this.creds.isAppSuperAdmin()) {
-			return false;
+                        throw new ValidationException(6);			
 		}
 		return true;
 	}
@@ -43,20 +43,4 @@ public class AddPermissionGroupRequest extends AppRequest {
 		return AppRequest.APP_ACTION_TYPE.ADD_PERMISSIONGROUP;
 	}
 
-	public class Column {
-
-		private String colName, dataType;
-		private int size;
-
-		public Column(String colName, String dataType, int size) {
-			this.colName = colName;
-			this.dataType = dataType;
-			this.size = size;
-		}
-
-		@Override
-		public String toString() {
-			return colName + " " + dataType + "(" + size + ")";
-		}
-	}
 }

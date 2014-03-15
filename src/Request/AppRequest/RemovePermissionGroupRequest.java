@@ -4,6 +4,7 @@
 package Request.AppRequest;
 
 import Request.Credentials;
+import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 
 public class RemovePermissionGroupRequest extends AppRequest {
 
-	private String permissionGroupName;
+	private final String permissionGroupName;
 
 	public RemovePermissionGroupRequest(Credentials creds, String permissionGroupName) {
 		super(creds);
@@ -20,7 +21,7 @@ public class RemovePermissionGroupRequest extends AppRequest {
 	}
 
 	@Override
-	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException {
+	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		final String permissionGroupNameLocal = this.permissionGroupName;
 		ResultSet rset = sqlExc.executePreparedStatement("getPermissionGroupInfoByName", new StatementPreparer() {
 			@Override
@@ -29,16 +30,17 @@ public class RemovePermissionGroupRequest extends AppRequest {
 			}
 		});
 		if (!rset.next()) {
-			return false;
+                    throw new ValidationException(9);                    
 		}
 		String username = rset.getString("USERNAME");
 		if (!this.creds.getUsername().equals(username)) {
-			return false;
+                    throw new ValidationException(6);			
 		}
 
 		if (!this.creds.isAppSuperAdmin()) {
-			return false;
+                    throw new ValidationException(6);			
 		}
+                
 		return true;
 	}
 
@@ -47,20 +49,5 @@ public class RemovePermissionGroupRequest extends AppRequest {
 		return AppRequest.APP_ACTION_TYPE.REMOVE_PERMISSIONGROUP;
 	}
 
-	public class Column {
 
-		private String colName, dataType;
-		private int size;
-
-		public Column(String colName, String dataType, int size) {
-			this.colName = colName;
-			this.dataType = dataType;
-			this.size = size;
-		}
-
-		@Override
-		public String toString() {
-			return colName + " " + dataType + "(" + size + ")";
-		}
-	}
 }

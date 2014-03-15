@@ -13,6 +13,7 @@ public class Credentials {
     public final static String superAdmin = "Super_Admin";
     public final static String developer = "Developer";
     public final static String anonymous = "Anonymous";
+    public final static String adminApp = "adminApp";
     private final String username, hashedPassword;
     private final String hashedAppKey;
     private final String appName;
@@ -33,6 +34,10 @@ public class Credentials {
         return isInPermissionGroup(superAdmin);
     }
 
+    public boolean isAdminApp() {
+        return this.appName.equals(adminApp);
+    }
+    
     public boolean isAppSuperAdmin() {
         return isSuperAdmin() || isInPermissionGroup(this.appName + "_" + superAdmin);
     }

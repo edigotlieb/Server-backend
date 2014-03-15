@@ -7,6 +7,7 @@
 package Request.AppRequest;
 
 import Request.Credentials;
+import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
 import java.sql.SQLException;
 
@@ -25,10 +26,13 @@ public class CreateAppRequest extends AppRequest {
     }
 
     @Override
-    protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException {
+    protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException,ValidationException {
         // no such app name yet
         // user is devel
-        // check specific app key
+        // check specific app_id
+        if(!this.creds.isAdminApp()) {
+            throw new ValidationException(6);
+        }
         return true;
     }
 

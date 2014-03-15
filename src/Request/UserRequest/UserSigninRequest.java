@@ -9,9 +9,9 @@ package Request.UserRequest;
 import Request.Credentials;
 import SQL.SqlExecutor;
 
-public class SignInRequest extends UserRequest{
+public class UserSigninRequest extends UserRequest{
             
-    public SignInRequest(Credentials creds) {
+    public UserSigninRequest(Credentials creds) {
         super(creds);
     }
 
@@ -22,7 +22,7 @@ public class SignInRequest extends UserRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
     

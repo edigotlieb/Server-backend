@@ -22,8 +22,9 @@ public class ErrorMsg {
         msgs.put(5, "Permission-group name already exists");
         msgs.put(6, "User has insufficient permissions to perform the desired operations");        
         msgs.put(7, "Table name already exists");
-        msgs.put(8,"No such table exists");
-        msgs.put(9,"No such permission-group exists");
+        msgs.put(8, "No such table exists");
+        msgs.put(9, "No such permission-group exists");
+        msgs.put(10, "Must be anon for signup");
     }
     
     

@@ -16,7 +16,7 @@ public abstract class UserRequest extends Request{
     }
     
     public enum USER_ACTION_TYPE {
-        SIGN_UP,SIGN_IN,UPDATE,ADD_PERMISSION,SELECT
+        SIGN_UP,SIGN_IN,UPDATE_INFO,ADD_PERMISSION,SELECT
     }
     
     @Override

@@ -28,8 +28,12 @@ public class ErrorMsg {
     }
     
     
-    public static String getErrorMsg(int errorCode) {
+    private static String getErrorMsg(int errorCode) {
         return msgs.get(errorCode);
+    }
+    
+    public static String getErrorMsg(RequestException ex){
+        return getErrorMsg(ex.getErrorCode());
     }
     
     

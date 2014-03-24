@@ -10,13 +10,14 @@ package Statement;
  */
 public class OrStatement extends Statement{
 
-	private Statement st1, st2;
+	private final Statement st1, st2;
 
 	public OrStatement(Statement st1, Statement st2) {
 		this.st1 = st1;
 		this.st2 = st2;
 	}
 	
+        @Override
 	public String toString(){
 		return "(" + st1.toString() + ") OR (" + st2.toString() + ")";
 	}

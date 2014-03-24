@@ -71,8 +71,13 @@ public abstract class Request {
 		do {
 			permissions.add(rset.getString("PERMISSION_NAME"));
 		} while (!rset.next());
+                
 		this.creds.setPermissions(permissions);
-		
+                
+		if(this.creds.isSuperAdmin()) {
+                    return true;
+                }
+                
 		return CheckPermissions(sqlExc);
 	}
 

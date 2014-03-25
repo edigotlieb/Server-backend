@@ -9,10 +9,18 @@ package Request.UserRequest;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
+import Statement.Statement;
 import java.sql.SQLException;
 
 public class UserSelectRequest extends UserRequest{
 
+    Statement where;
+
+    public UserSelectRequest(Statement where, Credentials creds) {
+        this(creds);
+        this.where = where;
+    }    
+    
     public UserSelectRequest(Credentials creds) {
         super(creds);
     }

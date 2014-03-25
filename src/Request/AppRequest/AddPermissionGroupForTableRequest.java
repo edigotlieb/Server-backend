@@ -6,6 +6,8 @@
 
 package Request.AppRequest;
 
+
+import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
@@ -13,6 +15,16 @@ import java.sql.SQLException;
 
 public class AddPermissionGroupForTableRequest extends AppRequest{
 
+    
+    Permission permissionToAdd;
+
+    public AddPermissionGroupForTableRequest(PERMISSION_TYPE type, String appName, String tableName, String permissionGroup, Credentials creds) {
+        this(creds);
+        this.permissionToAdd = new Permission(type, appName, tableName, permissionGroup);
+    }
+    
+    
+    
     public AddPermissionGroupForTableRequest(Credentials creds) {
         super(creds);
     }

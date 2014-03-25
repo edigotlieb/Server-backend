@@ -13,6 +13,14 @@ import java.sql.SQLException;
 
 public class UserRemovePermissionGroupRequest extends UserRequest{
 
+    String userToRemoveFrom,groupToRemove;
+
+    public UserRemovePermissionGroupRequest(String userToRemoveFrom, String groupToRemove, Credentials creds) {
+        this(creds);
+        this.userToRemoveFrom = userToRemoveFrom;
+        this.groupToRemove = groupToRemove;
+    }
+    
     public UserRemovePermissionGroupRequest(Credentials creds) {
         super(creds);
     }

@@ -13,6 +13,15 @@ import java.sql.SQLException;
 
 public class UserAddPermissionGroupRequest extends UserRequest{
 
+    String userToAddTo,groupName;
+
+    public UserAddPermissionGroupRequest(String userToAddTo, String groupName, Credentials creds) {
+        this(creds);
+        this.userToAddTo = userToAddTo;
+        this.groupName = groupName;
+    }
+    
+    
     public UserAddPermissionGroupRequest(Credentials creds) {
         super(creds);
     }

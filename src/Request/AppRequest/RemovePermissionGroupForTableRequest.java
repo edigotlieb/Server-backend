@@ -13,8 +13,15 @@ import java.sql.SQLException;
 
 public class RemovePermissionGroupForTableRequest extends AppRequest{
 
+    Permission toRemove;
+    
     public RemovePermissionGroupForTableRequest(Credentials creds) {
         super(creds);
+    }
+
+    public RemovePermissionGroupForTableRequest(Permission.PERMISSION_TYPE type, String appName, String tableName, String gorupName, Credentials creds) {
+        this(creds);
+        this.toRemove = new Permission(type, appName, tableName, gorupName);
     }
 
     @Override

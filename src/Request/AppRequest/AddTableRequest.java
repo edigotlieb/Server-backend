@@ -19,9 +19,7 @@ public class AddTableRequest extends AppRequest {
 	private final List<Permission> perms;
 	private final String tableName;
 
-	public enum PERMISSION_TYPE {
-		ADD_TABLE, DROP_TABLE, DELETE_APP, ADD_PERMISSIONGROUP, REMOVE_PERMISSIONGROUP
-	}
+
 
 	public AddTableRequest(Credentials creds, String tableName, List<Column> cols, List<Permission> perms) {
 		super(creds);
@@ -54,33 +52,7 @@ public class AddTableRequest extends AppRequest {
 		return AppRequest.APP_ACTION_TYPE.ADD_TABLE;
 	}
 
-	public class Column {
+	
 
-		private String colName, dataType;
-		private int size;
-
-		public Column(String colName, String dataType, int size) {
-			this.colName = colName;
-			this.dataType = dataType;
-			this.size = size;
-		}
-
-		@Override
-		public String toString() {
-			return colName + " " + dataType + "(" + size + ")";
-		}
-	}
-
-	public class Permission {
-
-		private PERMISSION_TYPE type;
-		private String appName, tableName, permissionGroup;
-
-		public Permission(PERMISSION_TYPE type, String appName, String tableName, String permissionGroup) {
-			this.type = type;
-			this.appName = appName;
-			this.tableName = tableName;
-			this.permissionGroup = permissionGroup;
-		}
-	}
+	
 }

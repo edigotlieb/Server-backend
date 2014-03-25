@@ -1,0 +1,1 @@
+{ "RequesterCredentials": { "appName":"testApp" , "appKey":"testKey" , "username":"testUsername", "password":"testPassword" } , "RequestInfo": { "requestType":"testType" , "requestAction":"testAction" } , "RequestData": {} }

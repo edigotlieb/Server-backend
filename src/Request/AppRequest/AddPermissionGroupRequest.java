@@ -14,10 +14,12 @@ import java.sql.SQLException;
 public class AddPermissionGroupRequest extends AppRequest {
 
 	private final String permissionGroupName;
-
-	public AddPermissionGroupRequest(Credentials creds, String permissionGroupName) {
-		super(creds);
-		this.permissionGroupName = permissionGroupName;
+        private final String description;
+        
+	public AddPermissionGroupRequest(Credentials creds, String permissionGroupName,String description) {
+            super(creds);
+            this.permissionGroupName = permissionGroupName;
+            this.description = description;
 	}
 
 	@Override

@@ -13,6 +13,20 @@ import java.sql.SQLException;
 
 public class UserSignupRequest extends UserRequest{
 
+    String user,pass,name,disp_name,email;
+    int room,year;
+
+    public UserSignupRequest(String user, String pass, String name, String disp_name, String email, int room, int year, Credentials creds) {
+        this(creds);
+        this.user = user;
+        this.pass = pass;
+        this.name = name;
+        this.disp_name = disp_name;
+        this.email = email;
+        this.room = room;
+        this.year = year;
+    }            
+    
     public UserSignupRequest(Credentials creds) {
         super(creds);
     }

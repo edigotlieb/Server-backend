@@ -13,10 +13,18 @@ import java.sql.SQLException;
 
 public class UserUpdateUserPasswordRequest extends UserRequest{
 
+    String userToUpdate,newPass;
+    
     public UserUpdateUserPasswordRequest(Credentials creds) {
         super(creds);
     }
 
+    public UserUpdateUserPasswordRequest(Credentials creds, String userToUpdate,String newPass) {
+        this(creds);
+        this.userToUpdate = userToUpdate;
+        this.newPass = newPass;
+    }
+    
     @Override
     public USER_ACTION_TYPE getActionType() {
         return USER_ACTION_TYPE.UPDATE_PASSWORD;

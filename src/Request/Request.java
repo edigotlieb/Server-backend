@@ -25,7 +25,6 @@ public abstract class Request {
 	}
 
 	public enum TYPE {
-
 		USER, APP, DTD
 	}
 

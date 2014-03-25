@@ -10,10 +10,11 @@ import java.sql.SQLException;
 
 public class DeleteAppRequest extends AppRequest {
 
+        String appName;
 
-
-	public DeleteAppRequest(Credentials creds) {
+	public DeleteAppRequest(Credentials creds,String appName) {
 		super(creds);
+                this.appName = appName;
 	}
 
 	@Override

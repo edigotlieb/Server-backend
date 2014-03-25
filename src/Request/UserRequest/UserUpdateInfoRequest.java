@@ -1,9 +1,8 @@
-/** 
+/**
  * FILE : UserUpdateInfoRequest.java
- * AUTHORS : Erez Gotlieb    
- * DESCRIPTION : 
- */ 
-
+ * AUTHORS : Erez Gotlieb
+ * DESCRIPTION :
+ */
 package Request.UserRequest;
 
 import Request.Credentials;
@@ -12,6 +11,19 @@ import SQL.SqlExecutor;
 import java.sql.SQLException;
 
 public class UserUpdateInfoRequest extends UserRequest {
+
+    String userToChange, newName, newDispName, newEmail;
+    int newYear, newRoom;
+
+    public UserUpdateInfoRequest(String userToChange, String newName, String newDispName, String newEmail, int newYear, int newRoom, Credentials creds) {
+        this(creds);
+        this.userToChange = userToChange;
+        this.newName = newName;
+        this.newDispName = newDispName;
+        this.newEmail = newEmail;
+        this.newYear = newYear;
+        this.newRoom = newRoom;
+    }
 
     public UserUpdateInfoRequest(Credentials creds) {
         super(creds);
@@ -24,11 +36,10 @@ public class UserUpdateInfoRequest extends UserRequest {
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        if(!this.creds.isAdminApp()) {
+        if (!this.creds.isAdminApp()) {
             throw new ValidationException(6);
         }
         return true;
     }
-    
 
 }

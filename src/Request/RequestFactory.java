@@ -7,12 +7,15 @@ package Request;
 
 import Request.AppRequest.AddPermissionGroupForTableRequest;
 import Request.AppRequest.AddPermissionGroupRequest;
+import Request.AppRequest.AddTableRequest;
 import Request.AppRequest.AppRequest;
 import Request.AppRequest.AppRequest.APP_ACTION_TYPE;
+import Request.AppRequest.Column;
 import Request.AppRequest.CreateAppRequest;
 import Request.AppRequest.DeleteAppRequest;
 import Request.AppRequest.DropTableRequest;
 import Request.AppRequest.GetTablesInfoRequest;
+import Request.AppRequest.Permission;
 import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.AppRequest.RemovePermissionGroupForTableRequest;
 import Request.AppRequest.RemovePermissionGroupRequest;
@@ -37,8 +40,10 @@ import Statement.AndStatement;
 import Statement.OrStatement;
 import Statement.RelStatement;
 import Statement.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.json.*;
 
@@ -87,6 +92,10 @@ public class RequestFactory {
             }
             case ADD_TABLE: {
                 // TO DO!
+                String tableName = requestData.getString("tableName");
+                List<Column> cols = processCols(requestData.getJSONArray("cols"));
+                List<Permission> permissions = processPermissions(requestData.getJSONArray("permissions"), creds, tableName);
+                return new AddTableRequest(creds, tableName, cols, permissions);
             }
             case CREATE_APP: {
                 return new CreateAppRequest(creds, requestData.getString("appName"));
@@ -216,4 +225,31 @@ public class RequestFactory {
         return map;
     }
 
+    private static List<Column> processCols(JSONArray jsonArray) {
+        ArrayList<Column> al = new ArrayList<>();
+        for(int i=0; i < jsonArray.length(); i++) {
+            JSONObject col = jsonArray.getJSONObject(i);   
+            String colName = (col.getString("colName"));
+            Column.COL_TYPE type = Column.COL_TYPE.valueOf(col.getString("colType"));
+            int size;
+            size = col.has("size")? (col.getInt("size")) : (-1);
+            boolean autoInc = col.has("autoInc")? (col.getBoolean("autoInc")):(false);
+            boolean isPrimary = col.has("isPrimary")? (col.getBoolean("isPrimary")):(false);            
+            al.add(new Column(colName,type , size, autoInc, isPrimary));
+        }
+        return al;
+    }
+
+    private static List<Permission> processPermissions(JSONArray jsonArray,Credentials creds,String tableName) {
+         ArrayList<Permission> al = new ArrayList<>();
+        for(int i=0; i < jsonArray.length(); i++) {
+            JSONObject permission = jsonArray.getJSONObject(i);   
+            PERMISSION_TYPE type = PERMISSION_TYPE.valueOf(permission.getString("permissionType"));
+            String groupName = permission.getString("permissionGroupName");
+            al.add(new Permission(type, creds.getAppName(), tableName, groupName));
+        }
+        return al;       
+    }
+    
+    
 }

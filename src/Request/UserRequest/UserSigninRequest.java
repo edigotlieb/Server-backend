@@ -24,9 +24,4 @@ public class UserSigninRequest extends UserRequest{
     protected boolean CheckPermissions(SqlExecutor sqlExc) {
         return true;
     }
-
-    
-    
-    
-
 }

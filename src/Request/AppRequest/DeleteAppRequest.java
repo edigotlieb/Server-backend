@@ -6,6 +6,7 @@ package Request.AppRequest;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.SQLException;
 
 public class DeleteAppRequest extends AppRequest {
@@ -19,6 +20,9 @@ public class DeleteAppRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException,ValidationException {
+		if(!ExistenceValidator.isAppByName(sqlExc, appName)){
+			throw new ValidationException(1);
+		}
 		if (!this.creds.isAppSuperAdmin()) {
 			throw new ValidationException(6);			
 		}

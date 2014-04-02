@@ -14,19 +14,11 @@ import java.sql.SQLException;
 
 public class DTDSelectRequest extends DTDRequest{
 
-    String tableName;
     Statement where;
 
     public DTDSelectRequest(String tableName, Statement where, Credentials creds) {
-        this(creds);
-        this.tableName = tableName;
+        super(creds, tableName);
         this.where = where;
-    }
-    
-    
-    
-    public DTDSelectRequest(Credentials creds) {
-        super(creds);
     }
 
     @Override

@@ -7,12 +7,16 @@
 package Request.DTDRequest;
 
 import Request.Credentials;
+import Request.Exceptions.ValidationException;
 import Request.Request;
+import SQL.SqlExecutor;
+import java.sql.SQLException;
 
 public abstract class DTDRequest extends Request{
-    
-    public DTDRequest(Credentials creds) {
+    private String tableName;
+    public DTDRequest(Credentials creds, String tableName) {
         super(creds);
+		this.tableName = tableName;
     }
     
     public enum DTD_ACTION_TYPE {
@@ -27,5 +31,11 @@ public abstract class DTDRequest extends Request{
     
     public abstract DTD_ACTION_TYPE getActionType();
     
-    
+    @Override
+    protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if(!this.creds.getTablePermissionList(sqlExc, this.tableName).contains(this.getActionType())){
+			throw new ValidationException(6);
+		}
+		return true;
+    }
 }

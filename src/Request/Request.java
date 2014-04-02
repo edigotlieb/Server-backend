@@ -25,6 +25,7 @@ public abstract class Request {
 	}
 
 	public enum TYPE {
+
 		USER, APP, DTD
 	}
 
@@ -40,13 +41,13 @@ public abstract class Request {
 			}
 		});
 		if (!rset.next()) {
-                        throw new ValidationException(1);			
+			throw new ValidationException(1);
 		}
 		String app_key = rset.getString("APP_KEY");
 		if (!this.creds.getHashedAppKey().equals(Hashing.MD5Hash(app_key + challenge))) {
 			throw new ValidationException(2);
 		}
-		
+
 		final String username = this.creds.getUsername();
 		rset = sqlExc.executePreparedStatement("getUserPermissionGroups", new StatementPreparer() {
 			@Override
@@ -70,14 +71,18 @@ public abstract class Request {
 		do {
 			permissions.add(rset.getString("PERMISSION_NAME"));
 		} while (!rset.next());
-                
+
 		this.creds.setPermissions(permissions);
-                
-		if(this.creds.isSuperAdmin()) {
-                    return true;
-                }
-                
-		return CheckPermissions(sqlExc);
+
+		try {
+			return CheckPermissions(sqlExc);
+		} catch (ValidationException ex) {
+			if(ex.getErrorCode() != 6){
+				throw ex;
+			}
+			return this.creds.isSuperAdmin();
+		}
+
 	}
 
 	protected abstract boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException;

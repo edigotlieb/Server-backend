@@ -11,6 +11,7 @@ import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.SQLException;
 
 public class AddPermissionGroupForTableRequest extends AppRequest{
@@ -36,7 +37,28 @@ public class AddPermissionGroupForTableRequest extends AppRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		//check appName exists
+		if(!ExistenceValidator.isAppByName(sqlExc, this.permissionToAdd.getAppName())){
+			throw new ValidationException(1);
+		}
+		
+		//check table name exists
+		if(!ExistenceValidator.isTableByName(sqlExc, this.permissionToAdd.getTableName())){
+			throw new ValidationException(12);
+		}
+		//check permission group exists
+		if(!ExistenceValidator.isPermissionGroupByName(sqlExc, this.permissionToAdd.getPermissionGroup())){
+			throw new ValidationException(11);
+		}
+		
+		if(!this.creds.isMasterApplication()){
+			throw new ValidationException(13);
+		}
+		
+        if(!this.creds.isAdminApp()){
+			throw new ValidationException(6);
+		}
+		return true;
     }
 
 }

@@ -32,7 +32,10 @@ public class UserUpdateUserPasswordRequest extends UserRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.creds.getUsername().equals(this.userToUpdate)) {
+            throw new ValidationException(6);
+        }
+        return true;
     }
 
 }

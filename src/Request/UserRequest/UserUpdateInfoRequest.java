@@ -36,7 +36,7 @@ public class UserUpdateInfoRequest extends UserRequest {
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        if (!this.creds.isAdminApp()) {
+        if (!this.creds.getUsername().equals(this.userToChange)) {
             throw new ValidationException(6);
         }
         return true;

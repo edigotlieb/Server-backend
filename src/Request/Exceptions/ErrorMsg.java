@@ -25,6 +25,10 @@ public class ErrorMsg {
         msgs.put(8, "No such table exists");
         msgs.put(9, "No such permission-group exists");
         msgs.put(10, "Must be anon for signup");
+        msgs.put(11, "Bad permission group name");
+        msgs.put(12, "Bad table name");
+        msgs.put(13, "Application must be Master App");
+		msgs.put(14, "App name already exists");
     }
     
     

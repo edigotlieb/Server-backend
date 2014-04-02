@@ -15,20 +15,14 @@ import java.util.Map;
 
 public class DTDUpdateRequest extends DTDRequest{
 
-    String tableName;
     Statement where;
     Map<String,String> data;
 
     public DTDUpdateRequest(String tableName, Statement where, Map<String, String> data, Credentials creds) {
-        this(creds);
-        this.tableName = tableName;
+        super(creds, tableName);
         this.where = where;
         this.data = data;
     }        
-    
-    public DTDUpdateRequest(Credentials creds) {
-        super(creds);
-    }
 
     @Override
     public DTD_ACTION_TYPE getActionType() {

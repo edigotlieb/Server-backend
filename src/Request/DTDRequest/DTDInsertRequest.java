@@ -14,18 +14,12 @@ import java.util.Map;
 
 public class DTDInsertRequest extends DTDRequest{
 
-    String tableName;    
     Map<String,String> data;
 
     public DTDInsertRequest(String tableName, Map<String, String> data, Credentials creds) {
-        this(creds);
-        this.tableName = tableName;
+        super(creds, tableName);
         this.data = data;
     }        
-    
-    public DTDInsertRequest(Credentials creds) {
-        super(creds);
-    }
 
     @Override
     public DTD_ACTION_TYPE getActionType() {

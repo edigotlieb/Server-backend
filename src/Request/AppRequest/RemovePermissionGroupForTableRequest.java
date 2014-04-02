@@ -9,18 +9,15 @@ package Request.AppRequest;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.SQLException;
 
 public class RemovePermissionGroupForTableRequest extends AppRequest{
 
     Permission toRemove;
     
-    public RemovePermissionGroupForTableRequest(Credentials creds) {
-        super(creds);
-    }
-
     public RemovePermissionGroupForTableRequest(Permission.PERMISSION_TYPE type, String appName, String tableName, String gorupName, Credentials creds) {
-        this(creds);
+        super(creds);
         this.toRemove = new Permission(type, appName, tableName, gorupName);
     }
 
@@ -31,7 +28,28 @@ public class RemovePermissionGroupForTableRequest extends AppRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //check appName exists
+		if(!ExistenceValidator.isAppByName(sqlExc, this.toRemove.getAppName())){
+			throw new ValidationException(1);
+		}
+		
+		//check table name exists
+		if(!ExistenceValidator.isTableByName(sqlExc, this.toRemove.getTableName())){
+			throw new ValidationException(12);
+		}
+		//check permission group exists
+		if(!ExistenceValidator.isPermissionGroupByName(sqlExc, this.toRemove.getPermissionGroup())){
+			throw new ValidationException(11);
+		}
+		
+		if(!this.creds.isMasterApplication()){
+			throw new ValidationException(13);
+		}
+		
+        if(!this.creds.isAdminApp()){
+			throw new ValidationException(6);
+		}
+		return true;
     }
     
 }

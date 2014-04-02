@@ -14,18 +14,11 @@ import java.sql.SQLException;
 
 public class DTDDeleteRequest extends DTDRequest{
 
-    String tableName;
     Statement where;
 
     public DTDDeleteRequest(String tableName, Statement where, Credentials creds) {
-        this(creds);
-        this.tableName = tableName;
+        super(creds, tableName);
         this.where = where;
-    }
-            
-    
-    public DTDDeleteRequest(Credentials creds) {
-        super(creds);
     }
 
     @Override

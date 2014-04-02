@@ -40,10 +40,11 @@ public class UserSignupRequest extends UserRequest{
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
         if(!this.creds.isAnonymous()) {
             throw new ValidationException(10);
-        }        
-        if(!this.creds.isAdminApp()) {
-            throw new ValidationException(6);
-        }        
+        }
+		//check specific appkey
+		if(!this.creds.isMasterApplication()){
+			throw new ValidationException(13);
+		}
         return true;
     }
 

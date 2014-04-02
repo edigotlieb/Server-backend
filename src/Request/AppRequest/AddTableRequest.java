@@ -19,17 +19,15 @@ public class AddTableRequest extends AppRequest {
 	private final List<Permission> perms;
 	private final String tableName;
 
-
-
 	public AddTableRequest(Credentials creds, String tableName, List<Column> cols, List<Permission> perms) {
 		super(creds);
 		this.columns = new ArrayList<>(cols);
 		this.perms = new ArrayList<>(perms);
-		this.tableName = this.creds.getAppName()+"_"+tableName;
+		this.tableName = this.creds.getAppName() + "_" + tableName;
 	}
 
 	@Override
-	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException,ValidationException {
+	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		final String table_name = this.tableName;
 		ResultSet rset = sqlExc.executePreparedStatement("getTableInfoByName", new StatementPreparer() {
 			@Override
@@ -38,11 +36,11 @@ public class AddTableRequest extends AppRequest {
 			}
 		});
 		if (rset.next()) {
-                        //table exists
-                        throw new ValidationException(7);			
+			//table exists
+			throw new ValidationException(7);
 		}
 		if (!this.creds.isAppSuperAdmin()) {
-                        throw new ValidationException(6);			
+			throw new ValidationException(6);
 		}
 		return true;
 	}
@@ -51,8 +49,4 @@ public class AddTableRequest extends AppRequest {
 	public APP_ACTION_TYPE getActionType() {
 		return AppRequest.APP_ACTION_TYPE.ADD_TABLE;
 	}
-
-	
-
-	
 }

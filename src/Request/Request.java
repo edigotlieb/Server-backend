@@ -6,13 +6,11 @@ import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
 import Utilities.Hashing;
-import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.text.Utilities;
 
 /**
  *
@@ -21,9 +19,11 @@ import javax.swing.text.Utilities;
 public abstract class Request {
 
 	protected final Credentials creds;
+	private boolean validated;
 
 	public Request(Credentials creds) {
 		this.creds = creds;
+		this.validated = false;
 	}
 
 	public enum TYPE {
@@ -32,6 +32,9 @@ public abstract class Request {
 	}
 
 	public final ResultSet execute() throws SQLException, ExecutionException {
+		if (!this.validated) {
+			throw new ExecutionException(51);
+		}
 		return performRequest();
 	}
 
@@ -78,12 +81,14 @@ public abstract class Request {
 		this.creds.setPermissions(permissions);
 
 		try {
-			return CheckPermissions(sqlExc);
+			this.validated = CheckPermissions(sqlExc);
+			return this.validated;
 		} catch (ValidationException ex) {
 			if (ex.getErrorCode() != 6) {
 				throw ex;
 			}
-			return this.creds.isSuperAdmin();
+			this.validated = this.creds.isSuperAdmin();
+			return this.validated;
 		}
 
 	}

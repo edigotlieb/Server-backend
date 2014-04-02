@@ -13,6 +13,7 @@ public class ErrorMsg {
 
     static {
         msgs = new HashMap<>();
+		//validation exceptions
         msgs.put(1, "Bad app name");
         msgs.put(2, "Bad app key");
         msgs.put(3, "Bad username");
@@ -27,6 +28,9 @@ public class ErrorMsg {
         msgs.put(12, "Bad table name");
         msgs.put(13, "Application must be Master App");
         msgs.put(14, "App name already exists");
+		
+		//execution exceptions
+		msgs.put(51, "Must validate before executing");
     }
 
     private static String getErrorMsg(int errorCode) {

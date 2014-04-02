@@ -9,6 +9,7 @@ package Request.AppRequest;
 
 import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.Credentials;
+import Request.Exceptions.ExecutionException;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
@@ -63,7 +64,7 @@ public class AddPermissionGroupForTableRequest extends AppRequest{
     }
 
     @Override
-    protected ResultSet performRequest() {
+    protected ResultSet performRequest() throws SQLException, ExecutionException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

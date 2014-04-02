@@ -1,5 +1,6 @@
 package Request;
 
+import Request.Exceptions.ExecutionException;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
@@ -29,11 +30,11 @@ public abstract class Request {
 		USER, APP, DTD
 	}
         
-        public final ResultSet execute(){
-            return null;
+        public final ResultSet execute() throws SQLException, ExecutionException{
+            return performRequest();
         }   
         
-        protected abstract ResultSet performRequest();
+        protected abstract ResultSet performRequest() throws SQLException, ExecutionException;
 
 	// abstract public Credentials getCreds();
 	abstract public TYPE getType();

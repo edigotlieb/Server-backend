@@ -39,7 +39,7 @@ public class SetPermissionGroupAdminRequest extends AppRequest{
     }
 
     @Override
-    protected ResultSet performRequest() {
+    protected ResultSet performRequest(SqlExecutor sqlExc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

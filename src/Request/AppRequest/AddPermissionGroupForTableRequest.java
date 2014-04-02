@@ -8,8 +8,10 @@ import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.Credentials;
 import Request.Exceptions.ExecutionException;
 import Request.Exceptions.ValidationException;
+import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -50,7 +52,16 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 	}
 
 	@Override
-	protected ResultSet performRequest() throws SQLException, ExecutionException {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException, ExecutionException {
+		final String username = this.creds.getUsername();
+		ResultSet rset = sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+				ps.setString(2, username);
+				ps.setString(3, username);
+			}
+		});
+		return null;
 	}
 }

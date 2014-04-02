@@ -4,14 +4,13 @@ import Request.Exceptions.ExecutionException;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import Utilities.Hashing;
-import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.text.Utilities;
 
 /**
  *
@@ -20,36 +19,36 @@ import javax.swing.text.Utilities;
 public abstract class Request {
 
 	protected final Credentials creds;
+	private boolean validated;
 
 	public Request(Credentials creds) {
 		this.creds = creds;
+		this.validated = false;
 	}
 
 	public enum TYPE {
 		USER, APP, DTD
 	}
-        
-        public final ResultSet execute() throws SQLException, ExecutionException{
-            return performRequest();
-        }   
-        
-        protected abstract ResultSet performRequest() throws SQLException, ExecutionException;
+
+	public final ResultSet execute() throws SQLException, ExecutionException {
+		if (!this.validated) {
+			throw new ExecutionException(51);
+		}
+		return performRequest();
+	}
+
+	protected abstract ResultSet performRequest() throws SQLException, ExecutionException;
 
 	// abstract public Credentials getCreds();
 	abstract public TYPE getType();
 
 	public final boolean Validate(SqlExecutor sqlExc, String challenge) throws SQLException, ValidationException {
-		final String appname = this.creds.getAppName();
-		ResultSet rset = sqlExc.executePreparedStatement("getAllAppInfoByName", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, appname);
-			}
-		});
-		if (!rset.next()) {
+		ResultSet rset;
+
+		String app_key = ExistenceValidator.appByName(sqlExc, this.creds.getAppName());
+		if (app_key.length() == 0) {
 			throw new ValidationException(1);
 		}
-		String app_key = rset.getString("APP_KEY");
 		if (!this.creds.getHashedAppKey().equals(Hashing.MD5Hash(app_key + challenge))) {
 			throw new ValidationException(2);
 		}
@@ -81,12 +80,14 @@ public abstract class Request {
 		this.creds.setPermissions(permissions);
 
 		try {
-			return CheckPermissions(sqlExc);
+			this.validated = CheckPermissions(sqlExc);
+			return this.validated;
 		} catch (ValidationException ex) {
-			if(ex.getErrorCode() != 6){
+			if (ex.getErrorCode() != 6) {
 				throw ex;
 			}
-			return this.creds.isSuperAdmin();
+			this.validated = this.creds.isSuperAdmin();
+			return this.validated;
 		}
 
 	}

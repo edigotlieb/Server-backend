@@ -3,6 +3,7 @@ package Utilities;
 
 import java.io.UnsupportedEncodingException;
 import java.security.*;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,4 +36,9 @@ public class Hashing {
 		byte[] thedigest = md5.digest(bytesOfMessage);
 		return new String(thedigest);
 	}
+        
+        public static String generateChallenge() {
+           return UUID.randomUUID().toString(); 
+        }
+        
 }

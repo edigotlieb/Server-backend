@@ -12,6 +12,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddPermissionGroupForTableRequest extends AppRequest{
@@ -59,6 +60,11 @@ public class AddPermissionGroupForTableRequest extends AppRequest{
 			throw new ValidationException(6);
 		}
 		return true;
+    }
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

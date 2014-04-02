@@ -68,4 +68,9 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 
 		return true;
 	}
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

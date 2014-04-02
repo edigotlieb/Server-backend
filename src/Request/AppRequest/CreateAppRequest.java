@@ -10,6 +10,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CreateAppRequest extends AppRequest {
@@ -42,6 +43,11 @@ public class CreateAppRequest extends AppRequest {
             throw new ValidationException(13);
         }
         return true;
+    }
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

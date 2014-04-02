@@ -10,6 +10,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
 import Statement.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DTDSelectRequest extends DTDRequest{
@@ -28,6 +29,11 @@ public class DTDSelectRequest extends DTDRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected ResultSet performRequest() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

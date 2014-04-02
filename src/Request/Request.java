@@ -28,6 +28,12 @@ public abstract class Request {
 
 		USER, APP, DTD
 	}
+        
+        public final ResultSet execute(){
+            return null;
+        }   
+        
+        protected abstract ResultSet performRequest();
 
 	// abstract public Credentials getCreds();
 	abstract public TYPE getType();

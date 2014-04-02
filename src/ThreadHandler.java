@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ThreadHandler {
     
-    private static ArrayList<ClientRequestThread> threads;  
+    private static final ArrayList<ClientRequestThread> threads;  
     private static ServerSocket ss;
     
     private final static int port = 0;
@@ -36,7 +36,7 @@ public class ThreadHandler {
            try {
                 Socket newSocket = ss.accept();
                 if(threads.size() == maxThreads) {
-                    // give the new socket and error and close it
+                    // give the new socket an error and close it
                     newSocket.close();
                 } else {
                     // create a new requestHandler and give it the socket and a new db connection

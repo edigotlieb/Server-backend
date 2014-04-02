@@ -7,6 +7,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DeleteAppRequest extends AppRequest {
@@ -33,4 +34,9 @@ public class DeleteAppRequest extends AppRequest {
 	public APP_ACTION_TYPE getActionType() {
 		return AppRequest.APP_ACTION_TYPE.DELETE_APP;
 	}
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

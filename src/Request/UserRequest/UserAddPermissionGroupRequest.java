@@ -6,10 +6,8 @@ package Request.UserRequest;
 
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
-import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -49,4 +47,9 @@ public class UserAddPermissionGroupRequest extends UserRequest {
 		}
 		return true;
 	}
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

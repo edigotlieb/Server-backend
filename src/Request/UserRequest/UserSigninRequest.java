@@ -8,6 +8,7 @@ package Request.UserRequest;
 
 import Request.Credentials;
 import SQL.SqlExecutor;
+import java.sql.ResultSet;
 
 public class UserSigninRequest extends UserRequest{
             
@@ -23,5 +24,10 @@ public class UserSigninRequest extends UserRequest{
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) {
         return true;
+    }
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

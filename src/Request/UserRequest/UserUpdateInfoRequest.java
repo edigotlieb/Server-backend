@@ -8,6 +8,7 @@ package Request.UserRequest;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserUpdateInfoRequest extends UserRequest {
@@ -40,6 +41,11 @@ public class UserUpdateInfoRequest extends UserRequest {
             throw new ValidationException(6);
         }
         return true;
+    }
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

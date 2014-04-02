@@ -9,6 +9,7 @@ package Request.AppRequest;
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.SqlExecutor;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SetPermissionGroupAdminRequest extends AppRequest{
@@ -35,6 +36,11 @@ public class SetPermissionGroupAdminRequest extends AppRequest{
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
         // check if the user is the current permission group admin
         return false;
+    }
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

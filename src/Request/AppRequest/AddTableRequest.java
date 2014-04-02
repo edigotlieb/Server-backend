@@ -49,4 +49,9 @@ public class AddTableRequest extends AppRequest {
 	public APP_ACTION_TYPE getActionType() {
 		return AppRequest.APP_ACTION_TYPE.ADD_TABLE;
 	}
+
+    @Override
+    protected ResultSet performRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

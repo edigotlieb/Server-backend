@@ -8,6 +8,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,32 +35,18 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		// check user and group exists
-
-		final String group_name = this.groupToRemove;
-		ResultSet rset = sqlExc.executePreparedStatement("getPermissionGroupInfoByName", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, group_name);
-			}
-		});
-		if (!rset.next()) {
+		String groupAdmin = ExistenceValidator.permissionGroupByName(sqlExc, this.groupToRemove);
+		if (groupAdmin.length() == 0) {
 			throw new ValidationException(11);
 		}
 
 		if (this.userToRemoveFrom.length() > 0) {
-			final String user_name = this.userToRemoveFrom;
-			ResultSet rset2 = sqlExc.executePreparedStatement("getAllUserInfoByUserName", new StatementPreparer() {
-				@Override
-				public void prepareStatement(PreparedStatement ps) throws SQLException {
-					ps.setString(1, user_name);
-				}
-			});
-			if (!rset2.next()) {
+			if (!ExistenceValidator.isUserByUsername(sqlExc, this.userToRemoveFrom)) {
 				throw new ValidationException(3);
 			}
 			
 			// check if adder is super admin or group admin
-			if (!rset.getString("USERNAME").equals(creds.getUsername())) {
+			if (!groupAdmin.equals(creds.getUsername())) {
 				throw new ValidationException(6);
 			}
 		} else {

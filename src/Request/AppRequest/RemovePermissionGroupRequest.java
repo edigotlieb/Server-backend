@@ -7,6 +7,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,25 +23,18 @@ public class RemovePermissionGroupRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		final String permissionGroupNameLocal = this.permissionGroupName;
-		ResultSet rset = sqlExc.executePreparedStatement("getPermissionGroupInfoByName", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, permissionGroupNameLocal);
-			}
-		});
-		if (!rset.next()) {
-                    throw new ValidationException(9);                    
+		String username = ExistenceValidator.permissionGroupByName(sqlExc, this.permissionGroupName);
+		if (username.length() == 0) {
+			throw new ValidationException(9);
 		}
-		String username = rset.getString("USERNAME");
 		if (!this.creds.getUsername().equals(username)) {
-                    throw new ValidationException(6);			
+			throw new ValidationException(6);
 		}
 
 		if (!this.creds.isAppSuperAdmin()) {
-                    throw new ValidationException(6);			
+			throw new ValidationException(6);
 		}
-                
+
 		return true;
 	}
 
@@ -49,10 +43,8 @@ public class RemovePermissionGroupRequest extends AppRequest {
 		return AppRequest.APP_ACTION_TYPE.REMOVE_PERMISSIONGROUP;
 	}
 
-    @Override
-    protected ResultSet performRequest() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
+	@Override
+	protected ResultSet performRequest() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 }

@@ -5,6 +5,7 @@ package Request.AppRequest;
 
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
+import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
@@ -37,8 +38,25 @@ public class DropTableRequest extends AppRequest {
 		return AppRequest.APP_ACTION_TYPE.DROP_TABLE;
 	}
 
-    @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		final String table_name = this.creds.getAppName() + "_" + this.tableName;
+		//drop table
+		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.drop(table_name));
+		//delete user permissions
+		sqlExc.executePreparedStatement("DeleteAppPermissionsByTableName", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, table_name);
+			}
+		});
+		//delete table
+		sqlExc.executePreparedStatement("DeleteTable", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, table_name);
+			}
+		});
+		return null;
+	}
 }

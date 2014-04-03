@@ -28,6 +28,7 @@ public class ErrorMsg {
         msgs.put(12, "Bad table name");
         msgs.put(13, "Application must be Master App");
         msgs.put(14, "App name already exists");
+        msgs.put(15, "SQL sanitization failed");
 		
 		//execution exceptions
 		msgs.put(51, "Must validate before executing");

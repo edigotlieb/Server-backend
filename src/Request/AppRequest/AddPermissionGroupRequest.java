@@ -7,6 +7,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,14 +25,7 @@ public class AddPermissionGroupRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		final String permissionGroupNameLocal = this.permissionGroupName;
-		ResultSet rset = sqlExc.executePreparedStatement("getPermissionGroupInfoByName", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, permissionGroupNameLocal);
-			}
-		});
-		if (rset.next() || permissionGroupName.equals(Credentials.anonymous)) {
+		if (ExistenceValidator.isPermissionGroupByName(sqlExc, this.permissionGroupName) || permissionGroupName.equals(Credentials.anonymous)) {
 			throw new ValidationException(5);                                
 		}                
 		if (!this.creds.isAppSuperAdmin()) {
@@ -46,8 +40,19 @@ public class AddPermissionGroupRequest extends AppRequest {
 	}
 
     @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+        final String permission_name = this.permissionGroupName;
+		final String permission_desc = this.description;
+		final String username = this.creds.getUsername();
+		sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, permission_name);
+				ps.setString(2, permission_desc);
+				ps.setString(3, username);
+			}
+		});
+		return null;
     }
 
 }

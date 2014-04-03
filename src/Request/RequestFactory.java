@@ -98,7 +98,7 @@ public class RequestFactory {
                 return new AddTableRequest(creds, tableName, cols, permissions);
             }
             case CREATE_APP: {
-                return new CreateAppRequest(creds, requestData.getString("appName"));
+                return new CreateAppRequest(creds, requestData.getString("appName"),requestData.getString("appKey"));
             }
             case DELETE_APP: {
                 return new DeleteAppRequest(creds,requestData.getString("appName"));

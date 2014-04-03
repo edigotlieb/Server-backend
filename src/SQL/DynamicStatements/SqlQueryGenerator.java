@@ -4,7 +4,7 @@
  */
 package SQL.DynamicStatements;
 
-
+import Request.AppRequest.Column;
 import Statement.Statement;
 import java.util.Iterator;
 import java.util.List;
@@ -16,33 +16,33 @@ import java.util.Map;
  */
 public class SqlQueryGenerator {
 
-	private static <T> String stringCommaSeperated(Iterable<T> list){
+	private static <T> String stringCommaSeperated(Iterable<T> list) {
 		Iterator<T> iterator = list.iterator();
 		String res = "";
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			res += iterator.next().toString();
 			res += ", ";
 		}
-		if(res.length() > 0){
-			res = res.substring(0, res.length()-2);
+		if (res.length() > 0) {
+			res = res.substring(0, res.length() - 2);
 		}
 		return res;
 	}
-	
-	private static <T> String stringCommaSeperated(Map<T,T> map){
+
+	private static <T> String stringCommaSeperated(Map<T, T> map) {
 		Iterator<T> iterator = map.keySet().iterator();
 		String res = "";
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			T key = iterator.next();
 			res += key.toString() + " = " + map.get(key);
 			res += ", ";
 		}
-		if(res.length() > 0){
-			res = res.substring(0, res.length()-2);
+		if (res.length() > 0) {
+			res = res.substring(0, res.length() - 2);
 		}
 		return res;
 	}
-	
+
 	public static String select(List<String> colnames, String from, Statement where) {
 		return "SELECT " + stringCommaSeperated(colnames) + " FROM " + from + " WHERE " + where.toString();
 	}
@@ -60,14 +60,27 @@ public class SqlQueryGenerator {
 	}
 
 	public static String insert(String into, Map<String, String> cols_vals) {
-		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet())  + ") VALUES (" + stringCommaSeperated(cols_vals.values()) + ")";
+		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values()) + ")";
 	}
-	
+
 	public static String create(String tableName, List<Request.AppRequest.Column> cols) {
-		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols)  + ")";
+		String primaries = "";
+		for (Column col : cols) {
+			if (col.isPrimary()) {
+				primaries += col.getColName() + ", ";
+			}
+		}
+		if (primaries.length() > 0) {
+			primaries = primaries.substring(0, primaries.length() - 2);
+		}
+		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols) + "," + primaries + ")";
 	}
-	
+
 	public static String drop(String tableName) {
 		return "DROP TABLE " + tableName;
+	}
+
+	public static String desc(String tableName) {
+		return "DESC " + tableName;
 	}
 }

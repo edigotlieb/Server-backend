@@ -6,7 +6,6 @@ package Request.AppRequest;
 
 import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.Credentials;
-import Request.Exceptions.ExecutionException;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
@@ -52,14 +51,18 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 	}
 
 	@Override
-	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException, ExecutionException {
-		final String username = this.creds.getUsername();
-		ResultSet rset = sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		final String app_name = this.permissionToAdd.getAppName();
+		final String table_name = this.permissionToAdd.getTableName();
+		final String permission_type = this.permissionToAdd.getType().toString();
+		final String permission_name = this.permissionToAdd.getPermissionGroup();
+		sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, username);
-				ps.setString(2, username);
-				ps.setString(3, username);
+				ps.setString(1, app_name);
+				ps.setString(2, table_name);
+				ps.setString(3, permission_type);
+				ps.setString(4, permission_name);
 			}
 		});
 		return null;

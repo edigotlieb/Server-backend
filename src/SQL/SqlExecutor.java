@@ -36,7 +36,7 @@ public class SqlExecutor {
         return rs;
     }
     
-    private  ResultSet executeDynamicStatementQry(String sql) throws SQLException {
+    public ResultSet executeDynamicStatementQry(String sql) throws SQLException {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         stmt.close();

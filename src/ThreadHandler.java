@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,9 +26,18 @@ public class ThreadHandler {
     
     private static final ComboPooledDataSource ds = new ComboPooledDataSource();
     
-    public static boolean init(String paramFileName) {
+    private static final Logger logger = Logger.getGlobal();
+    private static FileHandler fh;
+
         
-        RuntimeParams.readParams(paramFileName);       // read all the params from a config file
+    
+    public static boolean init(String paramFileName) {
+        try {
+            RuntimeParams.readParams(paramFileName);       // read all the params from a config file
+        } catch (Exception ex) {
+            // cant open param file
+            // exit
+        }
         
         threads = new ArrayList<>();
         
@@ -45,11 +55,17 @@ public class ThreadHandler {
             ds.setMaxStatementsPerConnection((int) RuntimeParams.getParams("MaxStatementsPerConnection"));
             ds.setMaxIdleTime((int) RuntimeParams.getParams("MaxIdleTime"));                     
             
+            fh = new FileHandler((String)RuntimeParams.getParams("LogFileName"));
             
         } catch (IOException | PropertyVetoException ex) {
             // cant start the server socket or open param file or set params of the DS
+            // or cant open log file
             // System.exit(1);
         }
+    
+        logger.addHandler(fh);
+        logger.setLevel(Level.ALL);
+        
         wasInit = true;
         return true;
     }

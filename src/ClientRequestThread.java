@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +25,7 @@ public class ClientRequestThread extends Thread {
 
     Connection con;
     Socket socket;
+    static final Logger log = Logger.getGlobal();
     BufferedReader reader;
     BufferedWriter writer;
 
@@ -120,7 +122,7 @@ public class ClientRequestThread extends Thread {
     }
 
     
-    private String createResponse(ResultSet rs) throws SQLException {
+    private synchronized String createResponse(ResultSet rs) throws SQLException {
         JSONObject response = new JSONObject();
         ResultSetMetaData rsmd = rs.getMetaData();
         JSONObject row;
@@ -138,7 +140,7 @@ public class ClientRequestThread extends Thread {
     }
     
     //  is this the desired signature?
-    private String createErrorResponse(RequestException ex) {
+    private synchronized String createErrorResponse(RequestException ex) {
         return String.format(ERROR_FORMAT, ErrorMsg.getErrorMsg(ex))+"\n";
     }
 

@@ -13,7 +13,7 @@ import SQL.SqlExecutor;
 import java.sql.SQLException;
 
 public abstract class DTDRequest extends Request{
-    private String tableName;
+    protected String tableName;
     public DTDRequest(Credentials creds, String tableName) {
         super(creds);
 		this.tableName = tableName;
@@ -33,6 +33,9 @@ public abstract class DTDRequest extends Request{
     
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if(!SQL.Utilities.Utils.isAlphaNumeric(tableName)){
+			throw new ValidationException(15);
+		}
 		if(!this.creds.getTablePermissionList(sqlExc, this.tableName).contains(this.getActionType())){
 			throw new ValidationException(6);
 		}

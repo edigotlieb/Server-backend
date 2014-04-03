@@ -6,8 +6,10 @@ package Request.UserRequest;
 
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
+import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,13 +18,9 @@ public class UserAddPermissionGroupRequest extends UserRequest {
 	String userToAddTo, groupName;
 
 	public UserAddPermissionGroupRequest(String userToAddTo, String groupName, Credentials creds) {
-		this(creds);
+		super(creds);
 		this.userToAddTo = userToAddTo;
 		this.groupName = groupName;
-	}
-
-	public UserAddPermissionGroupRequest(Credentials creds) {
-		super(creds);
 	}
 
 	@Override
@@ -48,8 +46,17 @@ public class UserAddPermissionGroupRequest extends UserRequest {
 		return true;
 	}
 
-    @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		final String username = this.userToAddTo;
+		final String permission_name = this.groupName;
+		sqlExc.executePreparedStatement("AddUserPermissionGroup", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+				ps.setString(2, permission_name);
+			}
+		});
+		return null;
+	}
 }

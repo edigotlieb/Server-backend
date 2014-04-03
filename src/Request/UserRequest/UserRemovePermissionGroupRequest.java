@@ -44,20 +44,32 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 			if (!ExistenceValidator.isUserByUsername(sqlExc, this.userToRemoveFrom)) {
 				throw new ValidationException(3);
 			}
-			
+
 			// check if adder is super admin or group admin
 			if (!groupAdmin.equals(creds.getUsername())) {
 				throw new ValidationException(6);
 			}
 		} else {
 			this.userToRemoveFrom = creds.getUsername();
+			if (groupAdmin.equals(creds.getUsername())) {
+				throw new ValidationException(16);
+			}
 		}
 
 		return true;
 	}
 
-    @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		final String username = this.userToRemoveFrom;
+		final String permission_name = this.groupToRemove;
+		sqlExc.executePreparedStatement("RemoveUserPermission", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+				ps.setString(2, permission_name);
+			}
+		});
+		return null;
+	}
 }

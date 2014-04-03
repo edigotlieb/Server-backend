@@ -21,6 +21,7 @@ public class Credentials {
 	public final static String anonymous = "Anonymous";
 	public final static String adminApp = "adminApp";
 	public final static String masterAppName = "MasterApplication";
+	public final static String userPermission = "User";
 	private final String username, hashedPassword;
 	private final String hashedAppKey;
 	private final String appName;

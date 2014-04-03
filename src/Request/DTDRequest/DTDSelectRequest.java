@@ -7,7 +7,7 @@
 package Request.DTDRequest;
 
 import Request.Credentials;
-import Request.Exceptions.ValidationException;
+import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.SqlExecutor;
 import Statement.Statement;
 import java.sql.ResultSet;
@@ -28,13 +28,9 @@ public class DTDSelectRequest extends DTDRequest{
     }
 
     @Override
-    protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+        sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(null, tableName, where));
+		return null;
     }
 
 }

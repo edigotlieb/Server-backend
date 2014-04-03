@@ -8,7 +8,9 @@ package Request.UserRequest;
 
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
+import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -29,8 +31,14 @@ public class UserGetPermissionGroups extends UserRequest{
     }
 
     @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+        final String username = this.creds.getUsername();
+		return sqlExc.executePreparedStatement("getUserPermissionGroups", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+			}
+		});
     }
 
 }

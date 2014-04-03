@@ -8,8 +8,10 @@ package Request.AppRequest;
 
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
+import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -50,8 +52,19 @@ public class RemovePermissionGroupForTableRequest extends AppRequest{
     }
 
     @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+        final String table_name = this.toRemove.getTableName();
+		final String group_name = this.toRemove.getPermissionGroup();
+		final String permission_type = this.toRemove.getType().toString();
+		sqlExc.executePreparedStatement("DeleteSingleAppPermission", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, table_name);
+				ps.setString(2, group_name);
+				ps.setString(3, permission_type);
+			}
+		});
+		return null;
     }
     
 }

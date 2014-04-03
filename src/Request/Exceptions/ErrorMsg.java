@@ -29,6 +29,7 @@ public class ErrorMsg {
         msgs.put(13, "Application must be Master App");
         msgs.put(14, "App name already exists");
         msgs.put(15, "SQL sanitization failed");
+        msgs.put(16, "Permission group admin cannot remove his own user permission");
 		
 		//execution exceptions
 		msgs.put(51, "Must validate before executing");

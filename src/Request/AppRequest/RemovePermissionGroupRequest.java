@@ -30,7 +30,6 @@ public class RemovePermissionGroupRequest extends AppRequest {
 		if (!this.creds.getUsername().equals(username)) {
 			throw new ValidationException(6);
 		}
-
 		if (!this.creds.isAppSuperAdmin()) {
 			throw new ValidationException(6);
 		}
@@ -44,7 +43,29 @@ public class RemovePermissionGroupRequest extends AppRequest {
 	}
 
 	@Override
-	protected ResultSet performRequest(SqlExecutor sqlExc) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		//delete userpermission relation
+		final String app_name = this.permissionGroupName;
+		sqlExc.executePreparedStatement("DeletePermissionUsers", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, app_name);
+			}
+		});
+		//delete app permission
+		sqlExc.executePreparedStatement("DeleteAppPermissionsByPermissionName", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, app_name);
+			}
+		});
+		//delete permission
+		sqlExc.executePreparedStatement("DeletePermission", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, app_name);
+			}
+		});
+		return null;
 	}
 }

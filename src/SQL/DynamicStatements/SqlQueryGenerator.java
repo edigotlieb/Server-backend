@@ -44,7 +44,13 @@ public class SqlQueryGenerator {
 	}
 
 	public static String select(List<String> colnames, String from, Statement where) {
-		return "SELECT " + stringCommaSeperated(colnames) + " FROM " + from + " WHERE " + where.toString();
+		String columns;
+		if (colnames == null) {
+			columns = "*";
+		} else {
+			columns = stringCommaSeperated(colnames);
+		}
+		return "SELECT " + columns + " FROM " + from + " WHERE " + where.toString();
 	}
 
 	public static String delete(String from, Statement where) {

@@ -35,11 +35,18 @@ public class PreparedStatementStrings {
 		fileNames.put("getAllAppInfoByKey", "select/getAllAppInfoByKey.sql");
 		/*
 		 * params: Username
-		 * cols: USER_ID, USERNAME, PASSWORD (hashed), Name, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM, PERMISSIONGROUP_IF, PERMISSION_NAME, PERMISSIONGROUP_DESCTIPTION, PERMISION_GROUP_ADMIN
+		 * cols: USER_ID, USERNAME, PASSWORD (hashed), NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM, PERMISSIONGROUP_IF, PERMISSION_NAME, PERMISSIONGROUP_DESCTIPTION, PERMISION_GROUP_ADMIN
 		 * descriptions: returns a set of rows, each describes the user info and the info of one of the
 		 * permission groups he is in.
 		 */
 		fileNames.put("getUserPermissionGroups", "select/getUserPermissionGroups.sql");
+		/*
+		 * params: Username
+		 * cols: USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM, PERMISSIONGROUP_IF, PERMISSION_NAME, PERMISSIONGROUP_DESCTIPTION, PERMISION_GROUP_ADMIN
+		 * descriptions: returns a set of rows, each describes the user info and the info of one of the
+		 * permission groups he is in.
+		 */
+		fileNames.put("getUserPermissionGroupsNoPass", "select/getUserPermissionGroupsNoPass.sql");
 		/*
 		 * params: Username, App Name
 		 * cols: TABLE_NAME, PERMISSION_TYPE
@@ -65,6 +72,116 @@ public class PreparedStatementStrings {
 		 * descriptions: returns the permissiongroup info including the username of the permissiongroup admin
 		 */
 		fileNames.put("getPermissionGroupInfoByName", "select/getPermissionGroupInfoByName.sql");
+		/*
+		 * params: app name
+		 * cols: TABLE_NAME
+		 * descriptions: returns the set of a given app's dynamic table names
+		 */
+		fileNames.put("getPermissionGroupInfoByName", "select/getPermissionGroupInfoByName.sql");
+		
+		
+		
+		/*
+		 * params: app name
+		 * description: deletes the app record from the app table
+		 */
+		fileNames.put("DeleteApp", "delete/DeleteApp.sql");
+		
+		/*
+		 * params: app name
+		 * description: deletes all app permissions of a given app
+		 */
+		fileNames.put("DeleteAppPermissionsByAppName", "delete/DeleteAppPermissionsByAppName.sql");
+		/*
+		 * params: permission name
+		 * description: deletes all app permissions of a given permission group
+		 */
+		fileNames.put("DeleteAppPermissionsByPermissionName", "delete/DeleteAppPermissionsByPermissionName.sql");
+		/*
+		 * params: table name
+		 * description: deletes all app permissions of a given permission group
+		 */
+		fileNames.put("DeleteAppPermissionsByTableName", "delete/DeleteAppPermissionsByTableName.sql");
+		/*
+		 * params: table name
+		 * description: deletes all dynamic table records of a given application
+		 */
+		fileNames.put("DeleteAppTables", "delete/DeleteAppTables.sql");
+		/*
+		 * params: permission name
+		 * description: deletes a permission group record
+		 */
+		fileNames.put("DeletePermission", "delete/DeletePermission.sql");
+		/*
+		 * params: permission name
+		 * description: deletes all relation records between a user and the given permission
+		 */
+		fileNames.put("DeletePermissionUsers", "delete/DeletePermissionUsers.sql");
+		/*
+		 * params: table name, permission name, permission type
+		 * description: deletes a specific app premission with the given info
+		 */
+		fileNames.put("DeletesSingleAppPermission", "delete/DeletesSingleAppPermission.sql");
+		/*
+		 * params: table name
+		 * description: deletes a given table record from the dynamic table table
+		 */
+		fileNames.put("DeleteTable", "delete/DeleteTable.sql");
+		/*
+		 * params: permission name, username
+		 * description: removes a relation between a given username and a given permission name
+		 */
+		fileNames.put("RemoveUserPermission", "delete/RemoveUserPermission.sql");
+		
+		
+		/*
+		 * params: user name, permission name
+		 * description: sets the given permission admin to be the given user
+		 */
+		fileNames.put("SetPermissionGroupAdmin", "update/SetPermissionGroupAdmin.sql");
+		/*
+		 * params: name, display name, email, room, year, username
+		 * description: updates information to a given user (last param)
+		 */
+		fileNames.put("UpdateUser", "update/UpdateUser.sql");
+		/*
+		 * params: new pass, username
+		 * description: sets a new password to a given user (last param)
+		 */
+		fileNames.put("UpdateUserPassword", "update/UpdateUserPassword.sql");
+		
+		
+		
+		/*
+		 * params: app name, hashed app key
+		 * description: inserts a new application record
+		 */
+		fileNames.put("AddApp", "insert/AddApp.sql");
+		/*
+		 * params: permission name, permission desc, admin username
+		 * description: inserts a new permission group record
+		 */
+		fileNames.put("AddPermissionGroup", "insert/AddPermissionGroup.sql");
+		/*
+		 * params: app name, table name, permission type, permission group id
+		 * description: inserts a new applicatoi permission group record
+		 */
+		fileNames.put("AddPermissionGroupForTable", "insert/AddPermissionGroupForTable.sql");
+		/*
+		 * params: table name, app name
+		 * description: inserts a new dynamic table record
+		 */
+		fileNames.put("AddTable", "insert/AddTable.sql");
+		/*
+		 * params: username, permission name
+		 * description: inserts a user permission relation record
+		 */
+		fileNames.put("AddUserPermissionGroup", "insert/AddUserPermissionGroup.sql");
+		/*
+		 * params: user name, hashed password, name, display name, email, room, year
+		 * description: inserts a new user record
+		 */
+		fileNames.put("AddUser", "insert/AddUser.sql");
 	}
 	private final HashMap<String, String> PreparedSql = new HashMap<>();
 	private static PreparedStatementStrings instance = null;

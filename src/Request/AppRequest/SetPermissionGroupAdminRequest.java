@@ -6,8 +6,10 @@ package Request.AppRequest;
 
 import Request.Credentials;
 import Request.Exceptions.ValidationException;
+import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,12 +17,8 @@ public class SetPermissionGroupAdminRequest extends AppRequest {
 
 	String username, groupName;
 
-	public SetPermissionGroupAdminRequest(Credentials creds) {
-		super(creds);
-	}
-
 	public SetPermissionGroupAdminRequest(String username, String groupName, Credentials creds) {
-		this(creds);
+		super(creds);
 		this.username = username;
 		this.groupName = groupName;
 	}
@@ -49,7 +47,16 @@ public class SetPermissionGroupAdminRequest extends AppRequest {
 	}
 
 	@Override
-	protected ResultSet performRequest(SqlExecutor sqlExc) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		final String user_name = this.username;
+		final String group_name = this.groupName;
+		sqlExc.executePreparedStatement("SetPermissionGroupAdmin", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, user_name);
+				ps.setString(2, group_name);
+			}
+		});
+		return null;
 	}
 }

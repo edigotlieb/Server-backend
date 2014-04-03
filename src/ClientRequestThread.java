@@ -1,4 +1,7 @@
 
+import Request.Exceptions.ErrorMsg;
+import Request.Exceptions.ExecutionException;
+import Request.Exceptions.RequestException;
 import Request.Exceptions.ValidationException;
 import Request.Request;
 import Request.RequestFactory;
@@ -11,9 +14,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ClientRequestThread extends Thread {
 
@@ -22,6 +27,9 @@ public class ClientRequestThread extends Thread {
     BufferedReader reader;
     BufferedWriter writer;
 
+    final String ERROR_FORMAT = "{'ERROR':'%s'}";
+    final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";
+    
     public ClientRequestThread(Connection con, Socket socket) {
         this.con = con;
         this.socket = socket;
@@ -34,6 +42,7 @@ public class ClientRequestThread extends Thread {
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException ex) {
+            
             this.closeThread();
             return;
         }
@@ -62,12 +71,17 @@ public class ClientRequestThread extends Thread {
         } catch (IOException ex) {
             // cand check if reader is ready
         }
+        
         Request clientRequest;
         try {
             // process response to request
             clientRequest = RequestFactory.createRequestFromString(reader.readLine());
         } catch (IOException ex) {
             // cant read line from stream
+            this.closeThread();
+            return;
+        } catch (JSONException ex) {
+            // bad format!
             this.closeThread();
             return;
         }
@@ -81,11 +95,55 @@ public class ClientRequestThread extends Thread {
             // validation error
             // send back response
         }
-                
-        // execute request
+        ResultSet resultSet = null;
+        try {
+            resultSet = clientRequest.execute(new SqlExecutor(con));
+            // execute request
+        } catch (SQLException ex) {
+            // execution went wrong
+        } catch (ExecutionException ex) {
+            // not validated
+        }   
+       
+        try {
         // send resultSet
+        if(resultSet == null) {
+            this.writer.write(SUCCESS_MSG);                        
+        } else {
+            this.writer.write(createResponse(resultSet));
+        }        
+        this.closeThread();
+        } catch(IOException | SQLException ex) {
+            // cant write result or read result set
+        }
+        
     }
 
+    
+    private String createResponse(ResultSet rs) throws SQLException {
+        JSONObject response = new JSONObject();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        JSONObject row;
+        int rowNum = 1;
+        while(rs.next()) {                      
+            row = new JSONObject();
+            for(int i=1; i <= rsmd.getColumnCount(); i++) {
+                row.append(rsmd.getColumnName(i), String.valueOf(rs.getObject(i)));                        
+            }
+            response.append("Entry"+rowNum, row);
+            rowNum++;
+        }
+            
+        return response.toString()+"\n";
+    }
+    
+    //  is this the desired signature?
+    private String createErrorResponse(RequestException ex) {
+        return String.format(ERROR_FORMAT, ErrorMsg.getErrorMsg(ex))+"\n";
+    }
+
+    
+    
     private void closeThread() {
         try {
             this.reader.close();

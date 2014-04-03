@@ -13,16 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class GetTablesInfoRequest extends AppRequest{
+public class GetTableInfoRequest extends AppRequest{
 
+    String tableName;
 
-    public GetTablesInfoRequest(Credentials creds) {
+    public GetTableInfoRequest(Credentials creds,String tableName) {
         super(creds);
     }
 
     	@Override
 	public APP_ACTION_TYPE getActionType() {
-		return AppRequest.APP_ACTION_TYPE.GET_TABLES_INFO;
+		return AppRequest.APP_ACTION_TYPE.GET_TABLE_INFO;
 	}
 
     @Override

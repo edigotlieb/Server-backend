@@ -30,14 +30,14 @@ public abstract class Request {
 		USER, APP, DTD
 	}
 
-	public final ResultSet execute(SqlExecutor sqlExc) throws SQLException, ExecutionException {
+	public final ResultSet execute(SqlExecutor sqlExc) throws SQLException,ExecutionException {
 		if (!this.validated) {
 			throw new ExecutionException(51);
 		}
 		return performRequest(sqlExc);
 	}
 
-	protected abstract ResultSet performRequest(SqlExecutor sqlExc) throws SQLException, ExecutionException;
+	protected abstract ResultSet performRequest(SqlExecutor sqlExc) throws SQLException;
 
 	// abstract public Credentials getCreds();
 	abstract public TYPE getType();

@@ -14,7 +14,8 @@ import Request.AppRequest.Column;
 import Request.AppRequest.CreateAppRequest;
 import Request.AppRequest.DeleteAppRequest;
 import Request.AppRequest.DropTableRequest;
-import Request.AppRequest.GetTablesInfoRequest;
+import Request.AppRequest.GetTableInfoRequest;
+import Request.AppRequest.GetTablesRequest;
 import Request.AppRequest.Permission;
 import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.AppRequest.RemovePermissionGroupForTableRequest;
@@ -106,8 +107,11 @@ public class RequestFactory {
             case DROP_TABLE: {
                 return new DropTableRequest(creds, requestData.getString("tableName"));
             }
-            case GET_TABLES_INFO: {
-                return new GetTablesInfoRequest(creds);
+            case GET_TABLE_INFO: {
+                return new GetTableInfoRequest(creds,requestData.getString("tableName"));
+            }
+            case GET_TABLES: {
+                return new GetTablesRequest(creds);
             }
             case REMOVE_PERMISSIONGROUP: {
                 return new RemovePermissionGroupRequest(creds, requestData.getString("permissionGroupName"));

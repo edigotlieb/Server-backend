@@ -28,15 +28,25 @@ public class Hashing {
 	public static String MD5Hash(String myStr) {
 		byte[] bytesOfMessage;
 		try {
-			bytesOfMessage = myStr.getBytes("UTF-8");
+			bytesOfMessage = myStr.getBytes("ascii");
 		} catch (UnsupportedEncodingException ex) {
 			return myStr;
 		}
 		byte[] thedigest = md5.digest(bytesOfMessage);
-		return new String(thedigest);
+                return toHex(thedigest);           
 	}
+        
+        public static String toHex(byte[] in) {
+        StringBuilder out = new StringBuilder(in.length * 2);
+        for (byte b: in) {
+            out.append(String.format("%02X", (byte) b));
+        }
+        return out.toString().toLowerCase();
+         }
+        
+        
 
 	public static String generateChallenge() {
-		return UUID.randomUUID().toString();
+		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 }

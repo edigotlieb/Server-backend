@@ -60,18 +60,20 @@ public class ThreadHandler {
             ds.setMaxPoolSize((int) RuntimeParams.getParams("MaxPoolSize"));
             ds.setMaxStatementsPerConnection((int) RuntimeParams.getParams("MaxStatementsPerConnection"));
             ds.setMaxIdleTime((int) RuntimeParams.getParams("MaxIdleTime"));                     
+                             
+            ds.getConnection();
             
             fh = new FileHandler((String)RuntimeParams.getParams("LogFileName"));
             fh.setFormatter(new SimpleFormatter());
             
-        } catch (IOException | PropertyVetoException ex) {
+        } catch (IOException | PropertyVetoException | SQLException ex) {
             // cant start the server socket or open param file or set params of the DS
             // or cant open log file
             logger.log(Level.SEVERE, "Failed on port or DB init");
             logger.log(Level.SEVERE, ex.getMessage(), ex);       
             logger.log(Level.SEVERE, "closing...");
              System.exit(1);
-        }
+        } 
     
         logger.addHandler(fh);
         logger.setLevel(Level.ALL);
@@ -85,34 +87,48 @@ public class ThreadHandler {
     public static void run() {
         
         if(!wasInit) return; // check we were initiallized
-        
+        int IDs = 0;
         while(true)  {// really want this?
            try {
+                logger.log(Level.INFO, "waiting for incoming connection...");
                 Socket newSocket = ss.accept();
+                logger.log(Level.INFO, "accepted new incoming connection...");
                 if(threads.size() == (int) RuntimeParams.getParams("MaxThreads")) {
                     // give the new socket an error and close it
+                    logger.log(Level.INFO, "refusing new incoming connection because of overhead");
                     newSocket.close();
                 } else {
                     // create a new requestHandler and give it the socket and a new db connection
-                    ClientRequestThread newRequestThread = new ClientRequestThread(ds.getConnection(), newSocket);
+                    logger.log(Level.INFO, "starting new DB connection...");
+                    ClientRequestThread newRequestThread = new ClientRequestThread(ds.getConnection(), newSocket,IDs);
                     threads.add(newRequestThread);
+                    logger.log(Level.INFO, "transfering control and starting new client request thread...");
                     newRequestThread.start();
                 }
                 
-                updateThreads();
-                
+                logger.log(Level.INFO, "updating thread arrays");
+                updateThreads();                
+                logger.log(Level.INFO, threads.size()+" Threads active.");
                 logger.getHandlers()[0].flush();
                 
-           } catch(IOException | SQLException ex) {
+           } catch(IOException ex) {
                // something went very wrong
-           }          
+               logger.log(Level.SEVERE, "failed to close socket");
+               logger.log(Level.SEVERE, ex.getMessage(), ex);   
+           }  catch (SQLException ex) {
+               logger.log(Level.SEVERE, "failed to open db connection");
+               logger.log(Level.SEVERE, ex.getMessage(), ex);   
+               logger.log(Level.SEVERE, "closing...");
+               System.exit(1);
+           } 
+           IDs++;
         }
     }
 
-    private static void updateThreads() {
-        for(ClientRequestThread t: threads) {
-            if(!t.isAlive()) {
-               threads.remove(t);
+    private synchronized static void updateThreads() {
+        for(int i=0; i< threads.size(); i++) {
+            if(!threads.get(i).isAlive()) {                
+               threads.remove(i);
             }
         }
     }

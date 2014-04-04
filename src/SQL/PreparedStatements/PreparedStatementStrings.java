@@ -121,7 +121,7 @@ public class PreparedStatementStrings {
 		 * params: table name, permission name, permission type
 		 * description: deletes a specific app premission with the given info
 		 */
-		fileNames.put("DeletesSingleAppPermission", "delete/DeletesSingleAppPermission.sql");
+		fileNames.put("DeleteSingleAppPermission", "delete/DeleteSingleAppPermission.sql");
 		/*
 		 * params: table name
 		 * description: deletes a given table record from the dynamic table table

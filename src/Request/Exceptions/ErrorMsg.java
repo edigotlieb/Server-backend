@@ -31,11 +31,17 @@ public class ErrorMsg {
         msgs.put(15, "SQL sanitization failed");
         msgs.put(16, "Permission group admin cannot remove his own user permission");
 		
-		//execution exceptions
-		msgs.put(51, "Must validate before executing");
+        
+	//execution exceptions
+	msgs.put(51, "Must validate before executing");
+        msgs.put(52, "General excution error");
+        
+        // 
+        msgs.put(100, "Bad request format");
+        
     }
 
-    private static String getErrorMsg(int errorCode) {
+    public static String getErrorMsg(int errorCode) {
         return msgs.get(errorCode);
     }
 

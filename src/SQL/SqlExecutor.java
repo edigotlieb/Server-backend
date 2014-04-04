@@ -27,19 +27,20 @@ public class SqlExecutor {
     
     public ResultSet executePreparedStatement(String sqlKey,StatementPreparer sp) throws SQLException {
         PreparedStatement ps = this.con.prepareStatement(this.sqls.getSQL(sqlKey));
+        sp.prepareStatement(ps);
         return executePreparedStatementQry(ps);
     }            
     
     private ResultSet executePreparedStatementQry(PreparedStatement ps) throws SQLException {
         ResultSet rs = ps.executeQuery();
-        ps.close();
+        // ps.close();
         return rs;
     }
     
     public ResultSet executeDynamicStatementQry(String sql) throws SQLException {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        stmt.close();
+        // stmt.close();
         return rs;
     }
     

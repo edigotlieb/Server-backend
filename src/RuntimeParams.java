@@ -15,16 +15,16 @@ public class RuntimeParams {
 
     static {
         // default params
-        params.put("DriverClass", "");
-        params.put("DBUser", "");
-        params.put("DBPass", "");
-        params.put("DBURL", "");
-        params.put("MaxPoolSize", 0);
-        params.put("MaxStatementsPerConnection", 0);
+        params.put("DriverClass", "com.mysql.jdbc.Driver");
+        params.put("DBUser", "root");
+        params.put("DBPass", "LD2012");
+        params.put("DBURL", "jdbc:mysql://localhost/MASTER");
+        params.put("MaxPoolSize", 10);
+        params.put("MaxStatementsPerConnection", 20);
         params.put("MaxIdleTime", 0);
-        params.put("RequestPort", 0);
-        params.put("MaxThreads", 0);
-        params.put("SocketBackLog", 0);
+        params.put("RequestPort", 4850);
+        params.put("MaxThreads", 1);
+        params.put("SocketBackLog", 20);
         params.put("ResponseTimeOut", 4000); // time in millis
         params.put("LogFileName", "logger.txt"); // time in millis
     }

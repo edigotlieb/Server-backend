@@ -37,6 +37,10 @@ public class ThreadHandler {
             RuntimeParams.readParams(paramFileName);       // read all the params from a config file
         } catch (Exception ex) {
             // cant open param file
+            logger.log(Level.SEVERE, "Can't open parameter file");
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, "closing...");
+            System.exit(0);
             // exit
         }
         
@@ -63,7 +67,10 @@ public class ThreadHandler {
         } catch (IOException | PropertyVetoException ex) {
             // cant start the server socket or open param file or set params of the DS
             // or cant open log file
-            // System.exit(1);
+            logger.log(Level.SEVERE, "Failed on port or DB init");
+            logger.log(Level.SEVERE, ex.getMessage(), ex);       
+            logger.log(Level.SEVERE, "closing...");
+             System.exit(1);
         }
     
         logger.addHandler(fh);

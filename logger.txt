@@ -1,2 +1,2 @@
-Apr 04, 2014 12:28:39 PM ThreadHandler init
+Apr 04, 2014 5:03:15 PM ThreadHandler init
 INFO: finished initiallizing...

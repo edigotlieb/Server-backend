@@ -152,6 +152,7 @@ public class ClientRequestThread extends Thread {
             this.writer.close();
             this.socket.close();
             this.con.close();
+            log.getHandlers()[0].flush();
         } catch (IOException | SQLException ex) {
             // couldnt close stuff
         }

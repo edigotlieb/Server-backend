@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /** 
  * FILE : ThreadHandler.java
@@ -24,7 +25,7 @@ public class ThreadHandler {
     private static ArrayList<ClientRequestThread> threads;  
     private static ServerSocket ss;
     
-    private static final ComboPooledDataSource ds = new ComboPooledDataSource();
+    private static  ComboPooledDataSource ds;
     
     private static final Logger logger = Logger.getGlobal();
     private static FileHandler fh;
@@ -46,6 +47,7 @@ public class ThreadHandler {
             // init the server socket
             ss = new ServerSocket((int) RuntimeParams.getParams("RequestPort"), (int) RuntimeParams.getParams("SocketBackLog"));
             
+            ds = new ComboPooledDataSource();
             // init the data source
             ds.setDriverClass(String.valueOf(RuntimeParams.getParams("DriverClass")));
             ds.setUser(String.valueOf(RuntimeParams.getParams("DBUser")));
@@ -56,6 +58,7 @@ public class ThreadHandler {
             ds.setMaxIdleTime((int) RuntimeParams.getParams("MaxIdleTime"));                     
             
             fh = new FileHandler((String)RuntimeParams.getParams("LogFileName"));
+            fh.setFormatter(new SimpleFormatter());
             
         } catch (IOException | PropertyVetoException ex) {
             // cant start the server socket or open param file or set params of the DS
@@ -66,6 +69,7 @@ public class ThreadHandler {
         logger.addHandler(fh);
         logger.setLevel(Level.ALL);
         
+        logger.log(Level.INFO, "finished initiallizing...");
         wasInit = true;
         return true;
     }
@@ -87,9 +91,13 @@ public class ThreadHandler {
                     threads.add(newRequestThread);
                     newRequestThread.start();
                 }
+                
                 updateThreads();
+                
+                logger.getHandlers()[0].flush();
+                
            } catch(IOException | SQLException ex) {
-               // something went wrong
+               // something went very wrong
            }          
         }
     }

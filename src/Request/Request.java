@@ -59,7 +59,7 @@ public abstract class Request {
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, username);
 			}
-		});
+		});                
 		if (!rset.next()) {
 			throw new ValidationException(3);
 		}
@@ -75,7 +75,7 @@ public abstract class Request {
 		List<String> permissions = new ArrayList<>();
 		do {
 			permissions.add(rset.getString("PERMISSION_NAME"));
-		} while (!rset.next());
+		} while (rset.next());
 
 		this.creds.setPermissions(permissions);
 

@@ -32,10 +32,12 @@ public class SqlExecutor {
     }            
     
     private ResultSet executePreparedStatementQry(PreparedStatement ps) throws SQLException {
-        ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();        
         // ps.close();
         return rs;
     }
+    
+    
     
     public ResultSet executeDynamicStatementQry(String sql) throws SQLException {
         Statement stmt = con.createStatement();

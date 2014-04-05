@@ -38,6 +38,7 @@ public class ErrorMsg {
         
         // 
         msgs.put(100, "Bad request format");
+        msgs.put(500, "Internal Server Error!");
         
     }
 

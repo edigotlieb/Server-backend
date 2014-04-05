@@ -139,8 +139,12 @@ public class ClientRequestThread extends Thread {
             clientRequest.Validate(new SqlExecutor(con), chal);
         } catch (SQLException ex) {
             // some bad SQL
-            logMSG("validation SQL error...", Level.SEVERE);
+            logMSG("validation SQL error...", Level.SEVERE);            
             logException(ex, Level.SEVERE);
+            
+            this.out.print(this.createErrorResponse(500)); 
+            this.out.flush();                
+                            
             this.closeThread();
             return;
         } catch (ValidationException ex) {
@@ -167,7 +171,12 @@ public class ClientRequestThread extends Thread {
         } catch (SQLException ex) {
             // execution went wrong
             this.logMSG("general execution error...", Level.INFO);
+            this.logException(ex, Level.INFO);
             this.out.printf(this.createErrorResponse(52));
+            
+            this.closeThread();
+            return; 
+            
         } catch (ExecutionException ex) {
             // not validated
             this.logMSG(ErrorMsg.getErrorMsg(51), Level.INFO);

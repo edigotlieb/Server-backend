@@ -49,6 +49,9 @@ public abstract class Request {
 		if (app_key.length() == 0) {
 			throw new ValidationException(1);
 		}
+                
+                // System.out.println(Hashing.MD5Hash(app_key + challenge));
+               
 		if (!this.creds.getHashedAppKey().equals(Hashing.MD5Hash(app_key + challenge))) {
 			throw new ValidationException(2);
 		}
@@ -64,6 +67,7 @@ public abstract class Request {
 			throw new ValidationException(3);
 		}
 		String hashed_pass = rset.getString("PASSWORD");
+
 		if (!this.creds.getHashedPassword().equals(Hashing.MD5Hash(hashed_pass + challenge))) {
 			throw new ValidationException(4);
 		}

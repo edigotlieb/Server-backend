@@ -1,56 +1,92 @@
-Apr 06, 2014 10:22:50 PM ThreadHandler init
+Apr 06, 2014 11:20:27 PM ThreadHandler init
 INFO: finished initiallizing...
-Apr 06, 2014 10:22:50 PM ThreadHandler run
+Apr 06, 2014 11:20:27 PM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 06, 2014 10:22:52 PM ThreadHandler run
+Apr 06, 2014 11:32:31 PM ThreadHandler run
 INFO: accepted new incoming connection...
-Apr 06, 2014 10:22:52 PM ThreadHandler run
+Apr 06, 2014 11:32:31 PM ThreadHandler run
 INFO: starting new DB connection...
-Apr 06, 2014 10:22:52 PM ThreadHandler run
+Apr 06, 2014 11:32:31 PM ThreadHandler run
 INFO: transfering control and starting new client request thread...
-Apr 06, 2014 10:22:52 PM ThreadHandler run
+Apr 06, 2014 11:32:31 PM ThreadHandler run
 INFO: updating thread arrays
-Apr 06, 2014 10:22:52 PM ThreadHandler run
+Apr 06, 2014 11:32:31 PM ThreadHandler run
 INFO: 1 Threads active.
-Apr 06, 2014 10:22:52 PM ThreadHandler run
+Apr 06, 2014 11:32:31 PM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 06, 2014 10:22:52 PM ClientRequestThread logMSG
+Apr 06, 2014 11:32:31 PM ClientRequestThread logMSG
 INFO: CRT-0: opening streams...
-Apr 06, 2014 10:22:52 PM ClientRequestThread logMSG
-INFO: CRT-0: sending challenge to client - 049c3a3025a6466dbdfb39f6af4d5e42
-Apr 06, 2014 10:22:52 PM ClientRequestThread logMSG
+Apr 06, 2014 11:32:31 PM ClientRequestThread logMSG
+INFO: CRT-0: sending challenge to client - e2d6cb3f812d4482b9085031281c4ab0
+Apr 06, 2014 11:32:31 PM ClientRequestThread logMSG
 INFO: CRT-0: waiting for client request 2000 millis...
-Apr 06, 2014 10:22:54 PM ClientRequestThread logMSG
+Apr 06, 2014 11:32:33 PM ClientRequestThread logMSG
 INFO: CRT-0: done sleeping...
-Apr 06, 2014 10:22:54 PM ClientRequestThread logMSG
+Apr 06, 2014 11:32:33 PM ClientRequestThread logMSG
 INFO: CRT-0: proc client request...
-Apr 06, 2014 10:22:54 PM ClientRequestThread logMSG
-INFO: CRT-0: client request denied with error code 2
-Apr 06, 2014 10:22:54 PM ClientRequestThread logMSG
+Apr 06, 2014 11:32:33 PM ClientRequestThread logMSG
+INFO: CRT-0: Client request validated
+Apr 06, 2014 11:32:33 PM ClientRequestThread logMSG
+INFO: CRT-0: general execution error...
+Apr 06, 2014 11:32:33 PM ClientRequestThread logException
+INFO: CRT-0: Can not issue data manipulation statements with executeQuery().
+java.sql.SQLException: Can not issue data manipulation statements with executeQuery().
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1086)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:989)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:975)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:920)
+	at com.mysql.jdbc.StatementImpl.checkForDml(StatementImpl.java:502)
+	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:2224)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.executeQuery(NewProxyPreparedStatement.java:430)
+	at SQL.SqlExecutor.executePreparedStatementQry(SqlExecutor.java:35)
+	at SQL.SqlExecutor.executePreparedStatement(SqlExecutor.java:31)
+	at Request.UserRequest.UserSignupRequest.performRequest(UserSignupRequest.java:61)
+	at Request.Request.execute(Request.java:37)
+	at ClientRequestThread.run(ClientRequestThread.java:184)
+
+Apr 06, 2014 11:32:33 PM ClientRequestThread logMSG
 INFO: CRT-0: closing request thread...
-Apr 06, 2014 10:25:56 PM ThreadHandler run
+Apr 06, 2014 11:33:03 PM ThreadHandler run
 INFO: accepted new incoming connection...
-Apr 06, 2014 10:25:56 PM ThreadHandler run
+Apr 06, 2014 11:33:03 PM ThreadHandler run
 INFO: starting new DB connection...
-Apr 06, 2014 10:25:56 PM ThreadHandler run
+Apr 06, 2014 11:33:03 PM ThreadHandler run
 INFO: transfering control and starting new client request thread...
-Apr 06, 2014 10:25:56 PM ThreadHandler run
+Apr 06, 2014 11:33:03 PM ThreadHandler run
 INFO: updating thread arrays
-Apr 06, 2014 10:25:56 PM ThreadHandler run
+Apr 06, 2014 11:33:03 PM ThreadHandler run
 INFO: 1 Threads active.
-Apr 06, 2014 10:25:56 PM ThreadHandler run
+Apr 06, 2014 11:33:03 PM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 06, 2014 10:25:56 PM ClientRequestThread logMSG
+Apr 06, 2014 11:33:03 PM ClientRequestThread logMSG
 INFO: CRT-1: opening streams...
-Apr 06, 2014 10:25:56 PM ClientRequestThread logMSG
-INFO: CRT-1: sending challenge to client - bf111cd8c6934739bdc2b106efddce98
-Apr 06, 2014 10:25:56 PM ClientRequestThread logMSG
+Apr 06, 2014 11:33:03 PM ClientRequestThread logMSG
+INFO: CRT-1: sending challenge to client - 10c1244e69544a0c8cc845049a50c1b6
+Apr 06, 2014 11:33:03 PM ClientRequestThread logMSG
 INFO: CRT-1: waiting for client request 2000 millis...
-Apr 06, 2014 10:25:58 PM ClientRequestThread logMSG
+Apr 06, 2014 11:33:05 PM ClientRequestThread logMSG
 INFO: CRT-1: done sleeping...
-Apr 06, 2014 10:25:58 PM ClientRequestThread logMSG
+Apr 06, 2014 11:33:05 PM ClientRequestThread logMSG
 INFO: CRT-1: proc client request...
-Apr 06, 2014 10:25:58 PM ClientRequestThread logMSG
-INFO: CRT-1: client request denied with error code 2
-Apr 06, 2014 10:25:58 PM ClientRequestThread logMSG
+Apr 06, 2014 11:33:05 PM ClientRequestThread logMSG
+INFO: CRT-1: Client request validated
+Apr 06, 2014 11:33:05 PM ClientRequestThread logMSG
+INFO: CRT-1: general execution error...
+Apr 06, 2014 11:33:05 PM ClientRequestThread logException
+INFO: CRT-1: Can not issue data manipulation statements with executeQuery().
+java.sql.SQLException: Can not issue data manipulation statements with executeQuery().
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1086)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:989)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:975)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:920)
+	at com.mysql.jdbc.StatementImpl.checkForDml(StatementImpl.java:502)
+	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:2224)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.executeQuery(NewProxyPreparedStatement.java:430)
+	at SQL.SqlExecutor.executePreparedStatementQry(SqlExecutor.java:35)
+	at SQL.SqlExecutor.executePreparedStatement(SqlExecutor.java:31)
+	at Request.UserRequest.UserSignupRequest.performRequest(UserSignupRequest.java:61)
+	at Request.Request.execute(Request.java:37)
+	at ClientRequestThread.run(ClientRequestThread.java:184)
+
+Apr 06, 2014 11:33:05 PM ClientRequestThread logMSG
 INFO: CRT-1: closing request thread...

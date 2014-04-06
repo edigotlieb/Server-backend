@@ -208,7 +208,7 @@ public class PreparedStatementStrings {
 		}
 	}
 
-	public String getSQL(String key) {
+	public String getSQL(String key) {            
 		return this.PreparedSql.get(key);
 	}
 }

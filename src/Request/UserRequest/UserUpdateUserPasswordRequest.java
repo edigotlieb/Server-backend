@@ -35,7 +35,7 @@ public class UserUpdateUserPasswordRequest extends UserRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        if (this.creds.getUsername().equals(this.userToUpdate)) {
+        if (!this.creds.getUsername().equals(this.userToUpdate)) {
             throw new ValidationException(6);
         }
         return true;
@@ -44,7 +44,7 @@ public class UserUpdateUserPasswordRequest extends UserRequest{
     @Override
     protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
         final String username = this.userToUpdate;
-		final String password = this.newPass;
+		final String password = Utilities.Hashing.MD5Hash(this.newPass);
 		sqlExc.executePreparedStatement("UpdateUserPassword", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {

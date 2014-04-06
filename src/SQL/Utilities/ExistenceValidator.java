@@ -19,7 +19,7 @@ public final class ExistenceValidator {
 	//returns hashed password
 	public static String userByUsername(SqlExecutor sqlExc, String username) throws SQLException {
 		final String user_name = username;
-		ResultSet rset = sqlExc.executePreparedStatement("getAllUserInfoByUserName", new StatementPreparer() {
+		ResultSet rset = sqlExc.executePreparedStatement("getAllUserInfoByUsername", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, user_name);

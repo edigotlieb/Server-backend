@@ -79,7 +79,6 @@ public class ClientRequestThread extends Thread {
         logMSG(String.format("sending challenge to client - %s", chal), Level.INFO);
 
 //</editor-fold>
-        
 //<editor-fold defaultstate="collapsed" desc="wait for client response">
         try {
             int time = (int) RuntimeParams.getParams("ResponseTimeOut");
@@ -131,20 +130,14 @@ public class ClientRequestThread extends Thread {
             this.closeThread();
             return;
         } catch (JSONException ex) {
-            try {
-                // bad format! - send bad format error
-                this.writer.write(this.createErrorResponse(100));
-                this.writer.flush();
-                logMSG("request format error...", Level.INFO);
-                logException(ex, Level.INFO);
-                this.closeThread();
-                return;
-            } catch (IOException ex1) {
-                logMSG("failed to respond to client...", Level.INFO);
-                logException(ex1, Level.INFO);
-                this.closeThread();
-                return;
-            }
+            // bad format! - send bad format error
+            this.out.print(this.createErrorResponse(100));
+            this.out.flush();
+            logMSG("request format error...", Level.INFO);
+            logException(ex, Level.INFO);
+            this.closeThread();
+            return;
+
         }
 //</editor-fold>
 
@@ -163,7 +156,7 @@ public class ClientRequestThread extends Thread {
             this.closeThread();
             return;
         } catch (ValidationException ex) {
-                // validation error
+            // validation error
             // send back response
             logMSG("client request denied with error code " + ex.getErrorCode(), Level.INFO);
                 // logException(ex, Level.INFO);
@@ -252,7 +245,7 @@ public class ClientRequestThread extends Thread {
     private void closeThread() {
         logMSG("closing request thread...", Level.INFO);
         try {
-     //       this.reader.close();
+            //       this.reader.close();
             //        this.writer.close();
             this.socket.close();
             this.con.close();

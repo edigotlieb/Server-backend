@@ -27,6 +27,7 @@ public class RuntimeParams {
         params.put("SocketBackLog", 20);
         params.put("ResponseTimeOut", 2000); // time in millis
         params.put("LogFileName", "logger.txt"); // time in millis
+        params.put("BufferSize", 2048); // time in millis
     }
 
     public static Object getParams(String key) {

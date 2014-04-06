@@ -72,28 +72,31 @@ public class ClientRequestThread extends Thread {
 //<editor-fold defaultstate="collapsed" desc="send challenge">
         String chal;
 
-            // send a challenge
-            chal = Hashing.generateChallenge();
-            this.out.println(chal);
-            this.out.flush();
-            logMSG(String.format("sending challenge to client - %s", chal), Level.INFO);
+        // send a challenge
+        chal = Hashing.generateChallenge();
+        this.out.println(chal);
+        this.out.flush();
+        logMSG(String.format("sending challenge to client - %s", chal), Level.INFO);
 
 //</editor-fold>
-
+        
 //<editor-fold defaultstate="collapsed" desc="wait for client response">
         try {
             int time = (int) RuntimeParams.getParams("ResponseTimeOut");
             logMSG(String.format("waiting for client request %d millis...", time), Level.INFO);
             Thread.sleep(time);
+            logMSG("done sleeping...", Level.INFO);
             if (!reader.ready()) {
                 // client timed-out
                 logMSG("client timed out...", Level.INFO);
                 this.closeThread();
                 return;
             }
-            
+
         } catch (InterruptedException ex) {
             // thread interupted ?
+            logMSG("InterruptedException...", Level.INFO);
+            logException(ex, Level.INFO);
             this.closeThread();
             return;
         } catch (IOException ex) {
@@ -106,8 +109,20 @@ public class ClientRequestThread extends Thread {
 //<editor-fold defaultstate="collapsed" desc="proccess client request">
         Request clientRequest;
         try {
+            int maxLength = (int) RuntimeParams.getParams("BufferSize");
+            char[] buffer = new char[maxLength];
+            int length = reader.read(buffer);
+            if (length == maxLength) {
+                // some error
+                this.out.print(this.createErrorResponse(501));
+                this.out.flush();
+
+                this.closeThread();
+                return;
+            }
+            // logMSG("REQUEST: "+(new String(buffer)),Level.INFO);
             // process response to request
-            clientRequest = RequestFactory.createRequestFromString(reader.readLine());
+            clientRequest = RequestFactory.createRequestFromString(new String(buffer));
             this.logMSG("proc client request...", Level.INFO);
         } catch (IOException ex) {
             // cant read line from stream
@@ -139,26 +154,26 @@ public class ClientRequestThread extends Thread {
             clientRequest.Validate(new SqlExecutor(con), chal);
         } catch (SQLException ex) {
             // some bad SQL
-            logMSG("validation SQL error...", Level.SEVERE);            
+            logMSG("validation SQL error...", Level.SEVERE);
             logException(ex, Level.SEVERE);
-            
-            this.out.print(this.createErrorResponse(500)); 
-            this.out.flush();                
-                            
+
+            this.out.print(this.createErrorResponse(500));
+            this.out.flush();
+
             this.closeThread();
             return;
         } catch (ValidationException ex) {
                 // validation error
-                // send back response
-                logMSG("client request denied with error code "+ex.getErrorCode(), Level.INFO);
+            // send back response
+            logMSG("client request denied with error code " + ex.getErrorCode(), Level.INFO);
                 // logException(ex, Level.INFO);
-                
-                // System.out.print(this.createErrorResponse(ex.getErrorCode()));                
-                this.out.print(this.createErrorResponse(ex.getErrorCode())); 
-                this.out.flush();                
-                
-                this.closeThread();
-                return;            
+
+            // System.out.print(this.createErrorResponse(ex.getErrorCode()));                
+            this.out.print(this.createErrorResponse(ex.getErrorCode()));
+            this.out.flush();
+
+            this.closeThread();
+            return;
         }
         logMSG("Client request validated", Level.INFO);
 //</editor-fold>
@@ -173,10 +188,10 @@ public class ClientRequestThread extends Thread {
             this.logMSG("general execution error...", Level.INFO);
             this.logException(ex, Level.INFO);
             this.out.printf(this.createErrorResponse(52));
-            
+
             this.closeThread();
-            return; 
-            
+            return;
+
         } catch (ExecutionException ex) {
             // not validated
             this.logMSG(ErrorMsg.getErrorMsg(51), Level.INFO);
@@ -190,15 +205,15 @@ public class ClientRequestThread extends Thread {
             if (resultSet == null) {
                 //this.writer.write(SUCCESS_MSG);
                 this.out.print(SUCCESS_MSG);
-                
+
             } else {
                 //this.writer.write(createResponse(resultSet));
                 this.out.print(createResponse(resultSet));
             }
             //this.writer.flush();
             this.out.flush();
-            
-        } catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             // cant write result or read result set
         }
         logMSG("Response sent to client", Level.INFO);
@@ -238,7 +253,7 @@ public class ClientRequestThread extends Thread {
         logMSG("closing request thread...", Level.INFO);
         try {
      //       this.reader.close();
-     //        this.writer.close();
+            //        this.writer.close();
             this.socket.close();
             this.con.close();
             log.getHandlers()[0].flush();

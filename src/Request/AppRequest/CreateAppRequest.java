@@ -55,13 +55,6 @@ public class CreateAppRequest extends AppRequest {
 		//add to APPS
 		final String app_name = this.appName;
 		final String hashedAppKey = Hashing.MD5Hash(appKey);
-		sqlExc.executePreparedStatement("AddApp", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, app_name);
-				ps.setString(2, hashedAppKey);
-			}
-		});
 		//add app_admin permission
 		final String permission_name = this.appName + "_admin";
 		final String permission_desc = "The admin user of the '" + this.appName + "' application";
@@ -72,6 +65,14 @@ public class CreateAppRequest extends AppRequest {
 				ps.setString(1, permission_name);
 				ps.setString(2, permission_desc);
 				ps.setString(3, permission_admin_username);
+			}
+		});
+		sqlExc.executePreparedStatement("AddApp", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, app_name);
+				ps.setString(2, hashedAppKey);
+				ps.setString(3, permission_name);
 			}
 		});
 		//set current user to be app_admin

@@ -88,15 +88,14 @@ public class RequestFactory {
             case ADD_PERMISSIONGROUP: {
                 return new AddPermissionGroupRequest(creds, requestData.getString("permissionGroupName"), requestData.getString("description"));
             }
-            case ADD_PERMISSION_GROUP_FOR_TABLE: {                
-                return new AddPermissionGroupForTableRequest(PERMISSION_TYPE.valueOf(requestData.getString("type")), creds.getAppName(), requestData.getString("to"), requestData.getString("permissionGroupName"),creds);
+            case ADD_PERMISSION_GROUP_FOR_TABLE: {                       
+                return new AddPermissionGroupForTableRequest(PERMISSION_TYPE.valueOf(requestData.getString("type")), requestData.getString("appName"), requestData.getString("to"), requestData.getString("permissionGroupName"),creds);
             }
-            case ADD_TABLE: {
-                // TO DO!
+            case ADD_TABLE: {                
                 String tableName = requestData.getString("tableName");
                 List<Column> cols = processCols(requestData.getJSONArray("cols"));
                 List<Permission> permissions = processPermissions(requestData.getJSONArray("permissions"), creds, tableName);
-                return new AddTableRequest(creds, tableName, cols, permissions);
+                return new AddTableRequest(creds, tableName, cols, permissions,requestData.getString("appName"));
             }
             case CREATE_APP: {
                 return new CreateAppRequest(creds, requestData.getString("appName"),requestData.getString("appKey"));
@@ -105,19 +104,19 @@ public class RequestFactory {
                 return new DeleteAppRequest(creds,requestData.getString("appName"));
             }
             case DROP_TABLE: {
-                return new DropTableRequest(creds, requestData.getString("tableName"));
+                return new DropTableRequest(creds, requestData.getString("tableName"),requestData.getString("appName"));
             }
-            case GET_TABLE_INFO: {
-                return new GetTableInfoRequest(creds,requestData.getString("tableName"));
+            case GET_TABLE_INFO: {                
+                return new GetTableInfoRequest(creds,requestData.getString("tableName"),requestData.getString("appName"));
             }
-            case GET_TABLES: {
-                return new GetTablesRequest(creds);
+            case GET_TABLES: {                
+                return new GetTablesRequest(creds,requestData.getString("appName"));
             }
             case REMOVE_PERMISSIONGROUP: {
                 return new RemovePermissionGroupRequest(creds, requestData.getString("permissionGroupName"));
             }
-            case REMOVE_PERMISSION_GROUP_FOR_TABLE: {
-                return new RemovePermissionGroupForTableRequest(PERMISSION_TYPE.valueOf(requestData.getString("type")), creds.getAppName(), requestData.getString("from"), requestData.getString("permissionGroupName"),creds);
+            case REMOVE_PERMISSION_GROUP_FOR_TABLE: {                            
+                return new RemovePermissionGroupForTableRequest(PERMISSION_TYPE.valueOf(requestData.getString("type")), requestData.getString("appName"), requestData.getString("from"), requestData.getString("permissionGroupName"),creds);
             }
             case SET_PERMISSIONGROUP_ADMIN: {
                 String username = requestData.getString("username");

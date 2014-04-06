@@ -27,6 +27,9 @@ public class DeleteAppRequest extends AppRequest {
 		if (!ExistenceValidator.isAppByName(sqlExc, appName)) {
 			throw new ValidationException(1);
 		}
+		if (this.appName.equals(Credentials.masterAppName)) {
+			throw new ValidationException(18);
+		}
 		if (!this.creds.isAppSuperAdmin()) {
 			throw new ValidationException(6);
 		}

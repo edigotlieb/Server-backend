@@ -44,7 +44,7 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 			throw new ValidationException(11);
 		}
 
-		if (!this.creds.isAdminApp()) {
+		if (!this.creds.isAppSuperAdmin()) {
 			throw new ValidationException(6);
 		}
 		return true;

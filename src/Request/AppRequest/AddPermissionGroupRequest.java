@@ -27,7 +27,10 @@ public class AddPermissionGroupRequest extends AppRequest {
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		if (ExistenceValidator.isPermissionGroupByName(sqlExc, this.permissionGroupName) || permissionGroupName.equals(Credentials.anonymous)) {
 			throw new ValidationException(5);                                
-		}                
+		}
+		if(Credentials.isSpecialPermissionGroup(permissionGroupName)){
+			throw new ValidationException(17);
+		}
 		if (!this.creds.isAppSuperAdmin()) {
                         throw new ValidationException(6);			
 		}

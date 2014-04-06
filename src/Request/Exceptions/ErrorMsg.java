@@ -30,6 +30,8 @@ public class ErrorMsg {
         msgs.put(14, "App name already exists");
         msgs.put(15, "SQL sanitization failed");
         msgs.put(16, "Permission group admin cannot remove his own user permission");
+        msgs.put(17, "Cannot add or delete a permission group with a special name");
+        msgs.put(17, "Cannot add or delete an application with a special name");
 		
         
 	//execution exceptions

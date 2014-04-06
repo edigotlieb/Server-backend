@@ -19,9 +19,16 @@ public class Credentials {
 	public final static String superAdmin = "Super_Admin";
 	public final static String developer = "Developer";
 	public final static String anonymous = "Anonymous";
-	public final static String adminApp = "adminApp";
 	public final static String masterAppName = "MasterApplication";
 	public final static String userPermission = "User";
+
+	public static boolean isSpecialPermissionGroup(String permissionGroupName) {
+		return permissionGroupName.equals(superAdmin)
+				|| permissionGroupName.equals(developer)
+				|| permissionGroupName.equals(userPermission)
+				|| permissionGroupName.equals(anonymous)
+				|| permissionGroupName.endsWith("_admin");
+	}
 	private final String username, hashedPassword;
 	private final String hashedAppKey;
 	private final String appName;
@@ -44,10 +51,6 @@ public class Credentials {
 
 	public boolean isMasterApplication() {
 		return this.appName.equals(masterAppName);
-	}
-
-	public boolean isAdminApp() {
-		return this.appName.equals(adminApp);
 	}
 
 	public boolean isAppSuperAdmin() {

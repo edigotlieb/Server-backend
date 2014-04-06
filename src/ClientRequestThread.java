@@ -188,7 +188,7 @@ public class ClientRequestThread extends Thread {
             this.logMSG("general execution error...", Level.INFO);
             this.logException(ex, Level.INFO);
             this.out.printf(this.createErrorResponse(52));
-
+            this.out.flush();
             this.closeThread();
             return;
 

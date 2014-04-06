@@ -87,11 +87,11 @@ public abstract class Request {
 			this.validated = CheckPermissions(sqlExc);
 			return this.validated;
 		} catch (ValidationException ex) {
-			if (ex.getErrorCode() != 6) {
+			if (ex.getErrorCode() != 6 || !this.creds.isAppSuperAdmin()) {
 				throw ex;
 			}
-			this.validated = this.creds.isSuperAdmin();
-			return this.validated;
+		        // this.validated = this.creds.isSuperAdmin();
+			return (this.validated = true);
 		}
 
 	}

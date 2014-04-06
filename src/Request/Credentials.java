@@ -54,7 +54,11 @@ public class Credentials {
 	}
 
 	public boolean isAppSuperAdmin() {
-		return isSuperAdmin() || isInPermissionGroup(this.appName + "_" + superAdmin);
+		return isAppSuperAdmin(this.appName);
+	}
+
+	public boolean isAppSuperAdmin(String app) {
+		return isSuperAdmin() || isInPermissionGroup(app + "_" + superAdmin);
 	}
 
 	public boolean isDeveloper() {

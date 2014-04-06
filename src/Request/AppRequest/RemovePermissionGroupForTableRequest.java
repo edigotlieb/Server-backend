@@ -45,7 +45,7 @@ public class RemovePermissionGroupForTableRequest extends AppRequest{
 			throw new ValidationException(11);
 		}
 		
-        if(!this.creds.isAppSuperAdmin()){
+        if(!this.creds.isAppSuperAdmin(this.toRemove.getAppName())){
 			throw new ValidationException(6);
 		}
 		return true;

@@ -21,12 +21,14 @@ public class AddTableRequest extends AppRequest {
 	private final List<Column> columns;
 	private final List<Permission> perms;
 	private final String tableName;
+	private final String appName;
 
-	public AddTableRequest(Credentials creds, String tableName, List<Column> cols, List<Permission> perms) {
+	public AddTableRequest(Credentials creds, String tableName, List<Column> cols, List<Permission> perms, String appName) {
 		super(creds);
 		this.columns = new ArrayList<>(cols);
 		this.perms = new ArrayList<>(perms);
 		this.tableName = tableName;
+		this.appName = appName;
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class AddTableRequest extends AppRequest {
 			throw new ValidationException(15);
 		}
 
-		if (!this.creds.isAppSuperAdmin()) {
+		if (!this.creds.isAppSuperAdmin(appName)) {
 			throw new ValidationException(6);
 		}
 		return true;
@@ -65,8 +67,8 @@ public class AddTableRequest extends AppRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		final String table_name = this.creds.getAppName() + "_" + tableName;
-		final String app_name = this.creds.getAppName();
+		final String app_name = appName;
+		final String table_name = app_name + "_" + tableName;
 		sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {

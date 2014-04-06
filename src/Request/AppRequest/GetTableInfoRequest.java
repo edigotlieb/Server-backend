@@ -13,10 +13,13 @@ import java.sql.SQLException;
 
 public class GetTableInfoRequest extends AppRequest {
 
+	String appName;
 	String tableName;
 
-	public GetTableInfoRequest(Credentials creds, String tableName) {
+	public GetTableInfoRequest(Credentials creds, String tableName, String appName) {
 		super(creds);
+		this.appName = appName;
+		this.tableName = tableName;
 	}
 
 	@Override
@@ -26,10 +29,10 @@ public class GetTableInfoRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (ExistenceValidator.isTableByName(sqlExc, this.creds.getAppName() + "_" + this.tableName)) {
+		if (ExistenceValidator.isTableByName(sqlExc, this.appName + "_" + this.tableName)) {
 			throw new ValidationException(8);
 		}
-		if (!this.creds.isAppSuperAdmin()) {
+		if (!this.creds.isAppSuperAdmin(this.appName)) {
 			throw new ValidationException(6);
 		}
 		return true;
@@ -37,6 +40,6 @@ public class GetTableInfoRequest extends AppRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.desc(this.creds.getAppName()+"_"+this.tableName));
+		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.desc(this.appName+"_"+this.tableName));
 	}
 }

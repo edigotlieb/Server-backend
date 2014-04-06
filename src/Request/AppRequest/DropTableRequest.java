@@ -16,10 +16,12 @@ import java.sql.SQLException;
 public class DropTableRequest extends AppRequest {
 
 	private String tableName;
+	private String appName;
 
-	public DropTableRequest(Credentials creds, String tableName) {
+	public DropTableRequest(Credentials creds, String tableName, String appName) {
 		super(creds);
-		this.tableName = this.creds.getAppName() + "_" + tableName;
+		this.appName = appName;
+		this.tableName = this.appName + "_" + tableName;
 	}
 
 	@Override
@@ -27,7 +29,7 @@ public class DropTableRequest extends AppRequest {
 		if (!ExistenceValidator.isTableByName(sqlExc, this.tableName)) {
 			throw new ValidationException(8);
 		}
-		if (!this.creds.isAppSuperAdmin()) {
+		if (!this.creds.isAppSuperAdmin(this.appName)) {
 			throw new ValidationException(6);
 		}
 		return true;
@@ -40,7 +42,7 @@ public class DropTableRequest extends AppRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		final String table_name = this.creds.getAppName() + "_" + this.tableName;
+		final String table_name = this.tableName;
 		//drop table
 		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.drop(table_name));
 		//delete user permissions

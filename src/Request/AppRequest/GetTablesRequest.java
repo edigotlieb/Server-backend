@@ -13,8 +13,11 @@ import java.sql.SQLException;
 
 public class GetTablesRequest extends AppRequest {
 
-	public GetTablesRequest(Credentials creds) {
+	String appName;
+
+	public GetTablesRequest(Credentials creds, String appName) {
 		super(creds);
+		this.appName = appName;
 	}
 
 	@Override
@@ -24,7 +27,7 @@ public class GetTablesRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (!this.creds.isAppSuperAdmin()) {
+		if (this.creds.isAppSuperAdmin(appName)) {
 			throw new ValidationException(6);
 		}
 		return true;

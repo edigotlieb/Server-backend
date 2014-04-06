@@ -1,58 +1,34 @@
-Apr 07, 2014 1:02:30 AM ThreadHandler init
+Apr 07, 2014 1:11:32 AM ThreadHandler init
 INFO: finished initiallizing...
-Apr 07, 2014 1:02:30 AM ThreadHandler run
+Apr 07, 2014 1:11:32 AM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 07, 2014 1:02:31 AM ThreadHandler run
+Apr 07, 2014 1:11:34 AM ThreadHandler run
 INFO: accepted new incoming connection...
-Apr 07, 2014 1:02:31 AM ThreadHandler run
+Apr 07, 2014 1:11:34 AM ThreadHandler run
 INFO: starting new DB connection...
-Apr 07, 2014 1:02:31 AM ThreadHandler run
+Apr 07, 2014 1:11:34 AM ThreadHandler run
 INFO: transfering control and starting new client request thread...
-Apr 07, 2014 1:02:31 AM ThreadHandler run
+Apr 07, 2014 1:11:34 AM ThreadHandler run
 INFO: updating thread arrays
-Apr 07, 2014 1:02:31 AM ClientRequestThread logMSG
+Apr 07, 2014 1:11:34 AM ClientRequestThread logMSG
 INFO: CRT-0: opening streams...
-Apr 07, 2014 1:02:31 AM ThreadHandler run
+Apr 07, 2014 1:11:34 AM ThreadHandler run
 INFO: 1 Threads active.
-Apr 07, 2014 1:02:31 AM ThreadHandler run
+Apr 07, 2014 1:11:34 AM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 07, 2014 1:02:31 AM ClientRequestThread logMSG
-INFO: CRT-0: sending challenge to client - 84200df7d1584447b0ba1090e8c92af7
-Apr 07, 2014 1:02:31 AM ClientRequestThread logMSG
+Apr 07, 2014 1:11:34 AM ClientRequestThread logMSG
+INFO: CRT-0: sending challenge to client - 884f24092beb44b99da26a8516e51294
+Apr 07, 2014 1:11:34 AM ClientRequestThread logMSG
 INFO: CRT-0: waiting for client request 2000 millis...
-Apr 07, 2014 1:02:33 AM ClientRequestThread logMSG
+Apr 07, 2014 1:11:36 AM ClientRequestThread logMSG
 INFO: CRT-0: done sleeping...
-Apr 07, 2014 1:02:33 AM ClientRequestThread logMSG
+Apr 07, 2014 1:11:36 AM ClientRequestThread logMSG
 INFO: CRT-0: proc client request...
-Apr 07, 2014 1:02:34 AM SQL.SqlExecutor executePreparedStatementQry
-OFF: com.mchange.v2.c3p0.impl.NewProxyPreparedStatement@113a03d
-Apr 07, 2014 1:02:34 AM SQL.SqlExecutor executePreparedStatementQry
-OFF: com.mchange.v2.c3p0.impl.NewProxyPreparedStatement@1518a15
-Apr 07, 2014 1:02:34 AM SQL.SqlExecutor executePreparedStatementQry
-OFF: com.mchange.v2.c3p0.impl.NewProxyPreparedStatement@1f0bb81
-Apr 07, 2014 1:02:34 AM ClientRequestThread logMSG
+Apr 07, 2014 1:11:36 AM ClientRequestThread logMSG
 INFO: CRT-0: Client request validated
-Apr 07, 2014 1:02:34 AM SQL.SqlExecutor executePreparedStatementQry
-OFF: com.mchange.v2.c3p0.impl.NewProxyPreparedStatement@4f6e03
-Apr 07, 2014 1:02:34 AM ClientRequestThread logMSG
-INFO: CRT-0: general execution error...
-Apr 07, 2014 1:02:34 AM ClientRequestThread logException
-INFO: CRT-0: Field 'ADMINPERMISSIONGROUP_ID' doesn't have a default value
-java.sql.SQLException: Field 'ADMINPERMISSIONGROUP_ID' doesn't have a default value
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1086)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4237)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4169)
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2617)
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2778)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2834)
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2156)
-	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1379)
-	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.execute(NewProxyPreparedStatement.java:404)
-	at SQL.SqlExecutor.executePreparedStatementQry(SqlExecutor.java:34)
-	at SQL.SqlExecutor.executePreparedStatement(SqlExecutor.java:29)
-	at Request.AppRequest.CreateAppRequest.performRequest(CreateAppRequest.java:58)
-	at Request.Request.execute(Request.java:37)
-	at ClientRequestThread.run(ClientRequestThread.java:184)
-
-Apr 07, 2014 1:02:34 AM ClientRequestThread logMSG
+Apr 07, 2014 1:11:36 AM ClientRequestThread logMSG
+INFO: CRT-0: Client request executed
+Apr 07, 2014 1:11:36 AM ClientRequestThread logMSG
+INFO: CRT-0: Response sent to client
+Apr 07, 2014 1:11:36 AM ClientRequestThread logMSG
 INFO: CRT-0: closing request thread...

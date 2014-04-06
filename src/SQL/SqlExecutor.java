@@ -30,7 +30,7 @@ public class SqlExecutor {
 	}
 
 	private ResultSet executePreparedStatementQry(PreparedStatement ps) throws SQLException {
-		log.log(Level.OFF, ps.toString());
+		//log.log(Level.INFO, ps.toString());
 		ps.execute();
 		return ps.getResultSet();
 	}

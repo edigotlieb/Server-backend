@@ -14,6 +14,7 @@ import Request.AppRequest.Column;
 import Request.AppRequest.CreateAppRequest;
 import Request.AppRequest.DeleteAppRequest;
 import Request.AppRequest.DropTableRequest;
+import Request.AppRequest.GetAllAppsRequest;
 import Request.AppRequest.GetTableInfoRequest;
 import Request.AppRequest.GetTablesRequest;
 import Request.AppRequest.Permission;
@@ -123,6 +124,9 @@ public class RequestFactory {
                 String groupName = requestData.getString("permissionGroupName");
                 return new SetPermissionGroupAdminRequest(username, groupName, creds);
             }
+            case GET_ALL_APPS: {
+                return new GetAllAppsRequest(creds);
+            }
         }
         return null;
     }
@@ -136,7 +140,7 @@ public class RequestFactory {
                 String username = requestData.getString("username");
                 String pass = requestData.getString("password");
                 String name = requestData.getString("name");
-                String disp_name = requestData.getString("display_name");
+                String disp_name = requestData.getString("displayName");
                 String email = requestData.getString("email");
                 int year = requestData.getInt("year");
                 int room = requestData.getInt("room");
@@ -144,11 +148,11 @@ public class RequestFactory {
             }
             case UPDATE_INFO: {
                 String userToChange = requestData.getString("username");
-                String newName = requestData.getString("new_name");
-                String newDispName = requestData.getString("new_display_name");
-                String newEmail = requestData.getString("new_email");
-                int newYear = requestData.getInt("new_year");
-                int newRoom = requestData.getInt("new_room");
+                String newName = requestData.getString("newName");
+                String newDispName = requestData.getString("newDisplayName");
+                String newEmail = requestData.getString("newEmail");
+                int newYear = requestData.getInt("newYear");
+                int newRoom = requestData.getInt("newRoom");
                 return new UserUpdateInfoRequest(userToChange, newName, newDispName, newEmail,newYear,newRoom, creds);
             }
             case ADD_PERMISSION: {
@@ -164,7 +168,7 @@ public class RequestFactory {
             }
             case UPDATE_PASSWORD: {
                 String user = requestData.getString("username");
-                String newPass = requestData.getString("new_password");
+                String newPass = requestData.getString("newPassword");
                 return new UserUpdateUserPasswordRequest(creds, user, newPass);
             }
             case REMOVE_PERMISSION: {

@@ -33,7 +33,7 @@ public class UserGetPermissionGroups extends UserRequest{
     @Override
     protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
         final String username = this.creds.getUsername();
-		return sqlExc.executePreparedStatement("getUserPermissionGroups", new StatementPreparer() {
+		return sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, username);

@@ -4,7 +4,13 @@
  */
 package SQL.Utilities;
 
+import SQL.DynamicStatements.SqlQueryGenerator;
+import SQL.SqlExecutor;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,20 +18,28 @@ import java.sql.Date;
  */
 public class Utils {
 
-    public static String sanitizeAlphaNumeric(String org) {
-        return org.replaceAll("[^\\w\\d]", "");
-    }
+	public static String sanitizeAlphaNumeric(String org) {
+		return org.replaceAll("[^\\w\\d]", "");
+	}
 
-    public static boolean isAlphaNumeric(String org) {
-        return org.matches("[\\w\\d]+");
-    }
+	public static boolean isAlphaNumeric(String org) {
+		return org.matches("[\\w\\d]+");
+	}
 
-    public static String toString(Date date) {
+	public static String toString(Date date) {
 
-        java.text.SimpleDateFormat sdf
-                = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return sdf.format(date);
-    }
+		return sdf.format(date);
+	}
 
+	public static List<String> getColNames(SqlExecutor sqlExc, String table) throws SQLException {
+
+		List<String> cols = new ArrayList<>();
+		ResultSet rset = sqlExc.executeDynamicStatementQry(SqlQueryGenerator.desc(table));
+		while (rset.next()) {
+			cols.add(rset.getString(1));
+		}
+		return cols;
+	}
 }

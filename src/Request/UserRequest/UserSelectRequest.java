@@ -47,7 +47,7 @@ public class UserSelectRequest extends UserRequest {
 		final String usernameField = "USERNAME";
 		List<String> userCols = Utils.getColNames(sqlExc, userTable);
 		userCols.remove(passwordField);
-		Statement whereNoAnon = new AndStatement(this.where, new RelStatement(usernameField, Credentials.anonymous, "!="));
+		Statement whereNoAnon = new AndStatement(this.where, new RelStatement(usernameField, "'" + Credentials.anonymous + "'", "!="));
 		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(userCols, userTable, whereNoAnon));
 	}
 }

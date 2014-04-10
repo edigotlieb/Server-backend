@@ -196,15 +196,10 @@ public class ClientRequestThread extends Thread {
 
 //<editor-fold defaultstate="collapsed" desc="response for client">
         try {
-            // send resultSet
-            if (resultSet == null) {
-                //this.writer.write(SUCCESS_MSG);
-                this.out.print(SUCCESS_MSG);
-
-            } else {
+            // send resultSet                    
                 //this.writer.write(createResponse(resultSet));
                 this.out.print(createResponse(resultSet, 1, ""));
-            }
+            
             //this.writer.flush();
             this.out.flush();
 
@@ -281,7 +276,8 @@ public class ClientRequestThread extends Thread {
 
     private synchronized String createResponse(ResultSet rs, int stat, String msg) throws SQLException {
         String message = (stat == 0) ? msg : "";
-        return String.format(RESPONSE_FORMAT, stat, message, valueOf(rs));
+        String data = (rs == null) ? "{}":valueOf(rs);
+        return String.format(RESPONSE_FORMAT, stat, message, data);
     }
 
     //  is this the desired signature?

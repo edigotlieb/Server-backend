@@ -211,12 +211,16 @@ public class RequestFactory {
         if(requestData.length() > 1) {
             throw new JSONException("Bad Format");
         }
+        JSONObject termData;
         if(requestData.has("Term")) {
-            return new RelStatement(requestData.getString("Field"), requestData.getString("Op"), requestData.getString("Value"));
+            termData = requestData.getJSONObject("Term");
+            return new RelStatement(termData.getString("Field"),termData.getString("Value"), termData.getString("Op"));
         } else if(requestData.has("AND")) {
-            return new AndStatement(processStatement(requestData.getJSONObject("firstStatement")), processStatement(requestData.getJSONObject("secondStatement")));
+            termData = requestData.getJSONObject("AND");
+            return new AndStatement(processStatement(termData.getJSONObject("firstStatement")), processStatement(termData.getJSONObject("secondStatement")));
         } else if(requestData.has("OR")) {
-            return new OrStatement(processStatement(requestData.getJSONObject("firstStatement")), processStatement(requestData.getJSONObject("secondStatement")));
+            termData = requestData.getJSONObject("OR");
+            return new OrStatement(processStatement(termData.getJSONObject("firstStatement")), processStatement(termData.getJSONObject("secondStatement")));
         } else {
            throw new JSONException("Bad Format");
         }

@@ -20,6 +20,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +35,7 @@ public class ClientRequestThread extends Thread {
     private final int ID;
     private final static String LOG_FORMAT_MSG = "CRT-%d: %s";
 
+    final String RESPONSE_FORMAT = "{\"Status\":\"%d\" , \"Message\":\"%s\", \"Data\":%s}";
     final String ERROR_FORMAT = "{'ERROR':'%s'}";
     final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";
 
@@ -201,7 +203,7 @@ public class ClientRequestThread extends Thread {
 
             } else {
                 //this.writer.write(createResponse(resultSet));
-                this.out.print(createResponse(resultSet));
+                this.out.print(createResponse(resultSet, 1, ""));
             }
             //this.writer.flush();
             this.out.flush();
@@ -215,26 +217,76 @@ public class ClientRequestThread extends Thread {
 
     }
 
-    private synchronized String createResponse(ResultSet rs) throws SQLException {
-        JSONObject response = new JSONObject();
+    private synchronized String valueOf(ResultSet rs) throws SQLException {
+        JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();
-        JSONObject row;
-        int rowNum = 1;
+        rs.beforeFirst();
         while (rs.next()) {
-            row = new JSONObject();
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                row.append(rsmd.getColumnName(i), String.valueOf(rs.getObject(i)));
+            int numColumns = rsmd.getColumnCount();
+            JSONObject obj = new JSONObject();
+
+            for (int i = 1; i < numColumns + 1; i++) {
+
+                String column_name = rsmd.getColumnLabel(i);  //Bugfix , works better than getColumnName() /Aries 
+
+                switch (rsmd.getColumnType(i)) {
+                    case java.sql.Types.ARRAY:
+                        obj.put(column_name, rs.getArray(column_name));
+                        break;
+                    case java.sql.Types.BIGINT:
+                        obj.put(column_name, rs.getInt(column_name));
+                        break;
+                    case java.sql.Types.BOOLEAN:
+                        obj.put(column_name, rs.getBoolean(column_name));
+                        break;
+                    case java.sql.Types.BLOB:
+                        obj.put(column_name, rs.getBlob(column_name));
+                        break;
+                    case java.sql.Types.DOUBLE:
+                        obj.put(column_name, rs.getDouble(column_name));
+                        break;
+                    case java.sql.Types.FLOAT:
+                        obj.put(column_name, rs.getFloat(column_name));
+                        break;
+                    case java.sql.Types.INTEGER:
+                        obj.put(column_name, rs.getInt(column_name));
+                        break;
+                    case java.sql.Types.NVARCHAR:
+                        obj.put(column_name, rs.getNString(column_name));
+                        break;
+                    case java.sql.Types.VARCHAR:
+                        obj.put(column_name, rs.getString(column_name));
+                        break;
+                    case java.sql.Types.TINYINT:
+                        obj.put(column_name, rs.getInt(column_name));
+                        break;
+                    case java.sql.Types.SMALLINT:
+                        obj.put(column_name, rs.getInt(column_name));
+                        break;
+                    case java.sql.Types.DATE:
+                        obj.put(column_name, SQL.Utilities.Utils.toString(rs.getDate(column_name)));
+                        break;
+
+                    default:
+                        obj.put(column_name, rs.getObject(column_name));
+                        break;
+                }
             }
-            response.append("Entry" + rowNum, row);
-            rowNum++;
+
+            json.put(obj);
         }
 
-        return response.toString() + "\n";
+        return json.toString();
+    }
+
+    private synchronized String createResponse(ResultSet rs, int stat, String msg) throws SQLException {
+        String message = (stat == 0) ? msg : "";
+        return String.format(RESPONSE_FORMAT, stat, message, valueOf(rs));
     }
 
     //  is this the desired signature?
     private synchronized String createErrorResponse(String msg) {
-        return String.format(ERROR_FORMAT, msg) + "\n";
+        return String.format(RESPONSE_FORMAT, 0, msg, "{}");
     }
 
     //  is this the desired signature?

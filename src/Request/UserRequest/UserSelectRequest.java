@@ -8,6 +8,8 @@ import Request.Exceptions.ValidationException;
 import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.SqlExecutor;
 import SQL.Utilities.Utils;
+import Statement.AndStatement;
+import Statement.RelStatement;
 import Statement.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,8 +44,10 @@ public class UserSelectRequest extends UserRequest {
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		final String userTable = "USERS";
 		final String passwordField = "PASSWORD";
+		final String usernameField = "USERNAME";
 		List<String> userCols = Utils.getColNames(sqlExc, userTable);
 		userCols.remove(passwordField);
-		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(userCols, userTable, where));
+		Statement whereNoAnon = new AndStatement(this.where, new RelStatement(usernameField, Credentials.anonymous, "!="));
+		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(userCols, userTable, whereNoAnon));
 	}
 }

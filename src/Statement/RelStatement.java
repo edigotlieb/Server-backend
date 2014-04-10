@@ -29,7 +29,7 @@ public class RelStatement extends Statement {
 	 */
 	private static String sanitizeTerm(String term) {
 		if (term.matches("'[^']*'")) {
-			return '\'' + Utils.sanitizeAlphaNumeric(term) + '\'';
+			return '\'' + Utils.sanitizeAlphaNumericSpecialChar(term) + '\'';
 		} else {
 			return Utils.sanitizeAlphaNumeric(term);
 		}

@@ -19,11 +19,16 @@ import java.util.List;
 public class Utils {
 
 	public static String sanitizeAlphaNumeric(String org) {
-		return org.replaceAll("[^\\w\\d]", "");
+		return org.replaceAll("[^\\w]", "");
+	}
+
+	public static String sanitizeAlphaNumericSpecialChar(String org) {
+		String special = ".";
+		return org.replaceAll("[^\\w" + special + "]", "");
 	}
 
 	public static boolean isAlphaNumeric(String org) {
-		return org.matches("[\\w\\d]+");
+		return org.matches("[\\w]+");
 	}
 
 	public static String toString(Date date) {

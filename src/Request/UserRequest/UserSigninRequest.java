@@ -29,12 +29,11 @@ public class UserSigninRequest extends UserRequest {
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		final String username = this.creds.getUsername();
-		ResultSet rset = sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
+		return sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, username);
 			}
 		});
-		return rset;
 	}
 }

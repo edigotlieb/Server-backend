@@ -1,9 +1,6 @@
-/** 
- * FILE : DTDSelectRequest.java
- * AUTHORS : Erez Gotlieb    
- * DESCRIPTION : 
- */ 
-
+/**
+ * FILE : DTDSelectRequest.java AUTHORS : Erez Gotlieb DESCRIPTION :
+ */
 package Request.DTDRequest;
 
 import Request.Credentials;
@@ -13,24 +10,27 @@ import Statement.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DTDSelectRequest extends DTDRequest{
+public class DTDSelectRequest extends DTDRequest {
 
-    Statement where;
+	Statement where;
 
-    public DTDSelectRequest(String tableName, Statement where, Credentials creds) {
-        super(creds, tableName);
-        this.where = where;
-    }
+	public DTDSelectRequest(String tableName, Statement where, Credentials creds) {
+		super(creds, tableName);
+		this.where = where;
+	}
 
-    @Override
-    public DTD_ACTION_TYPE getActionType() {
-        return DTD_ACTION_TYPE.SELECT;
-    }
+	public boolean validateOpernads() {
+		return this.where.validateOperands();
+	}
 
-    @Override
-    protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-        sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(null, tableName, where));
+	@Override
+	public DTD_ACTION_TYPE getActionType() {
+		return DTD_ACTION_TYPE.SELECT;
+	}
+
+	@Override
+	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
+		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(null, tableName, where));
 		return null;
-    }
-
+	}
 }

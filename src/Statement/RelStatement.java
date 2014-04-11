@@ -34,10 +34,6 @@ public class RelStatement extends Statement {
 		this.term1 = sanitizeTerm(term1);
 		this.term2 = sanitizeTerm(term2);
 		this.op = op;
-
-		if (!operands.contains(op)) {
-			throw new IllegalArgumentException();
-		}
 	}
 
 	/**

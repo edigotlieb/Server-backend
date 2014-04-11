@@ -43,7 +43,6 @@ public class UserSelectRequest extends UserRequest {
 		if (this.where.isColumnIn(passwordField)) {
 			throw new ValidationException(18);
 		}
-
 		if (!this.where.validateOperands()) {
 			throw new ValidationException(19);
 		}

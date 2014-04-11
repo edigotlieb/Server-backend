@@ -22,6 +22,12 @@ public class PreparedStatementStrings {
 		 */
 		fileNames.put("getAllUserInfoByUsername", "select/getAllUserInfoByUsername.sql");
 		/*
+		 * params: Username
+		 * cols: USER_ID, USERNAME, Name, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM
+		 * descriptions: Gives the information of a given user by username
+		 */
+		fileNames.put("getAllUserInfoByUsernameNoPass", "select/getAllUserInfoByUsernameNoPass.sql");
+		/*
 		 * params: App Name
 		 * cols: APP_ID, APP_NAME, APP_KEY
 		 * descriptions: Gives the information of a given app by name

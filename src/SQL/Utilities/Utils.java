@@ -23,7 +23,8 @@ public class Utils {
 	}
 
 	public static String sanitizeAlphaNumericSpecialChar(String org) {
-		String special = ".";
+		String hebrewChars = "אבגדהוזחטיכךלמםנןסעפףצץקרשת";
+		String special = ".*+-" + hebrewChars;
 		return org.replaceAll("[^\\w" + special + "]", "");
 	}
 

@@ -37,7 +37,7 @@ public class RelStatement extends Statement {
 
 	@Override
 	public boolean isColumnIn(String colname) {
-		return term1.equals(colname) || term1.equals(colname);
+		return term1.equals(colname) || term2.equals(colname);
 	}
 
 	@Override

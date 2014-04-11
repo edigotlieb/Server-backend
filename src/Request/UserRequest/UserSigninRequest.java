@@ -29,7 +29,7 @@ public class UserSigninRequest extends UserRequest {
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		final String username = this.creds.getUsername();
-		return sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
+		return sqlExc.executePreparedStatement("getAllUserInfoByUsernameNoPass", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, username);

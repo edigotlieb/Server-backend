@@ -95,6 +95,11 @@ public class PreparedStatementStrings {
 		 * descriptions: returns all table names of a given app name
 		 */
 		fileNames.put("getAppTables", "select/getAppTables.sql");
+		/*
+		 * params: user name, permission name
+		 * descriptions: returns the relation record between a user and a permission if exists
+		 */
+		fileNames.put("getUserPermissionRelation", "select/getUserPermissionRelation.sql");
 		
 		
 		

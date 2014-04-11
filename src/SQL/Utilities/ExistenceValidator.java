@@ -99,4 +99,18 @@ public final class ExistenceValidator {
 	public static boolean isTableByName(SqlExecutor sqlExc, String tableName) throws SQLException {
 		return tableByName(sqlExc, tableName).length() > 0;
 	}
+
+	//returns table's app name
+	public static boolean isUserInGroup(SqlExecutor sqlExc, String userName, String permissionGroup) throws SQLException {
+		final String username = userName;
+		final String permissiongroup = permissionGroup;
+		ResultSet rset = sqlExc.executePreparedStatement("getUserPermissionRelation", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+				ps.setString(2, permissiongroup);
+			}
+		});
+		return rset.next();
+	}
 }

@@ -32,6 +32,7 @@ public class ErrorMsg {
 		msgs.put(17, "Cannot add or delete an application with a special name");
 		msgs.put(18, "Cannot Select from User table using password field in where clause");
 		msgs.put(19, "Illegal operand in where clause");
+		msgs.put(20, "Cannot assign admin to user not in the permission group");
 
 
 		//execution exceptions

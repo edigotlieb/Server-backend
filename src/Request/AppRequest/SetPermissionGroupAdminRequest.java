@@ -43,6 +43,10 @@ public class SetPermissionGroupAdminRequest extends AppRequest {
 			throw new ValidationException(6);
 		}
 
+		if (!ExistenceValidator.isUserInGroup(sqlExc, username, groupName)) {
+			throw new ValidationException(20);
+		}
+
 		return false;
 	}
 

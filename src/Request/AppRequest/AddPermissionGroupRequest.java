@@ -47,7 +47,7 @@ public class AddPermissionGroupRequest extends AppRequest {
         final String permission_name = this.permissionGroupName;
 		final String permission_desc = this.description;
 		final String username = this.creds.getUsername();
-		sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
+		sqlExc.executePreparedStatement("AddPermissionGroup", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, permission_name);

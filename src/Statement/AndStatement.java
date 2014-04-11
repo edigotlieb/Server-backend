@@ -21,4 +21,9 @@ public class AndStatement extends Statement{
 	public String toString(){
 		return "(" + st1.toString() + ") AND (" + st2.toString() + ")";
 	}
+
+	@Override
+	public boolean isColumnIn(String colname) {
+		return st1.isColumnIn(colname) || st2.isColumnIn(colname);
+	}
 }

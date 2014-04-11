@@ -16,4 +16,9 @@ public class EmptyStatement extends Statement {
 	public String toString() {
 		return "1";
 	}
+
+	@Override
+	public boolean isColumnIn(String colname) {
+		return false;
+	}
 }

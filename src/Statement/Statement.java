@@ -14,6 +14,8 @@ abstract public class Statement {
 		return null;
 	}
 
+	abstract public boolean isColumnIn(String colname);
+
 	@Override
 	abstract public String toString();
 }

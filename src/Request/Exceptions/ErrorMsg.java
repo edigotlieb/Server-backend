@@ -32,6 +32,7 @@ public class ErrorMsg {
         msgs.put(16, "Permission group admin cannot remove his own user permission");
         msgs.put(17, "Cannot add or delete a permission group with a special name");
         msgs.put(17, "Cannot add or delete an application with a special name");
+        msgs.put(18, "Cannot Select from User table using password field in where clause");
 		
         
 	//execution exceptions

@@ -20,6 +20,9 @@ import java.util.List;
 public class UserSelectRequest extends UserRequest {
 
 	Statement where;
+	private static final String userTable = "USERS";
+	private static final String passwordField = "PASSWORD";
+	private static final String usernameField = "USERNAME";
 
 	public UserSelectRequest(Statement where, Credentials creds) {
 		this(creds);
@@ -37,14 +40,15 @@ public class UserSelectRequest extends UserRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if (this.where.isColumnIn(passwordField)) {
+			throw new ValidationException(18);
+		}
 		return true;
 	}
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		final String userTable = "USERS";
-		final String passwordField = "PASSWORD";
-		final String usernameField = "USERNAME";
+
 		List<String> userCols = Utils.getColNames(sqlExc, userTable);
 		userCols.remove(passwordField);
 		Statement whereNoAnon = new AndStatement(this.where, new RelStatement(usernameField, "'" + Credentials.anonymous + "'", "!="));

@@ -25,12 +25,14 @@ public final class ExistenceValidator {
 				ps.setString(1, user_name);
 			}
 		});
-		if(!rset.next()){
+		if (!rset.next()) {
 			return "";
 		}
-		return rset.getString("PASSWORD");
+		String result = rset.getString("PASSWORD");
+		rset.close();
+		return result;
 	}
-	
+
 	public static boolean isUserByUsername(SqlExecutor sqlExc, String username) throws SQLException {
 		return userByUsername(sqlExc, username).length() > 0;
 	}
@@ -44,16 +46,18 @@ public final class ExistenceValidator {
 				ps.setString(1, group_name);
 			}
 		});
-		if(!rset.next()){
+		if (!rset.next()) {
 			return "";
 		}
-		return rset.getString("USERNAME");
+		String result = rset.getString("USERNAME");
+		rset.close();
+		return result;
 	}
-	
+
 	public static boolean isPermissionGroupByName(SqlExecutor sqlExc, String groupName) throws SQLException {
 		return permissionGroupByName(sqlExc, groupName).length() > 0;
 	}
-	
+
 	//returns hashed app key
 	public static String appByName(SqlExecutor sqlExc, String appName) throws SQLException {
 		final String appname = appName;
@@ -63,16 +67,18 @@ public final class ExistenceValidator {
 				ps.setString(1, appname);
 			}
 		});
-		if(!rset.next()){
+		if (!rset.next()) {
 			return "";
 		}
-		return rset.getString("APP_KEY");
+		String result = rset.getString("APP_KEY");
+		rset.close();
+		return result;
 	}
-	
+
 	public static boolean isAppByName(SqlExecutor sqlExc, String appName) throws SQLException {
 		return appByName(sqlExc, appName).length() > 0;
 	}
-	
+
 	//returns table's app name
 	public static String tableByName(SqlExecutor sqlExc, String tableName) throws SQLException {
 		final String tablename = tableName;
@@ -82,12 +88,14 @@ public final class ExistenceValidator {
 				ps.setString(1, tablename);
 			}
 		});
-		if(!rset.next()){
+		if (!rset.next()) {
 			return "";
 		}
-		return rset.getString("APP_NAME");
+		String result = rset.getString("APP_NAME");
+		rset.close();
+		return result;
 	}
-	
+
 	public static boolean isTableByName(SqlExecutor sqlExc, String tableName) throws SQLException {
 		return tableByName(sqlExc, tableName).length() > 0;
 	}

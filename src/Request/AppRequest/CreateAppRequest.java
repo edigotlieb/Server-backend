@@ -31,16 +31,17 @@ public class CreateAppRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		// user is devel
+		if (!this.creds.isDeveloper()) {
+			throw new ValidationException(6);
+		}
+
 		// no such app name yet
 		if (ExistenceValidator.isAppByName(sqlExc, appName)) {
 			throw new ValidationException(14);
 		}
 		if (this.appName.equals(Credentials.masterAppName)) {
 			throw new ValidationException(18);
-		}
-		// user is devel
-		if (!this.creds.isDeveloper()) {
-			throw new ValidationException(6);
 		}
 
 		// check specific app_id

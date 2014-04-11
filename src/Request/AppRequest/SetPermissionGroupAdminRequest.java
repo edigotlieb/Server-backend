@@ -47,7 +47,7 @@ public class SetPermissionGroupAdminRequest extends AppRequest {
 			throw new ValidationException(20);
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override

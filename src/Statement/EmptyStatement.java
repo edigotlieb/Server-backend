@@ -10,7 +10,8 @@ package Statement;
  */
 public class EmptyStatement extends Statement {
 
-	public EmptyStatement() {}
+	public EmptyStatement() {
+	}
 
 	@Override
 	public String toString() {
@@ -20,5 +21,10 @@ public class EmptyStatement extends Statement {
 	@Override
 	public boolean isColumnIn(String colname) {
 		return false;
+	}
+
+	@Override
+	public boolean validateOperands() {
+		return true;
 	}
 }

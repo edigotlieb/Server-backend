@@ -15,6 +15,7 @@ abstract public class Statement {
 	}
 
 	abstract public boolean isColumnIn(String colname);
+	abstract public boolean validateOperands();
 
 	@Override
 	abstract public String toString();

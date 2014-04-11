@@ -5,6 +5,8 @@
 package Statement;
 
 import SQL.Utilities.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,11 +15,29 @@ import SQL.Utilities.Utils;
 public class RelStatement extends Statement {
 
 	private final String term1, term2, op;
+	private static final List<String> operands = new ArrayList<>();
+
+	static {
+
+		RelStatement.operands.add("=");
+		RelStatement.operands.add("!=");
+		RelStatement.operands.add(">=");
+		RelStatement.operands.add("<=");
+		RelStatement.operands.add(">");
+		RelStatement.operands.add("<");
+		RelStatement.operands.add("LIKE");
+		RelStatement.operands.add("NOT LIKE");
+		RelStatement.operands.add("NOT NULL");
+	}
 
 	public RelStatement(String term1, String term2, String op) {
 		this.term1 = sanitizeTerm(term1);
 		this.term2 = sanitizeTerm(term2);
 		this.op = op;
+
+		if (!operands.contains(op)) {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	/**
@@ -38,6 +58,11 @@ public class RelStatement extends Statement {
 	@Override
 	public boolean isColumnIn(String colname) {
 		return term1.equals(colname) || term2.equals(colname);
+	}
+
+	@Override
+	public boolean validateOperands() {
+		return operands.contains(op);
 	}
 
 	@Override

@@ -26,4 +26,9 @@ public class AndStatement extends Statement{
 	public boolean isColumnIn(String colname) {
 		return st1.isColumnIn(colname) || st2.isColumnIn(colname);
 	}
+
+	@Override
+	public boolean validateOperands() {
+		return st1.validateOperands() && st2.validateOperands();
+	}
 }

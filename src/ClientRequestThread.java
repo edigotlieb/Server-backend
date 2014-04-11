@@ -195,6 +195,16 @@ public class ClientRequestThread extends Thread {
         } catch (ExecutionException ex) {
             // not validated
             this.logMSG(ErrorMsg.getErrorMsg(51), Level.INFO);
+            return;
+        } catch (Exception ex) {
+            
+            this.out.print(this.createErrorResponse(500));
+            this.out.flush();
+            
+            ex.printStackTrace();
+            // something else went wrong
+            this.closeThread();
+            return;
         }
         logMSG("Client request executed", Level.INFO);
 //</editor-fold>
@@ -220,7 +230,7 @@ public class ClientRequestThread extends Thread {
     private synchronized String valueOf(ResultSet rs) throws SQLException {
         JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();
-        rs.beforeFirst();
+        rs.beforeFirst();        
         while (rs.next()) {
             int numColumns = rsmd.getColumnCount();
             JSONObject obj = new JSONObject();
@@ -281,13 +291,13 @@ public class ClientRequestThread extends Thread {
 
     private synchronized String createResponse(ResultSet rs, int stat, String msg) throws SQLException {
         String message = (stat == 0) ? msg : "";
-        String data = (rs == null) ? "{}":valueOf(rs);
+        String data = (rs == null || !rs.next()) ? "[]":valueOf(rs);
         return String.format(RESPONSE_FORMAT, stat, message, data);
     }
 
     //  is this the desired signature?
     private synchronized String createErrorResponse(String msg) {
-        return String.format(RESPONSE_FORMAT, 0, msg, "{}");
+        return String.format(RESPONSE_FORMAT, 0, msg, "[]");
     }
 
     //  is this the desired signature?

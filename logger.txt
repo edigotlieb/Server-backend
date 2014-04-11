@@ -1,422 +1,64 @@
-Apr 11, 2014 2:57:52 PM ThreadHandler init
+Apr 11, 2014 7:08:09 PM ThreadHandler init
 INFO: finished initiallizing...
-Apr 11, 2014 2:57:52 PM ThreadHandler run
+Apr 11, 2014 7:08:09 PM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 11, 2014 2:58:09 PM ThreadHandler run
+Apr 11, 2014 7:08:11 PM ThreadHandler run
 INFO: accepted new incoming connection...
-Apr 11, 2014 2:58:09 PM ThreadHandler run
+Apr 11, 2014 7:08:11 PM ThreadHandler run
 INFO: starting new DB connection...
-Apr 11, 2014 2:58:09 PM ThreadHandler run
+Apr 11, 2014 7:08:11 PM ThreadHandler run
 INFO: transfering control and starting new client request thread...
-Apr 11, 2014 2:58:09 PM ThreadHandler run
+Apr 11, 2014 7:08:11 PM ThreadHandler run
 INFO: updating thread arrays
-Apr 11, 2014 2:58:09 PM ThreadHandler run
+Apr 11, 2014 7:08:11 PM ThreadHandler run
 INFO: 1 Threads active.
-Apr 11, 2014 2:58:09 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ThreadHandler run
+INFO: waiting for incoming connection...
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: opening streams...
-Apr 11, 2014 2:58:09 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 2:58:09 PM ClientRequestThread logMSG
-INFO: CRT-0: sending challenge to client - 86e9ec430bbc47d98256427f83d56e1b
-Apr 11, 2014 2:58:09 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
+INFO: CRT-0: sending challenge to client - 9b0a71ea463f433ea0a3b082eb436786
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: waiting for client request max 2000 millis...
-Apr 11, 2014 2:58:09 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: done sleeping...
-Apr 11, 2014 2:58:10 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: proc client request...
-Apr 11, 2014 2:58:10 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: Client request validated
-Apr 11, 2014 2:58:10 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: Client request executed
-Apr 11, 2014 2:58:10 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: Response sent to client
-Apr 11, 2014 2:58:10 PM ClientRequestThread logMSG
+Apr 11, 2014 7:08:11 PM ClientRequestThread logMSG
 INFO: CRT-0: closing request thread...
-Apr 11, 2014 2:58:22 PM ThreadHandler run
+Apr 11, 2014 7:13:09 PM ThreadHandler run
 INFO: accepted new incoming connection...
-Apr 11, 2014 2:58:22 PM ThreadHandler run
+Apr 11, 2014 7:13:09 PM ThreadHandler run
 INFO: starting new DB connection...
-Apr 11, 2014 2:58:22 PM ThreadHandler run
+Apr 11, 2014 7:13:09 PM ThreadHandler run
 INFO: transfering control and starting new client request thread...
-Apr 11, 2014 2:58:22 PM ThreadHandler run
+Apr 11, 2014 7:13:09 PM ThreadHandler run
 INFO: updating thread arrays
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ThreadHandler run
+INFO: 1 Threads active.
+Apr 11, 2014 7:13:09 PM ThreadHandler run
+INFO: waiting for incoming connection...
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: opening streams...
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
-INFO: CRT-1: sending challenge to client - 5fee6a731ccf4df2b46ea04c76e15047
-Apr 11, 2014 2:58:22 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
+INFO: CRT-1: sending challenge to client - 7ebb4d1ee5db4a2d8b6bc360f1e9cd9a
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: waiting for client request max 2000 millis...
-Apr 11, 2014 2:58:22 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: done sleeping...
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: proc client request...
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: Client request validated
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: Client request executed
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: Response sent to client
-Apr 11, 2014 2:58:22 PM ClientRequestThread logMSG
+Apr 11, 2014 7:13:09 PM ClientRequestThread logMSG
 INFO: CRT-1: closing request thread...
-Apr 11, 2014 2:58:26 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 2:58:26 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 2:58:26 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 2:58:26 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: opening streams...
-Apr 11, 2014 2:58:26 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: sending challenge to client - c3c86075712d4ccc91e8360ad64a04e9
-Apr 11, 2014 2:58:26 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: waiting for client request max 2000 millis...
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: done sleeping...
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: proc client request...
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: Client request validated
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: Client request executed
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: Response sent to client
-Apr 11, 2014 2:58:26 PM ClientRequestThread logMSG
-INFO: CRT-2: closing request thread...
-Apr 11, 2014 2:58:53 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 2:58:53 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 2:58:53 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 2:58:53 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 2:58:53 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 2:58:53 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: opening streams...
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: sending challenge to client - 20fd194424e145acac675e26151f86d6
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: waiting for client request max 2000 millis...
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: done sleeping...
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: proc client request...
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: Client request validated
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: Client request executed
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: Response sent to client
-Apr 11, 2014 2:58:53 PM ClientRequestThread logMSG
-INFO: CRT-3: closing request thread...
-Apr 11, 2014 2:58:54 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 2:58:54 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 2:58:54 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 2:58:54 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 2:58:54 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 2:58:54 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: opening streams...
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: sending challenge to client - 408d7c00e9184de1b8a74cd62213c773
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: waiting for client request max 2000 millis...
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: done sleeping...
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: proc client request...
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: Client request validated
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: Client request executed
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: Response sent to client
-Apr 11, 2014 2:58:54 PM ClientRequestThread logMSG
-INFO: CRT-4: closing request thread...
-Apr 11, 2014 2:59:00 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 2:59:00 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 2:59:00 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 2:59:00 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 2:59:00 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 2:59:00 PM ClientRequestThread logMSG
-INFO: CRT-5: opening streams...
-Apr 11, 2014 2:59:00 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 2:59:00 PM ClientRequestThread logMSG
-INFO: CRT-5: sending challenge to client - b55762bed4144c33a95f495ad7fd04de
-Apr 11, 2014 2:59:00 PM ClientRequestThread logMSG
-INFO: CRT-5: waiting for client request max 2000 millis...
-Apr 11, 2014 2:59:00 PM ClientRequestThread logMSG
-INFO: CRT-5: done sleeping...
-Apr 11, 2014 2:59:00 PM ClientRequestThread logMSG
-INFO: CRT-5: proc client request...
-Apr 11, 2014 2:59:01 PM ClientRequestThread logMSG
-INFO: CRT-5: Client request validated
-Apr 11, 2014 2:59:01 PM ClientRequestThread logMSG
-INFO: CRT-5: Client request executed
-Apr 11, 2014 2:59:01 PM ClientRequestThread logMSG
-INFO: CRT-5: Response sent to client
-Apr 11, 2014 2:59:01 PM ClientRequestThread logMSG
-INFO: CRT-5: closing request thread...
-Apr 11, 2014 3:01:39 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:01:39 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:01:39 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:01:39 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: opening streams...
-Apr 11, 2014 3:01:39 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:01:39 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: sending challenge to client - b36b95ff53c44dbd86d7114acff3c3c3
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: waiting for client request max 2000 millis...
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: done sleeping...
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: proc client request...
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: Client request validated
-Apr 11, 2014 3:01:39 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:01:39 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (PASSWORD LIKE '.') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: Client request executed
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: Response sent to client
-Apr 11, 2014 3:01:39 PM ClientRequestThread logMSG
-INFO: CRT-6: closing request thread...
-Apr 11, 2014 3:02:15 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:02:15 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:02:15 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:02:15 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: opening streams...
-Apr 11, 2014 3:02:15 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: sending challenge to client - a839c1ab73bc40878011375a6ecda123
-Apr 11, 2014 3:02:15 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: waiting for client request max 2000 millis...
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: done sleeping...
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: proc client request...
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: Client request validated
-Apr 11, 2014 3:02:15 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:02:15 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (PASSWORD = 'd41d8cd98f00b204e9800998ecf8427e') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: Client request executed
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: Response sent to client
-Apr 11, 2014 3:02:15 PM ClientRequestThread logMSG
-INFO: CRT-7: closing request thread...
-Apr 11, 2014 3:02:27 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:02:27 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:02:27 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:02:27 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:02:27 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:02:27 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: opening streams...
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: sending challenge to client - 095ff0124b71418485d679105bf4b1c6
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: waiting for client request max 2000 millis...
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: done sleeping...
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: proc client request...
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: Client request validated
-Apr 11, 2014 3:02:27 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:02:27 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (USERNAME = 'edi.gotlieb') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: Client request executed
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: Response sent to client
-Apr 11, 2014 3:02:27 PM ClientRequestThread logMSG
-INFO: CRT-8: closing request thread...
-Apr 11, 2014 3:04:06 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:04:06 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:04:06 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:04:06 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:04:06 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: opening streams...
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: sending challenge to client - c7b5aebfb8c14e4198492abc064fb992
-Apr 11, 2014 3:04:06 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: waiting for client request max 2000 millis...
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: done sleeping...
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: proc client request...
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: Client request validated
-Apr 11, 2014 3:04:06 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:04:06 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (NAME = '') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: Client request executed
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: Response sent to client
-Apr 11, 2014 3:04:06 PM ClientRequestThread logMSG
-INFO: CRT-9: closing request thread...
-Apr 11, 2014 3:04:17 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:04:17 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:04:17 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:04:17 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:04:17 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:04:17 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: opening streams...
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: sending challenge to client - 3db82f6d4f7443679f7ec48024eb2ce4
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: waiting for client request max 2000 millis...
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: done sleeping...
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: proc client request...
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: Client request validated
-Apr 11, 2014 3:04:17 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:04:17 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (DISPLAY_NAME = '') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: Client request executed
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: Response sent to client
-Apr 11, 2014 3:04:17 PM ClientRequestThread logMSG
-INFO: CRT-10: closing request thread...
-Apr 11, 2014 3:07:01 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:07:01 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:07:01 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:07:01 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:07:01 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:07:01 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: opening streams...
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: sending challenge to client - 34fb4b08a27f4d9aa924b557de59afde
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: waiting for client request max 2000 millis...
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: done sleeping...
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: proc client request...
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: Client request validated
-Apr 11, 2014 3:07:01 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:07:01 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (PASSWORD = 'd41d8cd98f00b204e9800998ecf8427e') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: Client request executed
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: Response sent to client
-Apr 11, 2014 3:07:01 PM ClientRequestThread logMSG
-INFO: CRT-11: closing request thread...
-Apr 11, 2014 3:07:41 PM ThreadHandler run
-INFO: accepted new incoming connection...
-Apr 11, 2014 3:07:41 PM ThreadHandler run
-INFO: starting new DB connection...
-Apr 11, 2014 3:07:41 PM ThreadHandler run
-INFO: transfering control and starting new client request thread...
-Apr 11, 2014 3:07:41 PM ThreadHandler run
-INFO: updating thread arrays
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: opening streams...
-Apr 11, 2014 3:07:41 PM ThreadHandler run
-INFO: 1 Threads active.
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: sending challenge to client - 261ff2fe15304bc08f26a0046af09517
-Apr 11, 2014 3:07:41 PM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: waiting for client request max 2000 millis...
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: done sleeping...
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: proc client request...
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: Client request validated
-Apr 11, 2014 3:07:41 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: DESC USERS
-Apr 11, 2014 3:07:41 PM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT USER_ID, USERNAME, NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM FROM USERS WHERE (PASSWORD = 'df7dda2ed47b490b7d0f3dd107cb036e') AND (USERNAME != 'Anonymous')
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: Client request executed
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: Response sent to client
-Apr 11, 2014 3:07:41 PM ClientRequestThread logMSG
-INFO: CRT-12: closing request thread...

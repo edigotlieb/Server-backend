@@ -38,6 +38,7 @@ import Request.UserRequest.UserSigninRequest;
 import Request.UserRequest.UserSignupRequest;
 import Request.UserRequest.UserUpdateInfoRequest;
 import Request.UserRequest.UserUpdateUserPasswordRequest;
+import Request.UserRequest.UsergetUsersWithPermissionGroup;
 import Statement.AndStatement;
 import Statement.OrStatement;
 import Statement.RelStatement;
@@ -175,6 +176,10 @@ public class RequestFactory {
                 String user = requestData.getString("username");
                 String permissionGroupName = requestData.getString("permissionGroupName");
                 return new UserRemovePermissionGroupRequest(user, permissionGroupName, creds);
+            }
+            case GET_USERS_WITH_GROUPS: {
+                String groupName = requestData.getString("groupName");
+                return new UsergetUsersWithPermissionGroup(groupName, creds);
             }
         }
         return null;

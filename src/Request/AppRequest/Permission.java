@@ -8,7 +8,6 @@ package Request.AppRequest;
 public class Permission {
 
     public enum PERMISSION_TYPE {
-
         SELECT, INSERT, UPDATE, DELETE
     }
 

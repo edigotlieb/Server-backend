@@ -17,6 +17,7 @@ import java.util.List;
 public class Credentials {
 
 	public final static String superAdmin = "Super_Admin";
+	public final static String appAdminSuffix = "admin";
 	public final static String developer = "Developer";
 	public final static String anonymous = "Anonymous";
 	public final static String masterAppName = "MasterApplication";
@@ -58,7 +59,7 @@ public class Credentials {
 	}
 
 	public boolean isAppSuperAdmin(String app) {
-		return isSuperAdmin() || isInPermissionGroup(app + "_" + superAdmin);
+		return isSuperAdmin() || isInPermissionGroup(app + "_" + appAdminSuffix);
 	}
 
 	public boolean isDeveloper() {

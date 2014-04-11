@@ -84,8 +84,13 @@ public class ClientRequestThread extends Thread {
 //<editor-fold defaultstate="collapsed" desc="wait for client response">
         try {
             int time = (int) RuntimeParams.getParams("ResponseTimeOut");
-            logMSG(String.format("waiting for client request %d millis...", time), Level.INFO);
-            Thread.sleep(time);
+            int timeInterval = (int) RuntimeParams.getParams("ResponseWaitInterval");
+            logMSG(String.format("waiting for client request max %d millis...", time), Level.INFO);
+            int i = 0;
+            while(i*timeInterval < time && !reader.ready()) {
+                Thread.sleep(timeInterval);
+            }
+            // Thread.sleep(time);
             logMSG("done sleeping...", Level.INFO);
             if (!reader.ready()) {
                 // client timed-out

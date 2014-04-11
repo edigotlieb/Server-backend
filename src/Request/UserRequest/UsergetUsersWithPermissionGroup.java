@@ -50,12 +50,11 @@ public class UsergetUsersWithPermissionGroup extends UserRequest {
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		final String permission_name = this.groupName;
-		sqlExc.executePreparedStatement("getUserInfoWithPermissionGroup", new StatementPreparer() {
+		return sqlExc.executePreparedStatement("getUserInfoWithPermissionGroup", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, permission_name);
 			}
 		});
-		return null;
 	}
 }

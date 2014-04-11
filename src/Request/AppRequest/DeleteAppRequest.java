@@ -52,7 +52,7 @@ public class DeleteAppRequest extends AppRequest {
 			}
 		});
 		//dropAppTables
-		ResultSet rset = sqlExc.executePreparedStatement("DeleteAppTables", new StatementPreparer() {
+		ResultSet rset = sqlExc.executePreparedStatement("getAppTables", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, app_name);

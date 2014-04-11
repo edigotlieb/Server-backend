@@ -24,7 +24,7 @@ public class Utils {
 
 	public static String sanitizeAlphaNumericSpecialChar(String org) {
 		String hebrewChars = "אבגדהוזחטיכךלמםנןסעפףצץקרשת";
-		String special = "\\.\\*\\+\\-\\(\\)\\[\\]\\{\\}\\\\" + hebrewChars;
+		String special = "\\ \\.\\*\\+\\-\\(\\)\\[\\]\\{\\}\\\\" + hebrewChars;
 		return org.replaceAll("[^\\w" + special + "]", "");
 	}
 

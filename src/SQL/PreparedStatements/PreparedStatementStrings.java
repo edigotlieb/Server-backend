@@ -84,6 +84,12 @@ public class PreparedStatementStrings {
 		 * descriptions: returns the set of a given app's dynamic table names
 		 */
 		fileNames.put("getPermissionGroupInfoByName", "select/getPermissionGroupInfoByName.sql");
+		/*
+		 * params: permission name
+		 * cols: USER_ID, USERNAME, PASSWORD (hashed), NAME, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM
+		 * descriptions: returns all users with a specified group
+		 */
+		fileNames.put("getUserInfoWithPermissionGroup", "select/getUserInfoWithPermissionGroup.sql");
 		
 		
 		

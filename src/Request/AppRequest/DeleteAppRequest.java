@@ -30,7 +30,7 @@ public class DeleteAppRequest extends AppRequest {
 		if (this.appName.equals(Credentials.masterAppName)) {
 			throw new ValidationException(18);
 		}
-		if (!this.creds.isAppSuperAdmin()) {
+		if (!this.creds.isAppSuperAdmin(this.appName)) {
 			throw new ValidationException(6);
 		}
 		return true;

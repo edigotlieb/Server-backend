@@ -90,6 +90,11 @@ public class PreparedStatementStrings {
 		 * descriptions: returns all users with a specified group
 		 */
 		fileNames.put("getUserInfoWithPermissionGroup", "select/getUserInfoWithPermissionGroup.sql");
+		/*
+		 * params: app name
+		 * descriptions: returns all table names of a given app name
+		 */
+		fileNames.put("getAppTables", "select/getAppTables.sql");
 		
 		
 		

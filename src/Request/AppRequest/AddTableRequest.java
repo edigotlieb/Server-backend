@@ -36,10 +36,18 @@ public class AddTableRequest extends AppRequest {
 			throw new ValidationException(7);
 		}
 
+		boolean primaryFlag = false;
 		for (Column col : columns) {
 			if (!Utils.isAlphaNumeric(col.getColName())) {
 				throw new ValidationException(15);
 			}
+			if(col.isPrimary){
+				primaryFlag = true;
+			}
+		}
+		
+		if(!primaryFlag){
+			throw new ValidationException(21);
 		}
 
 		if (!Utils.isAlphaNumeric(tableName)) {
@@ -83,7 +91,7 @@ public class AddTableRequest extends AppRequest {
 					ps.setString(3, permission_type);
 					ps.setString(4, permission_name);
 				}
-			});
+			}).close();
 		}
 
 		return null;

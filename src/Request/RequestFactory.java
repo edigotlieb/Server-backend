@@ -96,8 +96,8 @@ public class RequestFactory {
             case ADD_TABLE: {                
                 String tableName = requestData.getString("tableName");
                 List<Column> cols = processCols(requestData.getJSONArray("cols"));
-                List<Permission> permissions = processPermissions(requestData.getJSONArray("permissions"), creds, tableName);
-                return new AddTableRequest(creds, tableName, cols, permissions,requestData.getString("appName"));
+                //List<Permission> permissions = processPermissions(requestData.getJSONArray("permissions"), creds, tableName);
+                return new AddTableRequest(creds, tableName, cols, /*permissions,*/requestData.getString("appName"));
             }
             case CREATE_APP: {
                 return new CreateAppRequest(creds, requestData.getString("appName"),requestData.getString("appKey"));

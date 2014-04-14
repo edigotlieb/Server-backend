@@ -19,14 +19,12 @@ import java.util.List;
 public class AddTableRequest extends AppRequest {
 
 	private final List<Column> columns;
-	private final List<Permission> perms;
 	private final String tableName;
 	private final String appName;
 
-	public AddTableRequest(Credentials creds, String tableName, List<Column> cols, List<Permission> perms, String appName) {
+	public AddTableRequest(Credentials creds, String tableName, List<Column> cols, String appName) {
 		super(creds);
 		this.columns = new ArrayList<>(cols);
-		this.perms = new ArrayList<>(perms);
 		this.tableName = tableName;
 		this.appName = appName;
 	}
@@ -36,12 +34,6 @@ public class AddTableRequest extends AppRequest {
 		if (ExistenceValidator.isTableByName(sqlExc, this.tableName)) {
 			//table exists
 			throw new ValidationException(7);
-		}
-
-		for (Permission per : perms) {
-			if (!ExistenceValidator.isPermissionGroupByName(sqlExc, per.getPermissionGroup())) {
-				throw new ValidationException(9);
-			}
 		}
 
 		for (Column col : columns) {
@@ -78,11 +70,11 @@ public class AddTableRequest extends AppRequest {
 		});
 		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.create(tableName, columns));
 
-		for (Permission per : perms) {
-			final String appname = per.getAppName();
-			final String tablename = per.getTableName();
-			final String permission_type = per.getType().toString();
-			final String permission_name = per.getPermissionGroup();
+		for (Permission.PERMISSION_TYPE per : Permission.PERMISSION_TYPE.values()) {
+			final String appname = this.appName;
+			final String tablename = this.tableName;
+			final String permission_type = per.toString();
+			final String permission_name = this.appName + Credentials.appAdminSuffix;
 			sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
 				@Override
 				public void prepareStatement(PreparedStatement ps) throws SQLException {

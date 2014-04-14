@@ -31,7 +31,7 @@ public class AddTableRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (ExistenceValidator.isTableByName(sqlExc, this.tableName)) {
+		if (ExistenceValidator.isTableByName(sqlExc, this.appName + "_" + this.tableName)) {
 			//table exists
 			throw new ValidationException(7);
 		}

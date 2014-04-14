@@ -61,7 +61,7 @@ public class AddTableRequest extends AppRequest {
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		final String app_name = appName;
 		final String table_name = app_name + "_" + tableName;
-		sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
+		sqlExc.executePreparedStatement("AddTable", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, table_name);
@@ -72,9 +72,9 @@ public class AddTableRequest extends AppRequest {
 
 		for (Permission.PERMISSION_TYPE per : Permission.PERMISSION_TYPE.values()) {
 			final String appname = this.appName;
-			final String tablename = this.tableName;
+			final String tablename = app_name + "_" + tableName;
 			final String permission_type = per.toString();
-			final String permission_name = this.appName + Credentials.appAdminSuffix;
+			final String permission_name = this.appName + "_" + Credentials.appAdminSuffix;
 			sqlExc.executePreparedStatement("AddPermissionGroupForTable", new StatementPreparer() {
 				@Override
 				public void prepareStatement(PreparedStatement ps) throws SQLException {

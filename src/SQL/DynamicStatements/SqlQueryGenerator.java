@@ -43,14 +43,14 @@ public class SqlQueryGenerator {
 		return res;
 	}
 
-	public static String select(List<String> colnames, String from, Statement where) {            
+	public static String select(List<String> colnames, String from, Statement where) {
 		String columns;
 		if (colnames == null) {
 			columns = "*";
 		} else {
 			columns = stringCommaSeperated(colnames);
 		}
-               // System.out.println("SELECT " + columns + " FROM " + from + " WHERE " + where.toString());
+		// System.out.println("SELECT " + columns + " FROM " + from + " WHERE " + where.toString());
 		return "SELECT " + columns + " FROM " + from + " WHERE " + where.toString();
 	}
 
@@ -79,8 +79,9 @@ public class SqlQueryGenerator {
 		}
 		if (primaries.length() > 0) {
 			primaries = primaries.substring(0, primaries.length() - 2);
+			primaries = ", PRIMARY KEY (" + primaries + ")";
 		}
-		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols) + ", PRIMARY KEY (" + primaries + "))";
+		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols) + primaries + ")";
 	}
 
 	public static String drop(String tableName) {

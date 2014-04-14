@@ -31,6 +31,10 @@ public class AddTableRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if (!this.creds.isAppSuperAdmin(appName)) {
+			throw new ValidationException(6);
+		}
+		
 		if (ExistenceValidator.isTableByName(sqlExc, this.appName + "_" + this.tableName)) {
 			//table exists
 			throw new ValidationException(7);
@@ -41,21 +45,17 @@ public class AddTableRequest extends AppRequest {
 			if (!Utils.isAlphaNumeric(col.getColName())) {
 				throw new ValidationException(15);
 			}
-			if(col.isPrimary){
+			if (col.isPrimary) {
 				primaryFlag = true;
 			}
 		}
-		
-		if(!primaryFlag){
+
+		if (!primaryFlag) {
 			throw new ValidationException(21);
 		}
 
 		if (!Utils.isAlphaNumeric(tableName)) {
 			throw new ValidationException(15);
-		}
-
-		if (!this.creds.isAppSuperAdmin(appName)) {
-			throw new ValidationException(6);
 		}
 		return true;
 	}

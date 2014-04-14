@@ -68,7 +68,7 @@ public class AddTableRequest extends AppRequest {
 				ps.setString(2, app_name);
 			}
 		});
-		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.create(tableName, columns));
+		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.create(app_name + "_" + tableName, columns));
 
 		for (Permission.PERMISSION_TYPE per : Permission.PERMISSION_TYPE.values()) {
 			final String appname = this.appName;

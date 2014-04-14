@@ -80,7 +80,7 @@ public class SqlQueryGenerator {
 		if (primaries.length() > 0) {
 			primaries = primaries.substring(0, primaries.length() - 2);
 		}
-		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols) + "," + primaries + ")";
+		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols) + ", PRIMARY KEY (" + primaries + "))";
 	}
 
 	public static String drop(String tableName) {

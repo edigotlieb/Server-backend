@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,11 +30,15 @@ public class ThreadHandler {
     
     private static final Logger logger = Logger.getGlobal();
     private static FileHandler fh;
-
+    
+    private static Timer garbageKeyCollectorTimer;
         
     
     public static boolean init(String paramFileName) {
-        try {
+        
+        garbageKeyCollectorTimer = new Timer();
+        
+        try {            
             RuntimeParams.readParams(paramFileName);       // read all the params from a config file
         } catch (Exception ex) {
             // cant open param file
@@ -74,7 +79,9 @@ public class ThreadHandler {
             logger.log(Level.SEVERE, "closing...");
              System.exit(1);
         } 
-    
+        
+        garbageKeyCollectorTimer.scheduleAtFixedRate(new GarbageKeyCollector(ds), 100, (long) RuntimeParams.getParams("GarbageKeyCollectorPeriod"));
+        
         logger.addHandler(fh);
         logger.setLevel(Level.INFO);
         

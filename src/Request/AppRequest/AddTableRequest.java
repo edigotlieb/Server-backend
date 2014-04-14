@@ -91,7 +91,7 @@ public class AddTableRequest extends AppRequest {
 					ps.setString(3, permission_type);
 					ps.setString(4, permission_name);
 				}
-			}).close();
+			});
 		}
 
 		return null;

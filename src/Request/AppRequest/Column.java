@@ -7,7 +7,7 @@ public class Column {
 
 	public enum COL_TYPE {
 
-		INT, VARCHAR, TIME_STAMP, DATE
+		INT, VARCHAR, TIMESTAMP, DATE
 	}
 	private final String colName;
 	public final int defaultVarcharSize = 50;
@@ -39,7 +39,7 @@ public class Column {
 	@Override
 	public String toString() {
 		String col = colName + " " + type;
-		if (type != COL_TYPE.DATE && type != COL_TYPE.TIME_STAMP && size >= 0) {
+		if (type != COL_TYPE.DATE && type != COL_TYPE.TIMESTAMP && size >= 0) {
 			col += "(" + size + ")";
 		} else if(type == COL_TYPE.VARCHAR && size < 0){
 			col += "(" + defaultVarcharSize + ")";

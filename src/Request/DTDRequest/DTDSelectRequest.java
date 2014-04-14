@@ -30,7 +30,6 @@ public class DTDSelectRequest extends DTDRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(null, tableName, where));
-		return null;
+		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(null, tableName, where));
 	}
 }

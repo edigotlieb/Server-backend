@@ -37,11 +37,11 @@ public class SqlExecutor {
 
 	public ResultSet executeDynamicStatementQry(String sql) throws SQLException {
 		Statement stmt = con.createStatement();
-                
-                 log.log(Level.INFO, sql);
-                
-		ResultSet rs = stmt.executeQuery(sql);
+
+		log.log(Level.INFO, sql);
+
+		stmt.execute(sql);
 		// stmt.close();
-		return rs;
+		return stmt.getResultSet();
 	}
 }

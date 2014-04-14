@@ -10,6 +10,7 @@ public class Column {
 		INT, VARCHAR, TIME_STAMP, DATE
 	}
 	private final String colName;
+	public final int defaultVarcharSize = 50;
 
 	public String getColName() {
 		return colName;
@@ -39,7 +40,9 @@ public class Column {
 	public String toString() {
 		String col = colName + " " + type;
 		if (type != COL_TYPE.DATE && type != COL_TYPE.TIME_STAMP && size >= 0) {
-			col += " (" + size + ")";
+			col += "(" + size + ")";
+		} else if(type == COL_TYPE.VARCHAR && size < 0){
+			col += "(" + defaultVarcharSize + ")";
 		}
 		if (this.autoInc) {
 			col += " AUTO_INCREMENT";

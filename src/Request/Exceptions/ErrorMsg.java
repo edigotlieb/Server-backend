@@ -34,6 +34,7 @@ public class ErrorMsg {
 		msgs.put(19, "Illegal operand in where clause");
 		msgs.put(20, "Cannot assign admin to user not in the permission group");
 		msgs.put(21, "New Tables must have a primary key column");
+		msgs.put(22, "Permission group for table exist already");
 
 
 		//execution exceptions

@@ -6,6 +6,7 @@ package Request.AppRequest;
 
 import Request.AppRequest.Permission.PERMISSION_TYPE;
 import Request.Credentials;
+import Request.DTDRequest.DTDRequest;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
@@ -30,6 +31,10 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if (!this.creds.isAppSuperAdmin(this.permissionToAdd.getAppName())) {
+			throw new ValidationException(6);
+		}
+
 		//check appName exists
 		if (!ExistenceValidator.isAppByName(sqlExc, this.permissionToAdd.getAppName())) {
 			throw new ValidationException(1);
@@ -44,9 +49,12 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 			throw new ValidationException(11);
 		}
 
-		if (!this.creds.isAppSuperAdmin(this.permissionToAdd.getAppName())) {
-			throw new ValidationException(6);
+		if (this.creds.getTablePermissionList(sqlExc,
+				this.permissionToAdd.getTableName()).contains(
+				DTDRequest.DTD_ACTION_TYPE.valueOf(this.permissionToAdd.getType().toString()))) {
+			throw new ValidationException(22);
 		}
+
 		return true;
 	}
 

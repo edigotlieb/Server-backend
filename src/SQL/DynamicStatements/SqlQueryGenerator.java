@@ -49,7 +49,7 @@ public class SqlQueryGenerator {
 	}
 
 	public static String select(List<String> colnames, String from, Statement where) {
-		return select(colnames, from, where, "", ORDER_ORIENTATION.ASC);
+		return select(colnames, from, where, "", null);
 	}
 
 	public static String select(List<String> colnames, String from, Statement where, String orderBy, ORDER_ORIENTATION orie) {

@@ -25,7 +25,7 @@ public class DTDSelectRequest extends DTDRequest {
 	}
 
 	public DTDSelectRequest(String tableName, Statement where, Credentials creds) {
-		this(tableName, where, "", ORDER_ORIENTATION.ASC, creds);
+		this(tableName, where, "", null, creds);
 	}
 
 	public boolean validateOpernads() {

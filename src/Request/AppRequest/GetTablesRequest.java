@@ -27,7 +27,7 @@ public class GetTablesRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (this.creds.isAppSuperAdmin(appName)) {
+		if (!this.creds.isAppSuperAdmin(appName)) {
 			throw new ValidationException(6);
 		}
 		return true;

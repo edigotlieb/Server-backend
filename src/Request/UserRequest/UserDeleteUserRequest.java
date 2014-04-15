@@ -42,7 +42,7 @@ public class UserDeleteUserRequest extends UserRequest {
 		}
 
 		final String username = this.userToDelete;
-		ResultSet rs = sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
+		ResultSet rs = sqlExc.executePreparedStatement("getUserPermissionGroupsAdmin", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, username);

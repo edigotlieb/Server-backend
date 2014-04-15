@@ -115,6 +115,11 @@ public class PreparedStatementStrings {
 		 * descriptions: returns all apps whom a given user is their app admin
 		 */
 		fileNames.put("getAllAppsUser", "select/getAllAppsUser.sql");
+		/*
+		 * params: username
+		 * descriptions: returns all apps whom a given user is their app admin
+		 */
+		fileNames.put("getUserPermissionGroupsAdmin", "select/getUserPermissionGroupsAdmin.sql");
 
 
 

@@ -8,7 +8,6 @@ import Request.Exceptions.ValidationException;
 import Request.Request;
 import SQL.SqlExecutor;
 import java.sql.SQLException;
-import Request.DTDRequest.DTDSelectRequest;
 
 public abstract class DTDRequest extends Request {
 
@@ -41,7 +40,7 @@ public abstract class DTDRequest extends Request {
 			throw new ValidationException(6);
 		}
 
-		if (this instanceof DTDSelectRequest) {
+		if (this.getActionType() == DTD_ACTION_TYPE.SELECT) {
 			DTDSelectRequest temp = (DTDSelectRequest) this;
 			if (!temp.validateOpernads()) {
 				throw new ValidationException(19);

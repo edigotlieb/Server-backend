@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Statement;
 
 import SQL.Utilities.Utils;
@@ -10,11 +7,14 @@ import java.util.List;
 
 /**
  *
- * @author T7639192
+ * Defines an abstract relational SQL WHERE statement
  */
 public class RelStatement extends Statement {
 
+        // the  tow terms and the operand defining the statement
 	private final String term1, term2, op;
+        
+        // the list of allowed opperands
 	private static final List<String> operands = new ArrayList<>();
 
 	static {
@@ -30,6 +30,13 @@ public class RelStatement extends Statement {
 		RelStatement.operands.add("NOT NULL");
 	}
 
+        /**
+         * Default constructor
+         * 
+         * @param term1 the first term
+         * @param term2 the second term
+         * @param op the operand 
+         */
 	public RelStatement(String term1, String term2, String op) {
 		this.term1 = sanitizeTerm(term1);
 		this.term2 = sanitizeTerm(term2);
@@ -56,7 +63,11 @@ public class RelStatement extends Statement {
 		return term1.equals(colname) || term2.equals(colname);
 	}
 
+        
 	@Override
+        /**
+         * validated the operand is legal
+         */
 	public boolean validateOperands() {
 		return operands.contains(op);
 	}

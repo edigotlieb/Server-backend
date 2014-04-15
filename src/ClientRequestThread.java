@@ -24,44 +24,82 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * This class handles a user request from start to finish.
+ */
 public class ClientRequestThread extends Thread {
 
+    // the db connection
     Connection con;
+    
+    // the tcp socket
     Socket socket;
+    
+    // the logger being used
     static final Logger log = Logger.getGlobal();
-    BufferedReader reader;
-    BufferedWriter writer;
+    
+    // the socket reader
+    BufferedReader reader;    
+    
+    // the socket printer
     PrintWriter out;
+    
+    // the thread ID
     private final int ID;
+    
+    // the LOG format
     private final static String LOG_FORMAT_MSG = "CRT-%d: %s";
 
-    final String RESPONSE_FORMAT = "{\"Status\":\"%d\" , \"Message\":\"%s\", \"Data\":%s}";
-    final String ERROR_FORMAT = "{'ERROR':'%s'}";
-    final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";
+    // response format
+    final static String RESPONSE_FORMAT = "{\"Status\":\"%d\" , \"Message\":\"%s\", \"Data\":%s}";
+    
+    // final String ERROR_FORMAT = "{'ERROR':'%s'}";
+    // final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";
 
+    /**
+     * 
+     * @param con the db connection
+     * @param socket the tcp socket
+     * @param ID the thread ID
+     */
     public ClientRequestThread(Connection con, Socket socket, int ID) {
         this.con = con;
         this.socket = socket;
         this.ID = ID;
     }
 
+    /**
+     * logs a string message
+     * 
+     * @param msg the message to log
+     * @param lvl the log level
+     */
     public void logMSG(String msg, Level lvl) {
         log.log(lvl, String.format(LOG_FORMAT_MSG, ID, msg));
     }
 
+    /**
+     * logs an exception.
+     * 
+     * @param ex the exception to log
+     * @param lvl the log level
+     */
     public void logException(Exception ex, Level lvl) {
         log.log(lvl, String.format(LOG_FORMAT_MSG, ID, ex.getMessage()), ex);
     }
 
+    
     @Override
+    /**
+     *  the run() function of the thread that handles the user request
+     */
     public synchronized void run() {
 
 //<editor-fold defaultstate="collapsed" desc="open streams">
         try {
             logMSG("opening streams...", Level.INFO);
             // open a stream
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));            
             this.out = new PrintWriter(this.socket.getOutputStream());
         } catch (IOException ex) {
             logMSG("failed to open streams...", Level.INFO);
@@ -228,6 +266,13 @@ public class ClientRequestThread extends Thread {
 
     }
 
+    /**
+     * This method converts a resultSet into a JSON data value
+     * 
+     * @param rs the result set to convert
+     * @return the JSON format string
+     * @throws SQLException if the result set throws it
+     */
     private synchronized String valueOf(ResultSet rs) throws SQLException {
         JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -290,22 +335,44 @@ public class ClientRequestThread extends Thread {
         return json.toString();
     }
 
+    /**
+     * Create the final response string to be sent back to the user,
+     * 
+     * @param rs the data result set
+     * @param stat the handle status (0 - fail, 1 - success)
+     * @param msg the message to append to the responce
+     * @return the string to send to the user (raw)
+     * @throws SQLException if the ResultSet throws it
+     */
     private synchronized String createResponse(ResultSet rs, int stat, String msg) throws SQLException {
         String message = (stat == 0) ? msg : "";
         String data = (rs == null || !rs.next()) ? "[]":valueOf(rs);
         return String.format(RESPONSE_FORMAT, stat, message, data);
     }
 
-    //  is this the desired signature?
+    /**
+     * Creates a generic error response with the given message
+     * 
+     * @param msg the error message 
+     * @return the string to send to the user (raw)
+     */
     private synchronized String createErrorResponse(String msg) {
         return String.format(RESPONSE_FORMAT, 0, msg, "[]");
     }
 
-    //  is this the desired signature?
+    /**
+     * Creates a error response with a given errorCode as to the ErrorMsg class
+     * 
+     * @param errorCode the message error code (as defined by ErrorMsg)
+     * @return the string to send to the user (raw)
+     */
     private synchronized String createErrorResponse(int errorCode) {
         return createErrorResponse(ErrorMsg.getErrorMsg(errorCode));
     }
 
+    /**
+     * Closes the thread and all of it's assets.
+     */
     private void closeThread() {
         logMSG("closing request thread...", Level.INFO);
         try {

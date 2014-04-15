@@ -39,6 +39,7 @@ import Request.UserRequest.UserUpdateInfoRequest;
 import Request.UserRequest.UserUpdateUserPasswordRequest;
 import Request.UserRequest.UsergetUsersWithPermissionGroup;
 import Statement.AndStatement;
+import Statement.EmptyStatement;
 import Statement.OrStatement;
 import Statement.RelStatement;
 import Statement.Statement;
@@ -185,7 +186,7 @@ public class RequestFactory {
 				return new UsergetUsersWithPermissionGroup(groupName, creds);
 			}
                         case DELETE_USER: {
-                                return new UserDeleteUserRequest(creds,requestData.getString("username"));
+                                return new UserDeleteUserRequest(creds,requestData.getString("userToDelete"));
                         }
 		}
 		return null;
@@ -219,6 +220,9 @@ public class RequestFactory {
 	}
 
 	private static Statement processStatement(JSONObject requestData) {
+                if(requestData.length() == 0) {
+                    return new EmptyStatement();
+                }
 		if (requestData.length() > 1) {
 			throw new JSONException("Bad Format");
 		}

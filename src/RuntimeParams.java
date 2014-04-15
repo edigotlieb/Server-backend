@@ -7,10 +7,13 @@ import java.util.Iterator;
 import org.json.JSONObject;
 
 /**
- * FILE : RuntimeParams.java AUTHORS : Erez Gotlieb DESCRIPTION :
+ * FILE : RuntimeParams.java 
+ * AUTHORS : Erez Gotlieb
+ * DESCRIPTION : This class encaps the access to the run-time parameters of the program
  */
 public class RuntimeParams {
 
+    // the map that holds the parameteres 
     private static HashMap<String, Object> params = new HashMap<>();
 
     static {
@@ -34,12 +37,27 @@ public class RuntimeParams {
         params.put("GarbageKeyCollectorPeriod",300000L); // time in millis (5 min)
     }
 
+    /**
+     * 
+     * @param key the name of the parameter
+     * @return the desired parameter, null if no such parameter exists
+     */
     public static Object getParams(String key) {
         return params.get(key);
     }
 
+    /**
+     * Reads the parameters from a config file
+     * 
+     * @param fileName name of the parameter file
+     * @return true - if file was read, false - otherwise
+     * @throws Exception 
+     */
     public static boolean readParams(String fileName) throws Exception {
         
+        if(fileName == null) {
+            return false;
+        }
         File f = new File(fileName);
         if(!f.exists()) {
             return false;

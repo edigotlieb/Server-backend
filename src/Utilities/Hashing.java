@@ -3,21 +3,16 @@ package Utilities;
 import java.io.UnsupportedEncodingException;
 import java.security.*;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author T7639192
+ * Defines Utilities for hashing stuff
  */
 public class Hashing {
 
 	static MessageDigest md5;
 
+        // static init
 	static {
 		try {
 			md5 = MessageDigest.getInstance("MD5");
@@ -25,10 +20,16 @@ public class Hashing {
 		}
 	}
 
+        /**
+         * Hashes an ascii string using MD5 hash
+         * 
+         * @param myStr the string to hash
+         * @return the hashed string in hex format
+         */
 	public static String MD5Hash(String myStr) {
 		byte[] bytesOfMessage;
-		try {
-			bytesOfMessage = myStr.getBytes("ascii");
+		try {                    
+			bytesOfMessage = myStr.getBytes("utf-8");
 		} catch (UnsupportedEncodingException ex) {
 			return myStr;
 		}
@@ -36,6 +37,12 @@ public class Hashing {
                 return toHex(thedigest);           
 	}
         
+        /**
+         * Converts byte array to hex
+         * 
+         * @param in the byte array to convert
+         * @return the resulting hex format string
+         */
         public static String toHex(byte[] in) {
         StringBuilder out = new StringBuilder(in.length * 2);
         for (byte b: in) {
@@ -45,7 +52,11 @@ public class Hashing {
          }
         
         
-
+        /**
+         * creates a random string
+         * 
+         * @return a random string
+         */
 	public static String generateChallenge() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}

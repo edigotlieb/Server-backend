@@ -38,6 +38,10 @@ public class UserUpdateUserPasswordRequest extends UserRequest{
         if (!this.creds.getUsername().equals(this.userToUpdate)) {
             throw new ValidationException(6);
         }
+		
+		if(!this.creds.isMasterApplication()){
+			throw new ValidationException(13);
+		}
         return true;
     }
 

@@ -115,15 +115,15 @@ public class PreparedStatementStrings {
 		 * descriptions: returns all apps whom a given user is their app admin
 		 */
 		fileNames.put("getAllAppsUser", "select/getAllAppsUser.sql");
-		
-		
-		
+
+
+
 		/*
 		 * params: app name
 		 * description: deletes the app record from the app table
 		 */
 		fileNames.put("DeleteApp", "delete/DeleteApp.sql");
-		
+
 		/*
 		 * params: app name
 		 * description: deletes all app permissions of a given app
@@ -169,8 +169,18 @@ public class PreparedStatementStrings {
 		 * description: removes a relation between a given username and a given permission name
 		 */
 		fileNames.put("RemoveUserPermission", "delete/RemoveUserPermission.sql");
-		
-		
+		/*
+		 * params: username
+		 * description: deletes user record from users table
+		 */
+		fileNames.put("DeleteUser", "delete/DeleteUser.sql");
+		/*
+		 * params: username
+		 * description: deletes user permissions with a given user name
+		 */
+		fileNames.put("DeletePermissionUsersByUser", "delete/DeletePermissionUsersByUser.sql");
+
+
 		/*
 		 * params: user name, permission name
 		 * description: sets the given permission admin to be the given user
@@ -186,9 +196,9 @@ public class PreparedStatementStrings {
 		 * description: sets a new password to a given user (last param)
 		 */
 		fileNames.put("UpdateUserPassword", "update/UpdateUserPassword.sql");
-		
-		
-		
+
+
+
 		/*
 		 * params: app name, hashed app key
 		 * description: inserts a new application record
@@ -245,7 +255,7 @@ public class PreparedStatementStrings {
 		}
 	}
 
-	public String getSQL(String key) {            
+	public String getSQL(String key) {
 		return this.PreparedSql.get(key);
 	}
 }

@@ -29,17 +29,23 @@ public class GetTableInfoRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (ExistenceValidator.isTableByName(sqlExc, this.appName + "_" + this.tableName)) {
-			throw new ValidationException(8);
+		if (!ExistenceValidator.isAppByName(sqlExc, this.appName)) {
+			throw new ValidationException(1);
 		}
+		
 		if (!this.creds.isAppSuperAdmin(this.appName)) {
 			throw new ValidationException(6);
 		}
+		
+		if (!ExistenceValidator.isTableByName(sqlExc, this.appName + "_" + this.tableName)) {
+			throw new ValidationException(8);
+		}
+
 		return true;
 	}
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.desc(this.appName+"_"+this.tableName));
+		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.desc(this.appName + "_" + this.tableName));
 	}
 }

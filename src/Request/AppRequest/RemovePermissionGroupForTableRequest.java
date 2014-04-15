@@ -29,13 +29,13 @@ public class RemovePermissionGroupForTableRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (!this.creds.isAppSuperAdmin(this.toRemove.getAppName())) {
-			throw new ValidationException(6);
-		}
-
 		//check appName exists
 		if (!ExistenceValidator.isAppByName(sqlExc, this.toRemove.getAppName())) {
 			throw new ValidationException(1);
+		}
+
+		if (!this.creds.isAppSuperAdmin(this.toRemove.getAppName())) {
+			throw new ValidationException(6);
 		}
 
 		//check table name exists

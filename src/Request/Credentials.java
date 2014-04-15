@@ -20,9 +20,11 @@ public class Credentials {
 	public final static String appAdminSuffix = "admin";
 	public final static String developer = "Developer";
 	public final static String anonymous = "Anonymous";
-	public final static String masterAppName = "MasterApplication";
+	public final static String masterAppName = "talnet";
 	public final static String userPermission = "User";
 
+        
+        
 	public static boolean isSpecialPermissionGroup(String permissionGroupName) {
 		return permissionGroupName.equals(superAdmin)
 				|| permissionGroupName.equals(developer)
@@ -37,6 +39,12 @@ public class Credentials {
 	private String name, dispName, email;
 	private int year, roomNum;
 	private List<String> permissions;
+        
+        private boolean isLocalRequest = false;
+
+    public void setIsLocalRequest(boolean isLocalRequest) {
+        this.isLocalRequest = isLocalRequest;
+    }                
 
 	public String[] getPermissions() {
 		return this.permissions.toArray(new String[this.permissions.size()]);
@@ -51,7 +59,7 @@ public class Credentials {
 	}
 
 	public boolean isMasterApplication() {
-		return this.appName.equals(masterAppName);
+		return this.appName.equals(masterAppName) && isLocalRequest;
 	}
 
 	public boolean isAppSuperAdmin() {

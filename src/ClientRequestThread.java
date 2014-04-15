@@ -146,6 +146,7 @@ public class ClientRequestThread extends Thread {
             return;
 
         }
+        clientRequest.setIsLocalRequest((socket.getInetAddress().isLoopbackAddress()));
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="validate client request">

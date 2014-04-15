@@ -107,6 +107,7 @@ public class ThreadHandler {
                 } else {
                     // create a new requestHandler and give it the socket and a new db connection
                     logger.log(Level.INFO, "starting new DB connection...");
+                    
                     ClientRequestThread newRequestThread = new ClientRequestThread(ds.getConnection(), newSocket,IDs);
                     threads.add(newRequestThread);
                     logger.log(Level.INFO, "transfering control and starting new client request thread...");

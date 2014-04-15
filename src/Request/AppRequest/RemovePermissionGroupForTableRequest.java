@@ -29,6 +29,10 @@ public class RemovePermissionGroupForTableRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if (!this.creds.isAppSuperAdmin(this.toRemove.getAppName())) {
+			throw new ValidationException(6);
+		}
+
 		//check appName exists
 		if (!ExistenceValidator.isAppByName(sqlExc, this.toRemove.getAppName())) {
 			throw new ValidationException(1);
@@ -43,8 +47,8 @@ public class RemovePermissionGroupForTableRequest extends AppRequest {
 			throw new ValidationException(11);
 		}
 
-		if (!this.creds.isAppSuperAdmin(this.toRemove.getAppName())) {
-			throw new ValidationException(6);
+		if (this.toRemove.getPermissionGroup().equals(this.toRemove.getAppName() + "_" + Credentials.appAdminSuffix)) {
+			throw new ValidationException(23);
 		}
 		return true;
 	}

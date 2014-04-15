@@ -21,6 +21,12 @@ public abstract class Request {
 	protected final Credentials creds;
 	private boolean validated;
 
+
+
+    public void setIsLocalRequest(boolean isLocalRequest) {
+        this.creds.setIsLocalRequest(isLocalRequest);
+    }                
+        
 	public Request(Credentials creds) {
 		this.creds = creds;
 		this.validated = false;

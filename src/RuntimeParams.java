@@ -31,7 +31,7 @@ public class RuntimeParams {
         params.put("BufferSize", 2048); // time in millis
         
         params.put("keyLifeTime",1800); // time in sec (30 min)
-        params.put("GarbageKeyCollectorPeriod",300000); // time in millis (5 min)
+        params.put("GarbageKeyCollectorPeriod",300000L); // time in millis (5 min)
     }
 
     public static Object getParams(String key) {

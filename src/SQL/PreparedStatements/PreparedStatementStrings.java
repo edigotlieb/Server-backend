@@ -100,6 +100,11 @@ public class PreparedStatementStrings {
 		 * descriptions: returns the relation record between a user and a permission if exists
 		 */
 		fileNames.put("getUserPermissionRelation", "select/getUserPermissionRelation.sql");
+		/*
+		 * params: group name, table name
+		 * descriptions: returns all permissions a group has to the given table
+		 */
+		fileNames.put("getGroupTablePermission", "select/getGroupTablePermission.sql");
 		
 		
 		

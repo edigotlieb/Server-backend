@@ -49,9 +49,7 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 			throw new ValidationException(11);
 		}
 
-		if (this.creds.getTablePermissionList(sqlExc,
-				this.permissionToAdd.getTableName()).contains(
-				DTDRequest.DTD_ACTION_TYPE.valueOf(this.permissionToAdd.getType().toString()))) {
+		if(SQL.Utilities.Utils.getGroupPermissionsForTable(sqlExc, this.permissionToAdd.getTableName(), this.permissionToAdd.getPermissionGroup()).contains(this.permissionToAdd.getType())){
 			throw new ValidationException(22);
 		}
 

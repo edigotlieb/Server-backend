@@ -15,7 +15,7 @@ public abstract class DTDRequest extends Request {
 
 	public DTDRequest(Credentials creds, String tableName) {
 		super(creds);
-		this.tableName = tableName;
+		this.tableName = this.creds.getAppName() + "_" + tableName;
 	}
 
 	public enum DTD_ACTION_TYPE {

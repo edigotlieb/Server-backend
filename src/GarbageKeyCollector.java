@@ -38,7 +38,7 @@ public class GarbageKeyCollector extends TimerTask{
             
             SqlExecutor sqlExec = new SqlExecutor(con);
             
-            
+            con.close();
             
         } catch (SQLException ex) {
             

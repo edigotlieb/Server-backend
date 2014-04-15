@@ -80,7 +80,7 @@ public class ThreadHandler {
              System.exit(1);
         } 
         
-        garbageKeyCollectorTimer.scheduleAtFixedRate(new GarbageKeyCollector(ds), 100, (long) RuntimeParams.getParams("GarbageKeyCollectorPeriod"));
+      //  garbageKeyCollectorTimer.scheduleAtFixedRate(new GarbageKeyCollector(ds), 100, (long) RuntimeParams.getParams("GarbageKeyCollectorPeriod"));
         
         logger.addHandler(fh);
         logger.setLevel(Level.INFO);

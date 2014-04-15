@@ -150,7 +150,7 @@ public class Credentials {
 			}
 		});
 		try {
-			while (!rset.next()) {
+			while (rset.next()) {
 				reslist.add(DTDRequest.DTD_ACTION_TYPE.valueOf(rset.getString("PERMISSION_TYPE")));
 			}
 		} catch (IllegalArgumentException e) {

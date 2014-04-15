@@ -15,25 +15,36 @@ import java.util.logging.SimpleFormatter;
 /** 
  * FILE : ThreadHandler.java
  AUTHORS : Erez Gotlieb    
- DESCRIPTION : 
+ DESCRIPTION : This class manages the serverSocket and ClientRequestThreads
+ *             That were built to handle client requests
  */ 
-
-
 public class ThreadHandler {
     
+    // a flag - has thet handler been initiallized
     private static boolean wasInit = false;
     
+    // and array to hold all the active threads
     private static ArrayList<ClientRequestThread> threads;  
+    
+    // the server socket
     private static ServerSocket ss;
     
+    // a pooled data source (C3P0) of DB connections
     private static  ComboPooledDataSource ds;
     
+    // the logger being used and it's file handler
     private static final Logger logger = Logger.getGlobal();
     private static FileHandler fh;
     
+    // a timer used for garbage collection tasks
     private static Timer garbageKeyCollectorTimer;
         
-    
+    /**
+     * An initialization function
+     * 
+     * @param paramFileName name of the parameter file (or null if default params) 
+     * @return true if init was successful, false - otherwise
+     */
     public static boolean init(String paramFileName) {
         
         garbageKeyCollectorTimer = new Timer();
@@ -91,6 +102,9 @@ public class ThreadHandler {
     }
   
     
+    /**
+     *  runs the handler ( this method blocks forever! ).
+     */
     public static void run() {
         
         if(!wasInit) return; // check we were initiallized
@@ -133,6 +147,9 @@ public class ThreadHandler {
         }
     }
 
+    /**
+     *  updates the thread array to hold only the active threads.
+     */
     private synchronized static void updateThreads() {
         for(int i=0; i< threads.size(); i++) {
             if(!threads.get(i).isAlive()) {                

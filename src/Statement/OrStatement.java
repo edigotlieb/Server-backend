@@ -1,17 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Statement;
 
 /**
- *
- * @author T7639192
+ *  Defines an abstract relational OR SQL WHERE statement
  */
 public class OrStatement extends Statement {
 
+        // the two statements that define the OR
 	private final Statement st1, st2;
 
+        /**
+         * Default Constructor
+         * 
+         * @param st1 the first statement
+         * @param st2 the second statement
+         */
 	public OrStatement(Statement st1, Statement st2) {
 		this.st1 = st1;
 		this.st2 = st2;
@@ -28,6 +31,9 @@ public class OrStatement extends Statement {
 	}
 
 	@Override
+        /**
+         * validates the operands of each statement
+         */
 	public boolean validateOperands() {
 		return st1.validateOperands() && st2.validateOperands();
 	}

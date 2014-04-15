@@ -59,7 +59,7 @@ public class DeleteAppRequest extends AppRequest {
 			}
 		});
 		while (rset.next()) {
-			sqlExc.executeDynamicStatementQry(SqlQueryGenerator.drop(rset.getString("TABLE_NAME")));
+			sqlExc.executeDynamicStatementQry(SqlQueryGenerator.drop(rset.getString("TABLENAME")));
 		}
 		//deleteAppTables
 		sqlExc.executePreparedStatement("DeleteAppTables", new StatementPreparer() {
@@ -69,7 +69,7 @@ public class DeleteAppRequest extends AppRequest {
 			}
 		});
 		//deletePermissionUsers
-		final String permission_appadmin = this.appName + "_admin";
+		final String permission_appadmin = this.appName + "_" + Credentials.appAdminSuffix;
 		sqlExc.executePreparedStatement("DeletePermissionUsers", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {

@@ -27,6 +27,7 @@ import Request.DTDRequest.DTDRequest.DTD_ACTION_TYPE;
 import Request.DTDRequest.DTDSelectRequest;
 import Request.DTDRequest.DTDUpdateRequest;
 import Request.UserRequest.UserAddPermissionGroupRequest;
+import Request.UserRequest.UserDeleteUserRequest;
 import Request.UserRequest.UserGetPermissionGroups;
 import Request.UserRequest.UserRemovePermissionGroupRequest;
 import Request.UserRequest.UserRequest;
@@ -183,6 +184,9 @@ public class RequestFactory {
 				String groupName = requestData.getString("groupName");
 				return new UsergetUsersWithPermissionGroup(groupName, creds);
 			}
+                        case DELETE_USER: {
+                                return new UserDeleteUserRequest(creds,requestData.getString("username"));
+                        }
 		}
 		return null;
 	}

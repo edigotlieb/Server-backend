@@ -32,14 +32,15 @@ public class UserDeleteUserRequest extends UserRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (!SQL.Utilities.ExistenceValidator.isUserByUsername(sqlExc, userToDelete)) {
+		if (this.userToDelete.equals(Credentials.anonymous)
+				|| !SQL.Utilities.ExistenceValidator.isUserByUsername(sqlExc, userToDelete)) {
 			throw new ValidationException(3);
 		}
 
 		if (!this.creds.getUsername().equals(this.userToDelete)) {
 			throw new ValidationException(6);
 		}
-		
+
 		final String username = this.userToDelete;
 		ResultSet rs = sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
 			@Override
@@ -47,7 +48,7 @@ public class UserDeleteUserRequest extends UserRequest {
 				ps.setString(1, username);
 			}
 		});
-		if(rs.next()){
+		if (rs.next()) {
 			throw new ValidationException(24);
 		}
 		return true;

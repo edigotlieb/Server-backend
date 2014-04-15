@@ -24,12 +24,8 @@ public class DTDSelectRequest extends DTDRequest {
 		this.orie = orie;
 	}
 
-	public DTDSelectRequest(String tableName, Statement where, String orderBy, Credentials creds) {
-		this(tableName, where, orderBy, ORDER_ORIENTATION.ASC, creds);
-	}
-
 	public DTDSelectRequest(String tableName, Statement where, Credentials creds) {
-		this(tableName, where, "", creds);
+		this(tableName, where, "", ORDER_ORIENTATION.ASC, creds);
 	}
 
 	public boolean validateOpernads() {

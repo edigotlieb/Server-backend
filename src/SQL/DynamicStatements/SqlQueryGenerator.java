@@ -48,6 +48,10 @@ public class SqlQueryGenerator {
 		ASC, DESC
 	}
 
+	public static String select(List<String> colnames, String from, Statement where) {
+		return select(colnames, from, where, "", ORDER_ORIENTATION.ASC);
+	}
+
 	public static String select(List<String> colnames, String from, Statement where, String orderBy, ORDER_ORIENTATION orie) {
 		String columns;
 		if (colnames == null) {

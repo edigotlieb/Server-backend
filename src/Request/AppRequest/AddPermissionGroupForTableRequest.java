@@ -20,7 +20,7 @@ public class AddPermissionGroupForTableRequest extends AppRequest {
 
 	public AddPermissionGroupForTableRequest(PERMISSION_TYPE type, String appName, String tableName, String permissionGroup, Credentials creds) {
 		super(creds);
-		this.permissionToAdd = new Permission(type, appName, tableName, permissionGroup);
+		this.permissionToAdd = new Permission(type, appName, appName + "_" + tableName, permissionGroup);
 	}
 
 	@Override

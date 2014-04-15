@@ -36,7 +36,7 @@ public class ErrorMsg {
 		msgs.put(21, "New Tables must have a primary key column");
 		msgs.put(22, "Permission group for table exist already");
 		msgs.put(23, "Cannot remove app admin permissions");
-		msgs.put(23, "Cannot delete user that is a permission group admin");
+		msgs.put(24, "Cannot delete user that is a permission group admin");
 
 
 		//execution exceptions

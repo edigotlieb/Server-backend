@@ -13,8 +13,6 @@ import Statement.RelStatement;
 import Statement.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UserSelectRequest extends UserRequest {
@@ -55,6 +53,6 @@ public class UserSelectRequest extends UserRequest {
 		List<String> userCols = Utils.getColNames(sqlExc, userTable);
 		userCols.remove(passwordField);
 		Statement whereNoAnon = new AndStatement(this.where, new RelStatement(usernameField, "'" + Credentials.anonymous + "'", "!="));
-		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(userCols, userTable, whereNoAnon));
+		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(userCols, userTable, whereNoAnon,"",SqlQueryGenerator.ORDER_ORIENTATION.ASC));
 	}
 }

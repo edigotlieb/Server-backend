@@ -43,7 +43,12 @@ public class SqlQueryGenerator {
 		return res;
 	}
 
-	public static String select(List<String> colnames, String from, Statement where) {
+	public enum ORDER_ORIENTATION {
+
+		ASC, DESC
+	}
+
+	public static String select(List<String> colnames, String from, Statement where, String orderBy, ORDER_ORIENTATION orie) {
 		String columns;
 		if (colnames == null) {
 			columns = "*";
@@ -51,7 +56,11 @@ public class SqlQueryGenerator {
 			columns = stringCommaSeperated(colnames);
 		}
 		// System.out.println("SELECT " + columns + " FROM " + from + " WHERE " + where.toString());
-		return "SELECT " + columns + " FROM " + from + " WHERE " + where.toString();
+		String query = "SELECT " + columns + " FROM " + from + " WHERE " + where.toString();
+		if (orderBy.length() > 0) {
+			query += " ORDER BY " + orderBy + " " + orie.toString();
+		}
+		return query;
 	}
 
 	public static String delete(String from, Statement where) {

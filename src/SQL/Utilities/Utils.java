@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +38,16 @@ public class Utils {
 
 	public static String toString(Date date) {
 
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
 		return sdf.format(date);
+	}
+	
+	public static String toString(Timestamp tstamp) {
+
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		return sdf.format(tstamp);
 	}
 
 	public static List<String> getColNames(SqlExecutor sqlExc, String table) throws SQLException {

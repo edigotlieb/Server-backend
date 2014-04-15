@@ -15,9 +15,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -252,13 +254,18 @@ public class ClientRequestThread extends Thread {
         try {
             // send resultSet                    
                 //this.writer.write(createResponse(resultSet));
-                this.out.print(createResponse(resultSet, 1, ""));
+                String response = createResponse(resultSet, 1, "");
+               //  System.out.println(response);
+                this.out.print(response);
             
             //this.writer.flush();
             this.out.flush();
 
         } catch (SQLException ex) {
             // cant write result or read result set
+             logMSG("cant write result or read result set", Level.INFO);
+             this.out.print(createErrorResponse(500));
+             this.out.flush();
         }
         logMSG("Response sent to client", Level.INFO);
         this.closeThread();
@@ -319,8 +326,17 @@ public class ClientRequestThread extends Thread {
                     case java.sql.Types.SMALLINT:
                         obj.put(column_name, rs.getInt(column_name));
                         break;
-                    case java.sql.Types.DATE:
-                        obj.put(column_name, SQL.Utilities.Utils.toString(rs.getDate(column_name)));
+                    case java.sql.Types.DATE:    {
+                       // obj.put(column_name, rs.getString(column_name));
+                        Date d = rs.getDate(column_name);                        
+                        obj.put(column_name, d==null ? "": d.toString());
+                    }                                             
+                        break;
+                    case java.sql.Types.TIMESTAMP:  {
+                       // obj.put(column_name, rs.getString(column_name));
+                        Timestamp d = rs.getTimestamp(column_name);                        
+                        obj.put(column_name, d==null ? "": d.toString());
+                    }                        
                         break;
 
                     default:

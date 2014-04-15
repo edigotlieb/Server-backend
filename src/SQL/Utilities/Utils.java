@@ -39,7 +39,7 @@ public class Utils {
 	public static String toString(Date date) {
 
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-
+                
 		return sdf.format(date);
 	}
 	

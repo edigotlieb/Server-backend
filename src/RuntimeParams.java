@@ -21,7 +21,7 @@ public class RuntimeParams {
         params.put("DriverClass", "com.mysql.jdbc.Driver");
         params.put("DBUser", "root");
         params.put("DBPass", "LD2012");
-        params.put("DBURL", "jdbc:mysql://localhost/MASTER?characterEncoding=utf8");
+        params.put("DBURL", "jdbc:mysql://localhost/MASTER?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull");
         params.put("MaxPoolSize", 10);
         params.put("MaxStatementsPerConnection", 20);
         params.put("MaxIdleTime", 0);

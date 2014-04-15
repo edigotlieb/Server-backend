@@ -38,6 +38,7 @@ import Request.UserRequest.UserSignupRequest;
 import Request.UserRequest.UserUpdateInfoRequest;
 import Request.UserRequest.UserUpdateUserPasswordRequest;
 import Request.UserRequest.UsergetUsersWithPermissionGroup;
+import SQL.DynamicStatements.SqlQueryGenerator;
 import Statement.AndStatement;
 import Statement.EmptyStatement;
 import Statement.OrStatement;
@@ -195,7 +196,7 @@ public class RequestFactory {
 	private static DTDRequest buildDTDRequest(Credentials creds, DTD_ACTION_TYPE actionType, JSONObject requestData) {
 		switch (actionType) {
 			case DELETE: {
-				String tableName = requestData.getString("into");
+				String tableName = requestData.getString("from");
 				Statement where = processStatement(requestData.getJSONObject("WHERE"));
 				return new DTDDeleteRequest(tableName, where, creds);
 			}
@@ -205,9 +206,17 @@ public class RequestFactory {
 				return new DTDInsertRequest(tableName, data, creds);
 			}
 			case SELECT: {
-				String tableName = requestData.getString("into");
+				String tableName = requestData.getString("from");
 				Statement where = processStatement(requestData.getJSONObject("WHERE"));
-				return new DTDSelectRequest(tableName, where, creds);
+                                
+                                if(requestData.has("order")) {
+                                    JSONObject order = requestData.getJSONObject("order");
+                                    return new DTDSelectRequest(tableName, where,order.getString("by") , SqlQueryGenerator.ORDER_ORIENTATION.valueOf(order.getString("dir")), creds);
+                                } else {
+                                   return new DTDSelectRequest(tableName, where, creds);
+                                }
+                                
+				
 			}
 			case UPDATE: {
 				String tableName = requestData.getString("into");

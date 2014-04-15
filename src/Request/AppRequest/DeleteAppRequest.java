@@ -59,7 +59,7 @@ public class DeleteAppRequest extends AppRequest {
 			}
 		});
 		while (rset.next()) {
-			sqlExc.executeDynamicStatementQry(SqlQueryGenerator.drop(rset.getString("TABLENAME")));
+			sqlExc.executeDynamicStatementQry(SqlQueryGenerator.drop(app_name + "_" + rset.getString("TABLENAME")));
 		}
 		//deleteAppTables
 		sqlExc.executePreparedStatement("DeleteAppTables", new StatementPreparer() {

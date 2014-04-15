@@ -30,6 +30,10 @@ public class UserAddPermissionGroupRequest extends UserRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if (this.userToAddTo.equals(Credentials.anonymous)) {
+			throw new ValidationException(3);
+		}
+
 		// check user and group exists
 		if (!ExistenceValidator.isUserByUsername(sqlExc, this.userToAddTo)) {
 			throw new ValidationException(3);

@@ -32,7 +32,7 @@ public class GetAllAppsRequest extends AppRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		if (this.creds.isSuperAdmin()) {
+		if (!this.creds.isSuperAdmin()) {
 			final String username = this.creds.getUsername();
 			return sqlExc.executePreparedStatement("getAllAppsUser", new StatementPreparer() {
 				@Override

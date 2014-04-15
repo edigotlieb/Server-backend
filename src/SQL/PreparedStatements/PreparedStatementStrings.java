@@ -105,6 +105,16 @@ public class PreparedStatementStrings {
 		 * descriptions: returns all permissions a group has to the given table
 		 */
 		fileNames.put("getGroupTablePermission", "select/getGroupTablePermission.sql");
+		/*
+		 * params: 
+		 * descriptions: returns all apps created
+		 */
+		fileNames.put("getAllApps", "select/getAllApps.sql");
+		/*
+		 * params: username
+		 * descriptions: returns all apps whom a given user is their app admin
+		 */
+		fileNames.put("getAllAppsUser", "select/getAllAppsUSer.sql");
 		
 		
 		

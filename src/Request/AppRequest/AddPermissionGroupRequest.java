@@ -31,7 +31,7 @@ public class AddPermissionGroupRequest extends AppRequest {
 		if (Credentials.isSpecialPermissionGroup(permissionGroupName)) {
 			throw new ValidationException(17);
 		}
-		if (!this.creds.isAppSuperAdmin()) {
+		if (!this.creds.isDeveloper()) {
 			throw new ValidationException(6);
 		}
 		return true;

@@ -35,7 +35,7 @@ public class GetTablesRequest extends AppRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		final String appName = this.creds.getAppName();
+		final String appName = this.appName;
 		return sqlExc.executePreparedStatement("getAppTables", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {

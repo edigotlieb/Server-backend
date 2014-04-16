@@ -55,6 +55,7 @@ public class RequestFactory {
 				return buildDTDRequest(creds, actionType, requestData);
 			}
 			case USER: {
+                            
 				USER_ACTION_TYPE actionType = USER_ACTION_TYPE.valueOf(requestInfo.getString("requestAction"));
 				return buildUserRequest(creds, actionType, requestData);
 			}

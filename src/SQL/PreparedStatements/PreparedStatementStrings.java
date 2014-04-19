@@ -234,6 +234,11 @@ public class PreparedStatementStrings {
 		 * description: inserts a new user record
 		 */
 		fileNames.put("AddUser", "insert/AddUser.sql");
+                /*
+                 * params: Table Name
+		 * description: gets the permission groups of the specific dynamic table
+                 */
+                fileNames.put("getTablePermissions", "select/getTablePermissions.sql");
 	}
 	private final HashMap<String, String> PreparedSql = new HashMap<>();
 	private static PreparedStatementStrings instance = null;

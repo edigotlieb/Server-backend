@@ -12,7 +12,7 @@ import java.util.List;
 public class RelStatement extends Statement {
 
         // the  tow terms and the operand defining the statement
-	private final String term1, term2, op;
+	private final String col, value, op;
         
         // the list of allowed opperands
 	private static final List<String> operands = new ArrayList<>();
@@ -33,34 +33,19 @@ public class RelStatement extends Statement {
         /**
          * Default constructor
          * 
-         * @param term1 the first term
-         * @param term2 the second term
+         * @param col the first term
+         * @param value the second term
          * @param op the operand 
          */
-	public RelStatement(String term1, String term2, String op) {
-		this.term1 = sanitizeTerm(term1);
-		this.term2 = sanitizeTerm(term2);
+	public RelStatement(String col, String value, String op) {
+		this.col = Utils.sanitizeAlphaNumeric(col);
+		this.value = Utils.sanitizeAlphaNumericSpecialChar(value);
 		this.op = op;
-	}
-
-	/**
-	 * only place a single quote may appear is at the beginning or end of a term
-	 * all other non alpha-numeric characters are removed
-	 *
-	 * @param term
-	 * @return
-	 */
-	private static String sanitizeTerm(String term) {
-		if (term.matches("'[^']*'")) {
-			return '\'' + Utils.sanitizeAlphaNumericSpecialChar(term) + '\'';
-		} else {
-			return Utils.sanitizeAlphaNumeric(term);
-		}
 	}
 
 	@Override
 	public boolean isColumnIn(String colname) {
-		return term1.equals(colname) || term2.equals(colname);
+		return col.equals(colname);
 	}
 
         
@@ -74,6 +59,6 @@ public class RelStatement extends Statement {
 
 	@Override
 	public String toString() {
-		return term1 + " " + op + " " + term2;
+		return col + " " + op + " '" + value + "'";
 	}
 }

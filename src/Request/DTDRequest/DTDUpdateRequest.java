@@ -4,12 +4,13 @@
 package Request.DTDRequest;
 
 import Request.Credentials;
-import Request.Exceptions.ValidationException;
 import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.SqlExecutor;
+import SQL.Utilities.Utils;
 import Statement.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.Map;
 
 public class DTDUpdateRequest extends DTDRequest {
@@ -32,5 +33,18 @@ public class DTDUpdateRequest extends DTDRequest {
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.update(tableName, data, where));
 		return null;
+	}
+	
+		@Override
+	public boolean santisizeData() {
+		Iterator<String> iterator = data.keySet().iterator();
+		while (iterator.hasNext()) {
+			String col = iterator.next();
+			if(!Utils.isAlphaNumeric(col)){
+				return false;
+			}
+			data.put(col, Utils.sanitizeAlphaNumericSpecialChar(data.get(col)));
+		}
+		return true;
 	}
 }

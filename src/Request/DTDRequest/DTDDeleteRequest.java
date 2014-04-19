@@ -30,4 +30,9 @@ public class DTDDeleteRequest extends DTDRequest {
 		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.delete(this.tableName, this.where));
 		return null;
 	}
+
+	@Override
+	public boolean santisizeData() {
+		return true;
+	}
 }

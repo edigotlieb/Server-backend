@@ -29,10 +29,12 @@ public abstract class DTDRequest extends Request {
 	}
 
 	public abstract DTD_ACTION_TYPE getActionType();
+	
+	public abstract boolean santisizeData();
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (!SQL.Utilities.Utils.isAlphaNumeric(tableName)) {
+		if (!SQL.Utilities.Utils.isAlphaNumeric(tableName) || !this.santisizeData()) {
 			throw new ValidationException(15);
 		}
 

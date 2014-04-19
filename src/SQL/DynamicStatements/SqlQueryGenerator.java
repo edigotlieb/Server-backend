@@ -16,11 +16,19 @@ import java.util.Map;
  */
 public class SqlQueryGenerator {
 
-	private static <T> String stringCommaSeperated(Iterable<T> list) {
+	private static <T> String stringCommaSeperated(Iterable<T> list){
+		return stringCommaSeperated(list, false);
+	}
+	
+	private static <T> String stringCommaSeperated(Iterable<T> list, boolean apostrophe) {
 		Iterator<T> iterator = list.iterator();
 		String res = "";
 		while (iterator.hasNext()) {
-			res += iterator.next().toString();
+			if (apostrophe) {
+				res += "'" + iterator.next().toString() + "'";
+			} else {
+				res += iterator.next().toString();
+			}
 			res += ", ";
 		}
 		if (res.length() > 0) {
@@ -34,7 +42,7 @@ public class SqlQueryGenerator {
 		String res = "";
 		while (iterator.hasNext()) {
 			T key = iterator.next();
-			res += key.toString() + " = " + map.get(key);
+			res += key.toString() + " = '" + map.get(key) + "'";
 			res += ", ";
 		}
 		if (res.length() > 0) {
@@ -76,11 +84,11 @@ public class SqlQueryGenerator {
 	}
 
 	public static String insert(String into, List<String> values) {
-		return "INSERT INTO " + into + " VALUES (" + stringCommaSeperated(values) + ")";
+		return "INSERT INTO " + into + " VALUES (" + stringCommaSeperated(values, true) + ")";
 	}
 
 	public static String insert(String into, Map<String, String> cols_vals) {
-		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values()) + ")";
+		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values(), true) + ")";
 	}
 
 	public static String create(String tableName, List<Request.AppRequest.Column> cols) {

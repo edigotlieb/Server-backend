@@ -41,4 +41,9 @@ public class DTDSelectRequest extends DTDRequest {
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(null, tableName, where, orderBy, orie));
 	}
+
+	@Override
+	public boolean santisizeData() {
+		return true;
+	}
 }

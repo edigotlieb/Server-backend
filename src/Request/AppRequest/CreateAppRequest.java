@@ -40,8 +40,8 @@ public class CreateAppRequest extends AppRequest {
 		if (ExistenceValidator.isAppByName(sqlExc, appName)) {
 			throw new ValidationException(14);
 		}
-		if (this.appName.equals(Credentials.masterAppName)) {
-			throw new ValidationException(18);
+		if (Credentials.isSpecialAppName(appName)) {
+			throw new ValidationException(25);
 		}
 
 		// check specific app_id

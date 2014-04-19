@@ -338,7 +338,6 @@ public class ClientRequestThread extends Thread {
                         obj.put(column_name, d==null ? "": d.toString());
                     }                        
                         break;
-
                     default:
                         obj.put(column_name, rs.getObject(column_name));
                         break;

@@ -32,6 +32,12 @@ public class Credentials {
 				|| permissionGroupName.equals(anonymous)
 				|| permissionGroupName.endsWith("_admin");
 	}
+        
+        public static boolean isSpecialAppName(String appName) {
+            return appName.matches("APPS|APP|DYNAMIC|DYNAMIC_TABLES|PERMISSION|PERMISSION_GROUPS"+
+                    "|TEMP|TEMP_KEYS|USERS|USER|USER_PERMISSIONS|talnet");
+        }
+        
 	private final String username, hashedPassword;
 	private final String hashedAppKey;
 	private final String appName;

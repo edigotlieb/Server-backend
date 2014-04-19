@@ -29,7 +29,7 @@ public class ErrorMsg {
 		msgs.put(15, "SQL sanitization failed");
 		msgs.put(16, "Permission group admin cannot remove his own user permission");
 		msgs.put(17, "Cannot add or delete a permission group with a special name");
-		msgs.put(17, "Cannot add or delete an application with a special name");
+		
 		msgs.put(18, "Cannot Select from User table using password field in where clause");
 		msgs.put(19, "Illegal operand in where clause");
 		msgs.put(20, "Cannot assign admin to user not in the permission group");
@@ -37,7 +37,7 @@ public class ErrorMsg {
 		msgs.put(22, "Permission group for table exist already");
 		msgs.put(23, "Cannot remove app admin permissions");
 		msgs.put(24, "Cannot delete user that is a permission group admin");
-
+                msgs.put(25, "Cannot add or delete an application with a special name");
 
 		//execution exceptions
 		msgs.put(51, "Must validate before executing");

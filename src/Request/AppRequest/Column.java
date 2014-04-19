@@ -6,7 +6,6 @@ package Request.AppRequest;
 public class Column {
 
 	public enum COL_TYPE {
-
 		INT, VARCHAR, TIMESTAMP, DATE
 	}
 	private final String colName;

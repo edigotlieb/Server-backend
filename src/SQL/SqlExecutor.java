@@ -45,7 +45,7 @@ public class SqlExecutor {
 		
 		// stmt.close();
 		if(sql.startsWith("INSERT")){
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 			return stmt.getGeneratedKeys();
 		}
 		stmt.execute(sql);

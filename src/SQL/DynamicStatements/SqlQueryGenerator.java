@@ -85,7 +85,7 @@ public class SqlQueryGenerator {
 	
 	public static String insert(String into, Map<String, String> cols_vals) {
 		String sql = "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values(), true) + ");";
-		sql += "SELECT LAST_INSERT_ID( ) AS insert_id;";
+		sql += "\nSELECT LAST_INSERT_ID( ) AS insert_id;";
 		return sql;
 	}
 

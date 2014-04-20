@@ -42,11 +42,13 @@ public class SqlExecutor {
 
 		log.log(Level.INFO, sql);
 
-		stmt.execute(sql);
+		
 		// stmt.close();
 		if(sql.startsWith("INSERT")){
+			stmt.executeUpdate(sql);
 			return stmt.getGeneratedKeys();
 		}
+		stmt.execute(sql);
 		return stmt.getResultSet();
 	}
 }

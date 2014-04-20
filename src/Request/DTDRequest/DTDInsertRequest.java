@@ -4,7 +4,6 @@
 package Request.DTDRequest;
 
 import Request.Credentials;
-import Request.Exceptions.ValidationException;
 import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.SqlExecutor;
 import SQL.Utilities.Utils;
@@ -29,8 +28,7 @@ public class DTDInsertRequest extends DTDRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		sqlExc.executeDynamicStatementQry(SqlQueryGenerator.insert(tableName, data));
-		return null;
+		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.insert(tableName, data));
 	}
 
 	@Override

@@ -82,13 +82,11 @@ public class SqlQueryGenerator {
 	public static String update(String table, Map<String, String> set, Statement where) {
 		return "UPDATE " + table + " SET " + stringCommaSeperated(set) + " WHERE " + where.toString();
 	}
-
-	public static String insert(String into, List<String> values) {
-		return "INSERT INTO " + into + " VALUES (" + stringCommaSeperated(values, true) + ")";
-	}
-
+	
 	public static String insert(String into, Map<String, String> cols_vals) {
-		return "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values(), true) + ")";
+		String sql = "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values(), true) + ");";
+		sql += "SELECT LAST_INSERT_ID( ) AS insert_id;";
+		return sql;
 	}
 
 	public static String create(String tableName, List<Request.AppRequest.Column> cols) {

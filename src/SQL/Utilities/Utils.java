@@ -75,4 +75,8 @@ public class Utils {
 		}
 		return pers;
 	}
+	
+	public static int countOccurances(String str, String count){
+		return str.length() - str.replace(count, "").length();
+	}
 }

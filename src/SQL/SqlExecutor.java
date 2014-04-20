@@ -44,6 +44,9 @@ public class SqlExecutor {
 
 		stmt.execute(sql);
 		// stmt.close();
+		if(sql.startsWith("INSERT")){
+			return stmt.getGeneratedKeys();
+		}
 		return stmt.getResultSet();
 	}
 }

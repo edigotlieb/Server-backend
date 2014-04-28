@@ -53,7 +53,7 @@ public class ClientRequestThread extends Thread {
     private final static String LOG_FORMAT_MSG = "CRT-%d: %s";
 
     // response format
-    final static String RESPONSE_FORMAT = "{\"Status\":\"%d\" , \"Message\":\"%s\", \"Data\":%s} \0";
+    final static String RESPONSE_FORMAT = "{\"Status\":\"%d\" , \"Message\":\"%s\", \"Data\":%s}";
     
     // final String ERROR_FORMAT = "{'ERROR':'%s'}";
     // final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";

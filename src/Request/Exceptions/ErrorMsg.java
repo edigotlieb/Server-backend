@@ -38,6 +38,8 @@ public class ErrorMsg {
 		msgs.put(23, "Cannot remove app admin permissions");
 		msgs.put(24, "Cannot delete user that is a permission group admin");
                 msgs.put(25, "Cannot add or delete an application with a special name");
+                msgs.put(26, "Cannot exist Users user group");
+                
 
 		//execution exceptions
 		msgs.put(51, "Must validate before executing");

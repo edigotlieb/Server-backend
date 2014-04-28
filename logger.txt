@@ -1,36 +1,36 @@
-Apr 16, 2014 2:35:07 AM ThreadHandler init
+Apr 16, 2014 2:38:53 AM ThreadHandler init
 INFO: finished initiallizing...
-Apr 16, 2014 2:35:07 AM ThreadHandler run
+Apr 16, 2014 2:38:53 AM ThreadHandler run
 INFO: waiting for incoming connection...
-Apr 16, 2014 2:35:28 AM ThreadHandler run
+Apr 16, 2014 2:39:06 AM ThreadHandler run
 INFO: accepted new incoming connection...
-Apr 16, 2014 2:35:28 AM ThreadHandler run
+Apr 16, 2014 2:39:06 AM ThreadHandler run
 INFO: starting new DB connection...
-Apr 16, 2014 2:35:28 AM ThreadHandler run
+Apr 16, 2014 2:39:06 AM ThreadHandler run
 INFO: transfering control and starting new client request thread...
-Apr 16, 2014 2:35:28 AM ThreadHandler run
+Apr 16, 2014 2:39:06 AM ThreadHandler run
 INFO: updating thread arrays
-Apr 16, 2014 2:35:28 AM ThreadHandler run
-INFO: 1 Threads active.
-Apr 16, 2014 2:35:28 AM ThreadHandler run
-INFO: waiting for incoming connection...
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:06 AM ClientRequestThread logMSG
 INFO: CRT-0: opening streams...
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
-INFO: CRT-0: sending challenge to client - 77e61f2f38aa40759faf5e45600802ff
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:06 AM ThreadHandler run
+INFO: 1 Threads active.
+Apr 16, 2014 2:39:06 AM ThreadHandler run
+INFO: waiting for incoming connection...
+Apr 16, 2014 2:39:06 AM ClientRequestThread logMSG
+INFO: CRT-0: sending challenge to client - 7d3f53846a3746d5bad1a52a6f890bc2
+Apr 16, 2014 2:39:06 AM ClientRequestThread logMSG
 INFO: CRT-0: waiting for client request max 2000 millis...
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:06 AM ClientRequestThread logMSG
 INFO: CRT-0: done sleeping...
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:06 AM ClientRequestThread logMSG
 INFO: CRT-0: proc client request...
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:06 AM ClientRequestThread logMSG
 INFO: CRT-0: Client request validated
-Apr 16, 2014 2:35:28 AM SQL.SqlExecutor executeDynamicStatementQry
-INFO: SELECT * FROM testApp_berkotable WHERE 1 ORDER BY col_int DESC
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:07 AM SQL.SqlExecutor executeDynamicStatementQry
+INFO: DROP TABLE testApp_berkotable
+Apr 16, 2014 2:39:07 AM ClientRequestThread logMSG
 INFO: CRT-0: Client request executed
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:07 AM ClientRequestThread logMSG
 INFO: CRT-0: Response sent to client
-Apr 16, 2014 2:35:28 AM ClientRequestThread logMSG
+Apr 16, 2014 2:39:07 AM ClientRequestThread logMSG
 INFO: CRT-0: closing request thread...

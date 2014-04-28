@@ -26,7 +26,7 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 	public UserRemovePermissionGroupRequest(Credentials creds) {
 		super(creds);
 	}
-
+        
 	@Override
 	public USER_ACTION_TYPE getActionType() {
 		return USER_ACTION_TYPE.REMOVE_PERMISSION;
@@ -39,6 +39,10 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 		if (groupAdmin.length() == 0) {
 			throw new ValidationException(11);
 		}
+                
+                if(this.groupToRemove.equals(Credentials.userPermission)){
+                    throw new ValidationException(26);
+                }
 
 		if (this.userToRemoveFrom.length() > 0) {
 			if (!ExistenceValidator.isUserByUsername(sqlExc, this.userToRemoveFrom)) {

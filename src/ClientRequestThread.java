@@ -169,6 +169,9 @@ public class ClientRequestThread extends Thread {
             // logMSG("REQUEST: "+(new String(buffer)),Level.INFO);
             // process response to request
             clientRequest = RequestFactory.createRequestFromString(new String(buffer));
+            if(clientRequest == null) {
+                throw new JSONException("RequestFactory Fail...");
+            }
             this.logMSG("proc client request...", Level.INFO);
         } catch (IOException ex) {
             // cant read line from stream

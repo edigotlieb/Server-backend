@@ -58,7 +58,7 @@ public class RequestFactory {
                             
 				USER_ACTION_TYPE actionType = USER_ACTION_TYPE.valueOf(requestInfo.getString("requestAction"));
 				return buildUserRequest(creds, actionType, requestData);
-			}
+			}                        
 		}
 		return null;
 	}
@@ -109,6 +109,9 @@ public class RequestFactory {
                         case GET_TABLE_PERMISSIONS: {                            
                                 return new GetTablePermissionRequest(requestData.getString("appName"), requestData.getString("tableName"), creds);
                         } 
+                        case GET_ALL_PERMISSIONS: {
+                            return new GetAllPermissionsAppRequest(creds);
+                        }
 		}
 		return null;
 	}

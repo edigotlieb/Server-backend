@@ -23,7 +23,7 @@ public class GetTablePermissionRequest extends AppRequest{
     public GetTablePermissionRequest(String appName, String tableName, Credentials creds) {
         super(creds);
         this.appName = appName;
-        this.tableName = this.creds.getAppName()+"_"+tableName;
+        this.tableName = this.appName+"_"+tableName;
     }        
     
     @Override

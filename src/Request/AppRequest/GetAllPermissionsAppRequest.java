@@ -27,7 +27,7 @@ public class GetAllPermissionsAppRequest extends AppRequest{
 
     @Override
     protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {       
-        return sqlExc.executePreparedStatement("getTablePermissions", new StatementPreparer() {
+        return sqlExc.executePreparedStatement("getAllPermissionGroupsAdmin", new StatementPreparer() {
             @Override           
             public void prepareStatement(PreparedStatement ps) throws SQLException {                                
             }

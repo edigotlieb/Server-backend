@@ -70,8 +70,8 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 		sqlExc.executePreparedStatement("RemoveUserPermission", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, username);
-				ps.setString(2, permission_name);
+				ps.setString(2, username);
+				ps.setString(1, permission_name);
 			}
 		});
 		return null;

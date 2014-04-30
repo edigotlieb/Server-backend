@@ -33,9 +33,6 @@ public class RemovePermissionGroupRequest extends AppRequest {
 		if(Credentials.isSpecialPermissionGroup(permissionGroupName)){
 			throw new ValidationException(17);
 		}
-		if (!this.creds.isAppSuperAdmin()) {
-			throw new ValidationException(6);
-		}
 
 		return true;
 	}

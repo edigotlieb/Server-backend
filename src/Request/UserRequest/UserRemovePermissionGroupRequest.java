@@ -50,7 +50,7 @@ public class UserRemovePermissionGroupRequest extends UserRequest {
 			}
 
 			// check if adder is super admin or group admin
-			if (!groupAdmin.equals(creds.getUsername())) {
+			if (!groupAdmin.equals(creds.getUsername()) && !this.userToRemoveFrom.equals(creds.getUsername())) {
 				throw new ValidationException(6);
 			}
 		} else {

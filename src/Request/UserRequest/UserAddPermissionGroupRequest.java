@@ -47,6 +47,20 @@ public class UserAddPermissionGroupRequest extends UserRequest {
 		if (!groupadmin.equals(creds.getUsername())) {
 			throw new ValidationException(6);
 		}
+		
+		final String username = this.creds.getUsername();
+		ResultSet rs = sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+			}
+		});
+		while(rs.next()){
+			if(rs.getString("PERMISSION_NAME").equals(this.groupName)){
+				throw new ValidationException(27);
+			}
+		}
+		
 		return true;
 	}
 

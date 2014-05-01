@@ -48,7 +48,7 @@ public class UserAddPermissionGroupRequest extends UserRequest {
 			throw new ValidationException(6);
 		}
 		
-		final String username = this.creds.getUsername();
+		final String username = this.userToAddTo;
 		ResultSet rs = sqlExc.executePreparedStatement("getUserPermissionGroupsNoPass", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {

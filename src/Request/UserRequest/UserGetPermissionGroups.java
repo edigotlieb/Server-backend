@@ -27,7 +27,7 @@ public class UserGetPermissionGroups extends UserRequest{
 
     @Override
     protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-        return !creds.isAnonymous();
+        return true;
     }
 
     @Override

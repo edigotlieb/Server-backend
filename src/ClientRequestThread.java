@@ -1,17 +1,14 @@
 
 import Request.Exceptions.ErrorMsg;
 import Request.Exceptions.ExecutionException;
-import Request.Exceptions.RequestException;
 import Request.Exceptions.ValidationException;
 import Request.Request;
 import Request.RequestFactory;
 import SQL.SqlExecutor;
 import Utilities.Hashing;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.Connection;
@@ -25,6 +22,7 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import SQL.Utilities.Utils;
 
 /**
  * This class handles a user request from start to finish.
@@ -318,10 +316,10 @@ public class ClientRequestThread extends Thread {
                         obj.put(column_name, rs.getInt(column_name));
                         break;
                     case java.sql.Types.NVARCHAR:
-                        obj.put(column_name, JSONObject.quote(rs.getNString(column_name)));
+                        obj.put(column_name, stripEdges(JSONObject.quote(rs.getNString(column_name))));
                         break;
                     case java.sql.Types.VARCHAR:
-                        obj.put(column_name, JSONObject.quote(rs.getString(column_name)));
+                        obj.put(column_name, stripEdges(JSONObject.quote(rs.getString(column_name))));
                         break;
                     case java.sql.Types.TINYINT:
                         obj.put(column_name, rs.getInt(column_name));
@@ -405,5 +403,9 @@ public class ClientRequestThread extends Thread {
             logException(ex, Level.INFO);
         }
     }
+
+	private static String stripEdges(String quote) {
+		return quote.substring(1, quote.length()-1);
+	}
 
 }

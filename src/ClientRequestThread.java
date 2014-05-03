@@ -318,10 +318,10 @@ public class ClientRequestThread extends Thread {
                         obj.put(column_name, rs.getInt(column_name));
                         break;
                     case java.sql.Types.NVARCHAR:
-                        obj.put(column_name, rs.getNString(column_name));
+                        obj.put(column_name, JSONObject.quote(rs.getNString(column_name)));
                         break;
                     case java.sql.Types.VARCHAR:
-                        obj.put(column_name, rs.getString(column_name));
+                        obj.put(column_name, JSONObject.quote(rs.getString(column_name)));
                         break;
                     case java.sql.Types.TINYINT:
                         obj.put(column_name, rs.getInt(column_name));

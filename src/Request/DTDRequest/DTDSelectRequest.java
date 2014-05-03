@@ -7,6 +7,7 @@ import Request.Credentials;
 import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.DynamicStatements.SqlQueryGenerator.ORDER_ORIENTATION;
 import SQL.SqlExecutor;
+import SQL.Utilities.Utils;
 import Statement.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class DTDSelectRequest extends DTDRequest {
 	}
 
 	public boolean validateOpernads() {
-		return this.where.validateOperands();
+		return this.where.validateOperands() && Utils.isAlphaNumeric(this.orderBy);
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public class DTDUpdateRequest extends DTDRequest {
 			if(!Utils.isAlphaNumeric(col)){
 				return false;
 			}
-			data.put(col, Utils.sanitizeAlphaNumericSpecialChar(data.get(col)));
+			data.put(col, Utils.sanitizeSqlCharacterEscaping(data.get(col)));
 		}
 		return true;
 	}

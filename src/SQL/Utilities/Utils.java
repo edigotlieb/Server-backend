@@ -26,10 +26,11 @@ public class Utils {
 		return org.replaceAll("[^\\w]", "");
 	}
 
-	public static String sanitizeAlphaNumericSpecialChar(String org) {
-		String hebrewChars = "אבגדהוזחטיכךלמםנןסעפףצץקרשת";
-		String special = "\\:\\ \\.\\*\\+\\-\\(\\)\\[\\]\\{\\}\\\\" + hebrewChars;
-		return org.replaceAll("[^\\w" + special + "]", "");
+	public static String sanitizeSqlCharacterEscaping(String org) {
+		//String hebrewChars = "אבגדהוזחטיכךלמםנןסעפףצץקרשת";
+		//String special = "\\:\\ \\.\\*\\+\\-\\(\\)\\[\\]\\{\\}\\\\" + hebrewChars;
+		//return org.replaceAll("[^\\w" + special + "]", "");
+		return "'" + org.replaceAll("'", "''") + "'";
 	}
 
 	public static boolean isAlphaNumeric(String org) {

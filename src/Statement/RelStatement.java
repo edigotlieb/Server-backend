@@ -39,7 +39,7 @@ public class RelStatement extends Statement {
          */
 	public RelStatement(String col, String value, String op) {
 		this.col = Utils.sanitizeAlphaNumeric(col);
-		this.value = Utils.sanitizeAlphaNumericSpecialChar(value);
+		this.value = Utils.sanitizeSqlCharacterEscaping(value);
 		this.op = op;
 	}
 

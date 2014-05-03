@@ -37,6 +37,10 @@ public class UserUpdateInfoRequest extends UserRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if(this.userToChange.equals(Credentials.anonymous)){
+			throw new ValidationException(28);
+		}
+		
 		if (!this.creds.getUsername().equals(this.userToChange)) {
 			throw new ValidationException(6);
 		}

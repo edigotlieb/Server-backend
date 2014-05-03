@@ -40,6 +40,8 @@ public class ErrorMsg {
 		msgs.put(25, "Cannot add or delete an application with a special name");
 		msgs.put(26, "Cannot exist Users user group");
 		msgs.put(27, "User already in group");
+		msgs.put(28, "Cannot Change Anonymous Details");
+		msgs.put(29, "App name is Invalid");
 
 
 		//execution exceptions

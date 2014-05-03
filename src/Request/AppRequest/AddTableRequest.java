@@ -54,7 +54,7 @@ public class AddTableRequest extends AppRequest {
 			throw new ValidationException(21);
 		}
 
-		if (!Utils.isAlphaNumeric(tableName)) {
+		if(!this.appName.matches("[a-zA-Z][\\w]*")){
 			throw new ValidationException(15);
 		}
 		return true;

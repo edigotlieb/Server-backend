@@ -8,6 +8,7 @@ import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import SQL.Utilities.ExistenceValidator;
+import SQL.Utilities.Utils;
 import Utilities.Hashing;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,6 +49,11 @@ public class CreateAppRequest extends AppRequest {
 		if (!this.creds.isMasterApplication()) {
 			throw new ValidationException(13);
 		}
+
+		if(!this.appName.matches("[a-zA-Z][\\w]*")){
+			throw new ValidationException(29);
+		}
+
 		return true;
 	}
 

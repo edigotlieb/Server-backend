@@ -30,7 +30,7 @@ public class Utils {
 		//String hebrewChars = "אבגדהוזחטיכךלמםנןסעפףצץקרשת";
 		//String special = "\\:\\ \\.\\*\\+\\-\\(\\)\\[\\]\\{\\}\\\\" + hebrewChars;
 		//return org.replaceAll("[^\\w" + special + "]", "");
-		return "'" + org.replaceAll("'", "''") + "'";
+		return org.replaceAll("'", "''");
 	}
 
 	public static boolean isAlphaNumeric(String org) {

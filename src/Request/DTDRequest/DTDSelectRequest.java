@@ -30,7 +30,7 @@ public class DTDSelectRequest extends DTDRequest {
 	}
 
 	public boolean validateOpernads() {
-		return this.where.validateOperands() && Utils.isAlphaNumeric(this.orderBy);
+		return this.where.validateOperands() && (this.orderBy.length() == 0 || Utils.isAlphaNumeric(this.orderBy));
 	}
 
 	@Override

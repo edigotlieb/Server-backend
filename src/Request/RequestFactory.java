@@ -129,7 +129,9 @@ public class RequestFactory {
 				String email = requestData.getString("email");
 				int year = requestData.getInt("year");
 				int room = requestData.getInt("room");
-				return new UserSignupRequest(username, pass, name, disp_name, email, room, year, creds);
+				String phonePre = requestData.getString("phonePre");
+				String phoneSuf = requestData.getString("phoneSuf");
+				return new UserSignupRequest(username, pass, name, disp_name, email, room, year, phonePre, phoneSuf, creds);
 			}
 			case UPDATE_INFO: {
 				String userToChange = requestData.getString("username");
@@ -138,7 +140,9 @@ public class RequestFactory {
 				String newEmail = requestData.getString("newEmail");
 				int newYear = requestData.getInt("newYear");
 				int newRoom = requestData.getInt("newRoom");
-				return new UserUpdateInfoRequest(userToChange, newName, newDispName, newEmail, newYear, newRoom, creds);
+				String newPhonePre = requestData.getString("phonePre");
+				String newPhoneSuf = requestData.getString("phoneSuf");
+				return new UserUpdateInfoRequest(userToChange, newName, newDispName, newEmail, newYear, newRoom, newPhonePre, newPhoneSuf, creds);
 			}
 			case ADD_PERMISSION: {
 				String username = requestData.getString("username");

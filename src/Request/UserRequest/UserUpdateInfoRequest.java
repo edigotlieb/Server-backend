@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public class UserUpdateInfoRequest extends UserRequest {
 
-	String userToChange, newName, newDispName, newEmail;
+	String userToChange, newName, newDispName, newEmail,newPhonePre,newPhoneSuf;
 	int newYear, newRoom;
 
-	public UserUpdateInfoRequest(String userToChange, String newName, String newDispName, String newEmail, int newYear, int newRoom, Credentials creds) {
+	public UserUpdateInfoRequest(String userToChange, String newName, String newDispName, String newEmail, int newYear, int newRoom, String newPhonePre, String newPhoneSuf, Credentials creds) {
 		this(creds);
 		this.userToChange = userToChange;
 		this.newName = newName;
@@ -24,6 +24,8 @@ public class UserUpdateInfoRequest extends UserRequest {
 		this.newEmail = newEmail;
 		this.newYear = newYear;
 		this.newRoom = newRoom;
+		this.newPhonePre = newPhonePre;
+		this.newPhoneSuf = newPhoneSuf;
 	}
 
 	public UserUpdateInfoRequest(Credentials creds) {
@@ -56,6 +58,8 @@ public class UserUpdateInfoRequest extends UserRequest {
 		final String e_mail = this.newEmail;
 		final String roomstr = "" + this.newRoom;
 		final String yearstr = "" + this.newYear;
+		final String phonePre = this.newPhonePre;
+		final String phoneSuf = this.newPhoneSuf;
 		sqlExc.executePreparedStatement("UpdateUser", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
@@ -65,6 +69,8 @@ public class UserUpdateInfoRequest extends UserRequest {
 				ps.setString(3, e_mail);
 				ps.setString(4, roomstr);
 				ps.setString(5, yearstr);
+				ps.setString(6, phonePre);
+				ps.setString(7, phoneSuf);
 			}
 		});
 		return null;

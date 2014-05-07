@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public class UserSignupRequest extends UserRequest {
 
-	String user, pass, name, disp_name, email;
+	String user, pass, name, disp_name, email, phonePre, phoneSuf;
 	int room, year;
 
-	public UserSignupRequest(String user, String pass, String name, String disp_name, String email, int room, int year, Credentials creds) {
+	public UserSignupRequest(String user, String pass, String name, String disp_name, String email, int room, int year, String phonePre, String phoneSuf, Credentials creds) {
 		this(creds);
 		this.user = user;
 		this.pass = pass;
@@ -25,6 +25,8 @@ public class UserSignupRequest extends UserRequest {
 		this.email = email;
 		this.room = room;
 		this.year = year;
+		this.phonePre = phonePre;
+		this.phoneSuf = phoneSuf;
 	}
 
 	public UserSignupRequest(Credentials creds) {
@@ -58,6 +60,8 @@ public class UserSignupRequest extends UserRequest {
 		final String e_mail = this.email;
 		final String roomstr = "" + this.room;
 		final String yearstr = "" + this.year;
+		final String phonepre = this.phonePre;
+		final String phonesuf = this.phoneSuf;
 		sqlExc.executePreparedStatement("AddUser", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
@@ -68,6 +72,8 @@ public class UserSignupRequest extends UserRequest {
 				ps.setString(5, e_mail);
 				ps.setString(6, roomstr);
 				ps.setString(7, yearstr);
+				ps.setString(8, phonepre);
+				ps.setString(9, phonesuf);
 			}
 		});
 		//add user permissiongroup

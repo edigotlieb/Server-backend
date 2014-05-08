@@ -7,6 +7,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import Request.Request;
 import SQL.SqlExecutor;
+import SQL.Utilities.ExistenceValidator;
 import java.sql.SQLException;
 
 public abstract class DTDRequest extends Request {
@@ -20,7 +21,7 @@ public abstract class DTDRequest extends Request {
 
 	public enum DTD_ACTION_TYPE {
 
-		SELECT, INSERT, UPDATE, DELETE
+		SELECT, INSERT, UPDATE, DELETE, PUBLIC_SELECT
 	}
 
 	@Override
@@ -36,6 +37,10 @@ public abstract class DTDRequest extends Request {
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		if (!SQL.Utilities.Utils.isAlphaNumeric(tableName) || !this.santisizeData()) {
 			throw new ValidationException(15);
+		}
+				
+		if(!ExistenceValidator.isTableByName(sqlExc, tableName)){
+			throw new ValidationException(12);
 		}
 
 		if (!this.creds.getTablePermissionList(sqlExc, this.tableName).contains(this.getActionType())) {

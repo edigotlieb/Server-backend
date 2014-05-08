@@ -201,6 +201,20 @@ public class RequestFactory {
                                 
 				
 			}
+			case PUBLIC_SELECT: {
+				String appName = requestData.getString("externalApp");
+				String tableName = requestData.getString("from");
+				Statement where = processStatement(requestData.getJSONObject("WHERE"));
+                                
+                                if(requestData.has("order")) {
+                                    JSONObject order = requestData.getJSONObject("order");
+                                    return new DTDPublicSelectRequest(appName, tableName, where,order.getString("by") , SqlQueryGenerator.ORDER_ORIENTATION.valueOf(order.getString("dir")), creds);
+                                } else {
+                                   return new DTDPublicSelectRequest(appName, tableName, where, creds);
+                                }
+                                
+				
+			}
 			case UPDATE: {
 				String tableName = requestData.getString("into");
 				Statement where = processStatement(requestData.getJSONObject("WHERE"));

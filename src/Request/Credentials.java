@@ -163,4 +163,16 @@ public class Credentials {
 		}
 		return reslist;
 	}
+	
+	public boolean getTablePublicPermission(SqlExecutor sqlExc, String tableName) throws SQLException {
+		final String table_name = tableName;
+		ResultSet rset = sqlExc.executePreparedStatement("getUserTablePermission", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, table_name);
+			}
+		});
+		rset.next();
+		return (rset.getInt("PUBLIC") != 0);
+	}
 }

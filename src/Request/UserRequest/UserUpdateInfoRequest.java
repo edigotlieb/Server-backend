@@ -63,7 +63,6 @@ public class UserUpdateInfoRequest extends UserRequest {
 		sqlExc.executePreparedStatement("UpdateUser", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(6, username);
 				ps.setString(1, full_name);
 				ps.setString(2, display_name);
 				ps.setString(3, e_mail);
@@ -71,6 +70,7 @@ public class UserUpdateInfoRequest extends UserRequest {
 				ps.setString(5, yearstr);
 				ps.setString(6, phonePre);
 				ps.setString(7, phoneSuf);
+				ps.setString(8, username);
 			}
 		});
 		return null;

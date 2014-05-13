@@ -31,11 +31,11 @@ public final class BeckendParams {
 	}
 	
 	public static int getInt(SqlExecutor sqlExc, String name) throws SQLException{
-		return getParamResultSet(sqlExc, name).getInt("name");
+		return getParamResultSet(sqlExc, name).getInt("value");
 	}
 	
 	public static String getString(SqlExecutor sqlExc, String name) throws SQLException{
-		return getParamResultSet(sqlExc, name).getString("name");
+		return getParamResultSet(sqlExc, name).getString("value");
 	}
 	
 	public static boolean isRegistrationActivated(SqlExecutor sqlExc) throws SQLException{

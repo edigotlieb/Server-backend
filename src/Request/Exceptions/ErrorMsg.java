@@ -43,6 +43,7 @@ public class ErrorMsg {
 		msgs.put(28, "Cannot Change Anonymous Details");
 		msgs.put(29, "App name is Invalid");
 		msgs.put(30, "Cannot publicly select from that table");
+		msgs.put(31, "Registration is inactive at the moment");
 
 
 		//execution exceptions

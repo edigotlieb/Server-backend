@@ -7,6 +7,7 @@ import Request.Credentials;
 import Request.Exceptions.ValidationException;
 import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
+import SQL.Utilities.BeckendParams;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +41,10 @@ public class UserSignupRequest extends UserRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
+		if(!BeckendParams.isRegistrationActivated(sqlExc)){
+			throw new ValidationException(27);
+		}
+		
 		if (!this.creds.isAnonymous()) {
 			throw new ValidationException(10);
 		}

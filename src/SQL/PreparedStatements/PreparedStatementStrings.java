@@ -16,6 +16,13 @@ public class PreparedStatementStrings {
 
 	static {
 		/*
+		 * params: name
+		 * cols: value
+		 * descriptions: Gives the value of a given param name
+		 */
+		fileNames.put("getBeckendParamValue", "getBeckendParamValue.sql");
+		
+		/*
 		 * params: Username
 		 * cols: USER_ID, USERNAME, PASSWORD (hashed), Name, EMAIL, DATE_REGISTERED, YEAR, DISPLAY_NAME, ROOM_NUM
 		 * descriptions: Gives the information of a given user by username

@@ -42,7 +42,7 @@ public class UserSignupRequest extends UserRequest {
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
 		if(!BeckendParams.isRegistrationActivated(sqlExc)){
-			throw new ValidationException(27);
+			throw new ValidationException(31);
 		}
 		
 		if (!this.creds.isAnonymous()) {

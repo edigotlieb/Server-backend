@@ -24,9 +24,9 @@ public class GetAllAppsRequest extends AppRequest {
 
 	@Override
 	protected boolean CheckPermissions(SqlExecutor sqlExc) throws SQLException, ValidationException {
-		if (!this.creds.isMasterApplication()) {
-			throw new ValidationException(13);
-		}
+		//if (!this.creds.isMasterApplication()) {
+		//	throw new ValidationException(13);
+		//}
 		return true;
 	}
 

@@ -106,12 +106,15 @@ public class RequestFactory {
 			case GET_ALL_APPS: {
 				return new GetAllAppsRequest(creds);
 			}
-                        case GET_TABLE_PERMISSIONS: {                            
-                                return new GetTablePermissionRequest(requestData.getString("appName"), requestData.getString("tableName"), creds);
-                        } 
-                        case GET_ALL_PERMISSIONS: {
-                            return new GetAllPermissionsAppRequest(creds);
-                        }
+			case GET_USER_APPS: {
+				return new GetUserAppsRequest(creds);
+			}
+			case GET_TABLE_PERMISSIONS: {                            
+					return new GetTablePermissionRequest(requestData.getString("appName"), requestData.getString("tableName"), creds);
+			} 
+			case GET_ALL_PERMISSIONS: {
+				return new GetAllPermissionsAppRequest(creds);
+			}
 		}
 		return null;
 	}

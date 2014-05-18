@@ -11,9 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetAllAppsRequest extends AppRequest {
+public class GetUserAppsRequest extends AppRequest {
 
-	public GetAllAppsRequest(Credentials creds) {
+	public GetUserAppsRequest(Credentials creds) {
 		super(creds);
 	}
 
@@ -32,10 +32,20 @@ public class GetAllAppsRequest extends AppRequest {
 
 	@Override
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
-		return sqlExc.executePreparedStatement("getAllApps", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-			}
-		});
+		if (!this.creds.isSuperAdmin()) {
+			final String username = this.creds.getUsername();
+			return sqlExc.executePreparedStatement("getAllAppsUser", new StatementPreparer() {
+				@Override
+				public void prepareStatement(PreparedStatement ps) throws SQLException {
+					ps.setString(1, username);
+				}
+			});
+		} else {
+			return sqlExc.executePreparedStatement("getAllApps", new StatementPreparer() {
+				@Override
+				public void prepareStatement(PreparedStatement ps) throws SQLException {
+				}
+			});
+		}
 	}
 }
